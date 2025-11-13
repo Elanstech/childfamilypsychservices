@@ -312,8 +312,7 @@ body {
 }
 
 /* ===================================
-   Hero Section with Background Collage & Service Overlay
-   Replace your existing hero styles
+   Hero Section
    =================================== */
 
 .hero-section {
@@ -378,7 +377,7 @@ body {
         transform: scale(0.9);
     }
     to {
-        opacity: 0.3;
+        opacity: 0.4;
         transform: scale(1);
     }
 }
@@ -397,6 +396,8 @@ body {
     transition: transform 0.6s ease;
 }
 
+/* Removed gradient-overlay - no white fade */
+
 /* Particles */
 .hero-particles {
     position: absolute;
@@ -411,7 +412,7 @@ body {
     position: absolute;
     border-radius: 50%;
     background: var(--gradient-blue);
-    opacity: 0.06;
+    opacity: 0.08;
     animation: particleFloat 20s ease-in-out infinite;
 }
 
@@ -548,7 +549,7 @@ body {
 }
 
 .service-card-overlay {
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.9);
     backdrop-filter: blur(20px) saturate(180%);
     padding: 2.5rem 2rem;
     border-radius: 25px;
@@ -758,12 +759,28 @@ body {
         font-size: 1.125rem;
     }
     
+    /* MOBILE: Show only single image, hide collage */
     .hero-collage-bg {
         grid-template-columns: 1fr;
-        grid-template-rows: auto;
-        gap: 1rem;
+        grid-template-rows: 1fr;
+        gap: 0;
+        padding: 0;
     }
     
+    /* Hide the smaller collage items on mobile */
+    .collage-top,
+    .collage-bottom {
+        display: none;
+    }
+    
+    /* Make the large image fill entire background */
+    .collage-large {
+        grid-row: 1;
+        height: 100%;
+        border-radius: 0;
+    }
+    
+    /* Adjust opacity for single image on mobile */
     .collage-item {
         animation: fadeInScaleMobile 1.2s ease-out both;
     }
@@ -774,19 +791,9 @@ body {
             transform: scale(0.9);
         }
         to {
-            opacity: 0.2;
+            opacity: 0.35;
             transform: scale(1);
         }
-    }
-    
-    .collage-large {
-        grid-row: auto;
-        height: 200px;
-    }
-    
-    .collage-top,
-    .collage-bottom {
-        height: 150px;
     }
     
     .hero-services-overlay {
@@ -843,6 +850,7 @@ body {
         font-size: 1.075rem;
     }
     
+    /* Slightly higher opacity on very small screens for better visibility */
     .collage-item {
         animation: fadeInScaleSmallMobile 1.2s ease-out both;
     }
@@ -853,7 +861,7 @@ body {
             transform: scale(0.9);
         }
         to {
-            opacity: 0.15;
+            opacity: 0.3;
             transform: scale(1);
         }
     }
