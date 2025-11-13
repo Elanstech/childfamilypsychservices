@@ -60,9 +60,27 @@
         </div>
     </header>
 
-<!-- Hero Section - Replace your existing hero section -->
+<!-- Hero Section with Background Collage & Service Overlay -->
 <section id="home" class="hero-section">
+    <!-- Background Collage Layer -->
     <div class="hero-background">
+        <div class="hero-collage-bg">
+            <div class="collage-item collage-large">
+                <div class="image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=800&q=80" alt="Family counseling">
+                </div>
+            </div>
+            <div class="collage-item collage-top">
+                <div class="image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=600&q=80" alt="Child therapy">
+                </div>
+            </div>
+            <div class="collage-item collage-bottom">
+                <div class="image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&q=80" alt="Professional support">
+                </div>
+            </div>
+        </div>
         <div class="gradient-overlay"></div>
         <div class="hero-particles">
             <div class="particle"></div>
@@ -73,6 +91,7 @@
         </div>
     </div>
     
+    <!-- Content Layer (On Top) -->
     <div class="hero-content">
         <div class="hero-logo" data-aos="fade-down" data-aos-duration="1000">
             <img src="logo.png" alt="Child & Family Psychological Services">
@@ -91,31 +110,44 @@
             <span id="typed-text"></span>
         </div>
 
-        <!-- Image Collage -->
-        <div class="hero-collage" data-aos="fade-up" data-aos-delay="800">
-            <div class="collage-item collage-large">
-                <div class="image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=800&q=80" alt="Family counseling">
-                    <div class="image-overlay">
-                        <span class="image-label">Family Counseling</span>
-                    </div>
+        <!-- Services Grid Overlay -->
+        <div class="hero-services-overlay" data-aos="fade-up" data-aos-delay="800">
+            <div class="service-card-overlay">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 7V12L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
                 </div>
+                <h3>Therapy Services</h3>
+                <p>Comprehensive therapeutic support for children, adolescents, individuals, families, and couples.</p>
             </div>
-            <div class="collage-item collage-top">
-                <div class="image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=600&q=80" alt="Child therapy">
-                    <div class="image-overlay">
-                        <span class="image-label">Child Therapy</span>
-                    </div>
+
+            <div class="service-card-overlay">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89317 18.7122 8.75608 18.1676 9.45768C17.623 10.1593 16.8604 10.6597 16 10.88" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 </div>
+                <h3>Family & Legal Services</h3>
+                <p>Specialized support for families navigating divorce, reunification, and parent coordination.</p>
             </div>
-            <div class="collage-item collage-bottom">
-                <div class="image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&q=80" alt="Professional support">
-                    <div class="image-overlay">
-                        <span class="image-label">Expert Care</span>
-                    </div>
+
+            <div class="service-card-overlay">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14 2V8H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M16 13H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M16 17H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M10 9H9H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 </div>
+                <h3>Assessment & Evaluation</h3>
+                <p>Professional psychological evaluations including custody assessments and mental health evaluations.</p>
             </div>
         </div>
         
