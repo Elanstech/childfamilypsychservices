@@ -312,7 +312,7 @@ body {
 }
 
 /* ===================================
-   Hero Section with Image Collage
+   Hero Section with Background Collage & Service Overlay
    Replace your existing hero styles
    =================================== */
 
@@ -348,8 +348,7 @@ body {
     grid-template-rows: 1fr 1fr;
     gap: 1.5rem;
     padding: 2rem;
-    opacity: 0.25;
-    filter: blur(0px);
+    z-index: 0;
 }
 
 .collage-item {
@@ -357,6 +356,7 @@ body {
     overflow: hidden;
     border-radius: 30px;
     animation: fadeInScale 1.2s ease-out both;
+    z-index: 0;
 }
 
 .collage-large {
@@ -378,7 +378,7 @@ body {
         transform: scale(0.9);
     }
     to {
-        opacity: 1;
+        opacity: 0.3;
         transform: scale(1);
     }
 }
@@ -406,9 +406,9 @@ body {
     height: 100%;
     background: linear-gradient(
         135deg, 
-        rgba(255, 255, 255, 0.95) 0%, 
-        rgba(248, 249, 255, 0.92) 50%, 
-        rgba(240, 244, 255, 0.95) 100%
+        rgba(255, 255, 255, 0.88) 0%, 
+        rgba(248, 249, 255, 0.85) 50%, 
+        rgba(240, 244, 255, 0.88) 100%
     );
     z-index: 1;
 }
@@ -778,7 +778,21 @@ body {
         grid-template-columns: 1fr;
         grid-template-rows: auto;
         gap: 1rem;
-        opacity: 0.15;
+    }
+    
+    .collage-item {
+        animation: fadeInScaleMobile 1.2s ease-out both;
+    }
+    
+    @keyframes fadeInScaleMobile {
+        from {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        to {
+            opacity: 0.2;
+            transform: scale(1);
+        }
     }
     
     .collage-large {
@@ -845,8 +859,19 @@ body {
         font-size: 1.075rem;
     }
     
-    .hero-collage-bg {
-        opacity: 0.1;
+    .collage-item {
+        animation: fadeInScaleSmallMobile 1.2s ease-out both;
+    }
+    
+    @keyframes fadeInScaleSmallMobile {
+        from {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        to {
+            opacity: 0.15;
+            transform: scale(1);
+        }
     }
 }
 
