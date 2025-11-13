@@ -274,9 +274,11 @@ class ScrollEffects {
         }
     }
 
-    updateParallax() {
-        const scrolled = window.pageYOffset;
-        
+updateParallax() {
+    const scrolled = window.pageYOffset;
+    
+    // Only apply parallax on desktop (screens wider than 768px)
+    if (window.innerWidth > 768) {
         // Parallax effect for hero background
         if (this.heroBackground) {
             this.heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
@@ -286,9 +288,17 @@ class ScrollEffects {
         if (this.heroVideo) {
             this.heroVideo.style.transform = `translate(-50%, -50%) translateY(${scrolled * 0.3}px) scale(1.1)`;
         }
+    } else {
+        // Reset transforms on mobile
+        if (this.heroBackground) {
+            this.heroBackground.style.transform = 'none';
+        }
+        if (this.heroVideo) {
+            this.heroVideo.style.transform = 'translate(-50%, -50%) scale(1.1)';
+        }
     }
 }
-
+    
 /**
  * ParticleAnimation Class
  * Handles dynamic particle animations
