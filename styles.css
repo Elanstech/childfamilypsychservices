@@ -260,7 +260,7 @@ body {
     font-weight: 500;
     font-size: 0.95rem;
     padding: 0.5rem 1rem;
-    border-radius: 8px;
+    border-radius: 20px;
     transition: all var(--transition-normal);
     position: relative;
 }
@@ -281,6 +281,7 @@ body {
 .nav-link:hover,
 .nav-link.active {
     color: var(--primary-blue);
+    background: rgba(79, 195, 247, 0.1);
 }
 
 .nav-link.active::before {
@@ -363,7 +364,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(30, 41, 59, 0.5);
+    background: rgba(255, 255, 255, 0.1);
     z-index: 0;
 }
 
@@ -374,9 +375,9 @@ body {
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, 
-        rgba(149, 117, 205, 0.4) 0%, 
-        rgba(79, 195, 247, 0.4) 50%, 
-        rgba(244, 143, 177, 0.3) 100%
+        rgba(149, 117, 205, 0.15) 0%, 
+        rgba(79, 195, 247, 0.15) 50%, 
+        rgba(244, 143, 177, 0.1) 100%
     );
     z-index: 1;
 }
@@ -483,6 +484,7 @@ body {
     font-weight: 700;
     margin-bottom: var(--spacing-sm);
     line-height: 1.2;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .gradient-text {
@@ -490,21 +492,33 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    filter: drop-shadow(0 2px 10px rgba(79, 195, 247, 0.3));
 }
 
 .hero-subtitle {
     font-size: 1rem;
     letter-spacing: 3px;
-    color: var(--dark-gray);
+    color: var(--white);
     font-weight: 500;
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    display: inline-block;
+    backdrop-filter: blur(10px);
 }
 
 .hero-typed-container {
-    min-height: 80px;
+    min-height: 60px;
     font-size: 1.5rem;
-    color: var(--black);
-    margin-bottom: var(--spacing-lg);
+    color: var(--white);
+    margin-bottom: var(--spacing-md);
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.25);
+    padding: 1rem 2rem;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
 }
 
 .typed-prefix {
@@ -513,7 +527,47 @@ body {
 
 #typed-text {
     font-weight: 600;
-    color: var(--primary-blue);
+    color: var(--white);
+}
+
+/* Hero Services Grid */
+.hero-services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    max-width: 1000px;
+    margin: 0 auto var(--spacing-lg);
+    padding: 0 var(--spacing-md);
+}
+
+.hero-service-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all var(--transition-normal);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--black);
+}
+
+.hero-service-item:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(79, 195, 247, 0.3);
+    background: rgba(255, 255, 255, 1);
+}
+
+.service-bullet {
+    width: 12px;
+    height: 12px;
+    background: var(--gradient-blue);
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(79, 195, 247, 0.4);
 }
 
 .hero-cta {
@@ -525,7 +579,7 @@ body {
 
 .btn {
     padding: 1rem 2.5rem;
-    border-radius: 50px;
+    border-radius: 100px;
     font-weight: 600;
     font-size: 1rem;
     text-decoration: none;
@@ -533,29 +587,31 @@ body {
     cursor: pointer;
     border: 2px solid transparent;
     display: inline-block;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
 .btn-primary {
     background: var(--gradient-blue);
     color: var(--white);
-    box-shadow: 0 4px 15px rgba(79, 195, 247, 0.4);
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(79, 195, 247, 0.5);
 }
 
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(79, 195, 247, 0.6);
+}
+
 .btn-secondary {
-    background: transparent;
+    background: rgba(255, 255, 255, 0.95);
     color: var(--primary-blue);
-    border-color: var(--primary-blue);
+    border-color: transparent;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .btn-secondary:hover {
-    background: var(--primary-blue);
-    color: var(--white);
-    transform: translateY(-2px);
+    background: var(--white);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(79, 195, 247, 0.3);
 }
 
 .btn-full {
@@ -620,12 +676,13 @@ section {
     padding: 0.5rem 1.5rem;
     background: var(--gradient-blue);
     color: var(--white);
-    border-radius: 50px;
+    border-radius: 100px;
     font-size: 0.875rem;
     font-weight: 600;
     letter-spacing: 1px;
     text-transform: uppercase;
     margin-bottom: var(--spacing-sm);
+    box-shadow: 0 4px 15px rgba(79, 195, 247, 0.3);
 }
 
 .section-title {
@@ -658,7 +715,7 @@ section {
 .about-card {
     background: var(--white);
     padding: var(--spacing-lg);
-    border-radius: 20px;
+    border-radius: 30px;
     box-shadow: var(--shadow-sm);
     transition: all var(--transition-normal);
 }
@@ -666,13 +723,14 @@ section {
 .about-card:hover {
     transform: translateY(-10px);
     box-shadow: var(--shadow-lg);
+    border-radius: 35px;
 }
 
 .card-icon {
     width: 60px;
     height: 60px;
     background: var(--gradient-blue);
-    border-radius: 15px;
+    border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -709,7 +767,7 @@ section {
 .service-card {
     background: var(--white);
     padding: var(--spacing-lg);
-    border-radius: 20px;
+    border-radius: 30px;
     box-shadow: var(--shadow-sm);
     transition: all var(--transition-normal);
     position: relative;
@@ -722,11 +780,12 @@ section {
     top: 0;
     left: 0;
     width: 100%;
-    height: 4px;
+    height: 5px;
     background: var(--gradient-blue);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform var(--transition-slow);
+    border-radius: 30px 30px 0 0;
 }
 
 .service-card:hover::before {
@@ -736,6 +795,7 @@ section {
 .service-card:hover {
     transform: translateY(-10px);
     box-shadow: var(--shadow-lg);
+    border-radius: 35px;
 }
 
 .service-number {
@@ -776,7 +836,7 @@ section {
 .video-wrapper {
     position: relative;
     padding-bottom: 56.25%;
-    border-radius: 20px;
+    border-radius: 30px;
     overflow: hidden;
     box-shadow: var(--shadow-lg);
 }
@@ -796,6 +856,7 @@ section {
     color: var(--white);
     cursor: pointer;
     transition: all var(--transition-normal);
+    border-radius: 30px;
 }
 
 .video-placeholder:hover .play-button {
@@ -844,7 +905,7 @@ section {
 .info-card {
     background: var(--white);
     padding: var(--spacing-md);
-    border-radius: 15px;
+    border-radius: 25px;
     box-shadow: var(--shadow-sm);
     transition: all var(--transition-normal);
 }
@@ -852,13 +913,14 @@ section {
 .info-card:hover {
     transform: translateX(10px);
     box-shadow: var(--shadow-md);
+    border-radius: 30px;
 }
 
 .info-icon {
     width: 50px;
     height: 50px;
     background: var(--gradient-blue);
-    border-radius: 10px;
+    border-radius: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -886,7 +948,7 @@ section {
 .contact-form {
     background: var(--white);
     padding: var(--spacing-lg);
-    border-radius: 20px;
+    border-radius: 30px;
     box-shadow: var(--shadow-md);
 }
 
@@ -900,7 +962,7 @@ section {
     width: 100%;
     padding: 1rem;
     border: 2px solid var(--medium-gray);
-    border-radius: 10px;
+    border-radius: 20px;
     font-family: var(--font-primary);
     font-size: 1rem;
     transition: all var(--transition-normal);
@@ -911,6 +973,8 @@ section {
 .form-group textarea:focus {
     outline: none;
     border-color: var(--primary-blue);
+    border-radius: 25px;
+    box-shadow: 0 4px 15px rgba(79, 195, 247, 0.2);
 }
 
 .form-group label {
@@ -1005,6 +1069,7 @@ section {
         opacity: 0;
         visibility: hidden;
         transition: all var(--transition-normal);
+        border-radius: 0 0 30px 30px;
     }
     
     .nav-menu.active {
@@ -1023,6 +1088,17 @@ section {
     
     .hero-typed-container {
         font-size: 1.125rem;
+        padding: 0.75rem 1.5rem;
+    }
+
+    .hero-services {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .hero-service-item {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.875rem;
     }
     
     .hero-cta {
@@ -1055,6 +1131,15 @@ section {
     .hero-logo {
         width: 140px;
         height: 200px;
+    }
+
+    .hero-services {
+        gap: 0.5rem;
+    }
+
+    .hero-service-item {
+        padding: 0.6rem 1rem;
+        font-size: 0.825rem;
     }
 }
 
