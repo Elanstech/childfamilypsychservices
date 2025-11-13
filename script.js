@@ -14,6 +14,10 @@ class Preloader {
     }
 
     init() {
+        // Set body overflow to hidden initially
+        document.body.style.overflow = 'hidden';
+        
+        // Wait for page to fully load
         window.addEventListener('load', () => this.hide());
     }
 
@@ -22,6 +26,13 @@ class Preloader {
             this.element.classList.add('hidden');
             document.body.style.overflow = 'auto';
             this.initializeAOS();
+            
+            // Remove preloader from DOM after transition completes
+            setTimeout(() => {
+                if (this.element && this.element.parentNode) {
+                    this.element.remove();
+                }
+            }, 600);
         }, this.duration);
     }
 
