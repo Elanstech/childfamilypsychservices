@@ -99,8 +99,8 @@ body {
 }
 
 .logo-container {
-    width: 180px;
-    height: 250px;
+    width: 290px;
+    height: 290px;
     margin: 0 auto 2rem;
     animation: subtleFadeIn 1s ease-out;
     display: flex;
