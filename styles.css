@@ -371,6 +371,11 @@ body {
     animation-delay: 0.7s;
 }
 
+/* Hide mobile image on desktop */
+.collage-mobile {
+    display: none;
+}
+
 @keyframes fadeInScale {
     from {
         opacity: 0;
@@ -395,8 +400,6 @@ body {
     object-fit: cover;
     transition: transform 0.6s ease;
 }
-
-/* Removed gradient-overlay - no white fade */
 
 /* Particles */
 .hero-particles {
@@ -767,28 +770,29 @@ body {
         padding: 0;
     }
     
-    /* Hide the smaller collage items on mobile */
-    .collage-top,
-    .collage-bottom {
+    /* Hide all desktop images on mobile */
+    .collage-desktop {
         display: none;
     }
     
-    /* Make the large image fill entire background */
-    .collage-large {
+    /* Show mobile-specific image */
+    .collage-mobile {
+        display: block;
         grid-row: 1;
         height: 100%;
         border-radius: 0;
+        animation: fadeInScaleMobile 1.2s ease-out both;
     }
     
-    /* Adjust opacity for single image on mobile */
-    .collage-item {
-        animation: fadeInScaleMobile 1.2s ease-out both;
+    /* NO PARALLAX on mobile - fixed background */
+    .hero-background {
+        transform: none !important;
     }
     
     @keyframes fadeInScaleMobile {
         from {
             opacity: 0;
-            transform: scale(0.9);
+            transform: scale(1);
         }
         to {
             opacity: 0.35;
@@ -850,15 +854,15 @@ body {
         font-size: 1.075rem;
     }
     
-    /* Slightly higher opacity on very small screens for better visibility */
-    .collage-item {
+    /* Slightly higher opacity on very small screens */
+    .collage-mobile {
         animation: fadeInScaleSmallMobile 1.2s ease-out both;
     }
     
     @keyframes fadeInScaleSmallMobile {
         from {
             opacity: 0;
-            transform: scale(0.9);
+            transform: scale(1);
         }
         to {
             opacity: 0.3;
