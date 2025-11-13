@@ -31,35 +31,56 @@
         </div>
     </div>
     
-    <!-- Header / Navigation -->
-    <header id="header">
-        <nav class="nav-container">
-            <div class="nav-logo">
-                <img src="logo.png" alt="Child & Family" class="nav-logo-img">
-                <span class="nav-logo-text">Child & Family</span>
-            </div>
-            
-            <ul class="nav-menu">
-                <li class="nav-item"><a href="#home" class="nav-link active">Home</a></li>
-                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
-                <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
-                <li class="nav-item"><a href="#video" class="nav-link">Video</a></li>
-                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-            
-            <button class="mobile-menu-btn" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </nav>
-        
-        <!-- Progress Bar -->
-        <div class="scroll-progress">
-            <div class="scroll-progress-bar"></div>
-        </div>
-    </header>
+ <!-- Progress Tracker Header -->
+<header id="header" class="progress-header">
+    <div class="nav-container">
+        <!-- Logo -->
+        <a href="#home" class="nav-logo">
+            <img src="assets/logo.png" alt="Logo" class="nav-logo-img">
+            <span class="nav-logo-text">CFPS</span>
+        </a>
 
+        <!-- Progress Tracker -->
+        <nav class="progress-tracker">
+            <div class="progress-track">
+                <div class="progress-line"></div>
+                <a href="#home" class="progress-dot" data-section="home">
+                    <span class="dot-label">Home</span>
+                    <span class="dot-circle"></span>
+                </a>
+                <a href="#about" class="progress-dot" data-section="about">
+                    <span class="dot-label">About</span>
+                    <span class="dot-circle"></span>
+                </a>
+                <a href="#services" class="progress-dot" data-section="services">
+                    <span class="dot-label">Services</span>
+                    <span class="dot-circle"></span>
+                </a>
+                <a href="#video" class="progress-dot" data-section="video">
+                    <span class="dot-label">Video</span>
+                    <span class="dot-circle"></span>
+                </a>
+                <a href="#contact" class="progress-dot" data-section="contact">
+                    <span class="dot-label">Contact</span>
+                    <span class="dot-circle"></span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-btn" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress">
+        <div class="scroll-progress-bar"></div>
+    </div>
+</header>
+    
 <!-- Hero Section with Background Collage & Service Overlay -->
 <section id="home" class="hero-section">
     <!-- Background Collage Layer -->
