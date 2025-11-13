@@ -242,6 +242,7 @@ class ScrollEffects {
     constructor() {
         this.progressBar = document.querySelector('.scroll-progress-bar');
         this.heroBackground = document.querySelector('.hero-background');
+        this.heroVideo = document.querySelector('.hero-video');
         this.init();
     }
 
@@ -265,8 +266,14 @@ class ScrollEffects {
     updateParallax() {
         const scrolled = window.pageYOffset;
         
+        // Parallax effect for hero background
         if (this.heroBackground) {
             this.heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
+        }
+
+        // Slower parallax for video to create depth
+        if (this.heroVideo) {
+            this.heroVideo.style.transform = `translate(-50%, -50%) translateY(${scrolled * 0.3}px) scale(1.1)`;
         }
     }
 }
@@ -441,7 +448,7 @@ class CardObserver {
  * Handles interactive logo animations
  */
 class LogoAnimation {
-    constructor(selector = '.hero-logo svg') {
+    constructor(selector = '.hero-logo img, .hero-logo svg') {
         this.logo = document.querySelector(selector);
         this.init();
     }
@@ -453,6 +460,20 @@ class LogoAnimation {
     }
 
     animate() {
+        // For images, apply simple scale and glow effect
+        if (this.logo.tagName === 'IMG') {
+            this.logo.style.transition = 'transform 0.3s ease, filter 0.3s ease';
+            this.logo.style.transform = 'scale(1.05)';
+            this.logo.style.filter = 'drop-shadow(0 15px 40px rgba(79, 195, 247, 0.5))';
+            
+            setTimeout(() => {
+                this.logo.style.transform = 'scale(1)';
+                this.logo.style.filter = 'drop-shadow(0 10px 30px rgba(79, 195, 247, 0.3))';
+            }, 300);
+            return;
+        }
+
+        // For SVG elements (if any remain)
         const lotusLarge = this.logo.querySelector('.lotus-large');
         const lotusSmall = this.logo.querySelector('.lotus-small');
         const wheel = this.logo.querySelector('.wheel');
@@ -591,66 +612,6 @@ class KonamiCode {
 }
 
 /**
- * MouseTrail Class
- * Creates subtle mouse trail effect
- */
-class MouseTrail {
-    constructor(maxLength = 10) {
-        this.trail = [];
-        this.maxLength = maxLength;
-        this.init();
-    }
-
-    init() {
-        this.addTrailAnimation();
-        document.addEventListener('mousemove', (e) => this.createTrail(e));
-    }
-
-    createTrail(e) {
-        const trailElement = document.createElement('div');
-        trailElement.className = 'mouse-trail';
-        trailElement.style.cssText = `
-            position: fixed;
-            width: 5px;
-            height: 5px;
-            background: radial-gradient(circle, rgba(79, 195, 247, 0.6), transparent);
-            border-radius: 50%;
-            pointer-events: none;
-            left: ${e.clientX}px;
-            top: ${e.clientY}px;
-            z-index: 9999;
-            animation: trailFade 0.5s ease-out forwards;
-        `;
-        
-        document.body.appendChild(trailElement);
-        this.trail.push(trailElement);
-        
-        if (this.trail.length > this.maxLength) {
-            const oldTrail = this.trail.shift();
-            oldTrail.remove();
-        }
-        
-        setTimeout(() => trailElement.remove(), 500);
-    }
-
-    addTrailAnimation() {
-        if (document.getElementById('trail-animation')) return;
-        
-        const style = document.createElement('style');
-        style.id = 'trail-animation';
-        style.innerHTML = `
-            @keyframes trailFade {
-                to {
-                    opacity: 0;
-                    transform: scale(2);
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    }
-}
-
-/**
  * PerformanceMonitor Class
  * Monitors and logs performance metrics
  */
@@ -726,7 +687,6 @@ class App {
         this.components.logoAnimation = new LogoAnimation();
         this.components.scrollToTop = new ScrollToTop();
         this.components.konamiCode = new KonamiCode();
-        this.components.mouseTrail = new MouseTrail();
         this.components.performanceMonitor = new PerformanceMonitor();
         this.components.serviceWorkerManager = new ServiceWorkerManager();
     }
