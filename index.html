@@ -14,7 +14,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <!-- CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     
@@ -22,65 +22,7 @@
     <div id="preloader">
         <div class="preloader-content">
             <div class="logo-container">
-                <svg class="logo-svg" viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Lotus Petals -->
-                    <g class="lotus-large">
-                        <!-- Center circle -->
-                        <circle cx="100" cy="120" r="15" fill="url(#blueGradient)"/>
-                        
-                        <!-- Petals -->
-                        <ellipse cx="100" cy="85" rx="20" ry="35" fill="url(#blueGradient)" opacity="0.9"/>
-                        <ellipse cx="75" cy="95" rx="18" ry="32" fill="url(#blueGradient)" opacity="0.85" transform="rotate(-30 75 95)"/>
-                        <ellipse cx="125" cy="95" rx="18" ry="32" fill="url(#blueGradient)" opacity="0.85" transform="rotate(30 125 95)"/>
-                        <ellipse cx="60" cy="110" rx="16" ry="28" fill="url(#blueGradient)" opacity="0.8" transform="rotate(-50 60 110)"/>
-                        <ellipse cx="140" cy="110" rx="16" ry="28" fill="url(#blueGradient)" opacity="0.8" transform="rotate(50 140 110)"/>
-                        
-                        <!-- Decorative dots -->
-                        <circle cx="100" cy="60" r="4" fill="#4FC3F7"/>
-                        <circle cx="85" cy="75" r="3.5" fill="#4FC3F7"/>
-                        <circle cx="115" cy="75" r="3.5" fill="#4FC3F7"/>
-                        <circle cx="75" cy="85" r="3" fill="#4FC3F7"/>
-                        <circle cx="125" cy="85" r="3" fill="#4FC3F7"/>
-                    </g>
-                    
-                    <!-- Small Pink Lotus -->
-                    <g class="lotus-small">
-                        <ellipse cx="70" cy="165" rx="12" ry="20" fill="url(#pinkGradient)" opacity="0.9"/>
-                        <ellipse cx="55" cy="172" rx="10" ry="18" fill="url(#pinkGradient)" opacity="0.85" transform="rotate(-25 55 172)"/>
-                        <ellipse cx="85" cy="172" rx="10" ry="18" fill="url(#pinkGradient)" opacity="0.85" transform="rotate(25 85 172)"/>
-                        <circle cx="70" cy="175" r="8" fill="url(#pinkGradient)"/>
-                    </g>
-                    
-                    <!-- Wheel -->
-                    <g class="wheel">
-                        <circle cx="130" cy="175" r="25" fill="none" stroke="url(#blueGradient)" stroke-width="3"/>
-                        <line x1="130" y1="150" x2="130" y2="200" stroke="url(#blueGradient)" stroke-width="2"/>
-                        <line x1="105" y1="175" x2="155" y2="175" stroke="url(#blueGradient)" stroke-width="2"/>
-                        <line x1="112" y1="157" x2="148" y2="193" stroke="url(#blueGradient)" stroke-width="2"/>
-                        <line x1="148" y1="157" x2="112" y2="193" stroke="url(#blueGradient)" stroke-width="2"/>
-                        <circle cx="130" cy="175" r="5" fill="url(#blueGradient)"/>
-                    </g>
-                    
-                    <!-- Stem -->
-                    <path d="M 100 135 Q 90 160, 70 185" fill="none" stroke="url(#purpleGradient)" stroke-width="3"/>
-                    <path d="M 100 135 Q 110 160, 130 175" fill="none" stroke="url(#purpleGradient)" stroke-width="2"/>
-                    
-                    <!-- Gradients -->
-                    <defs>
-                        <linearGradient id="blueGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" style="stop-color:#4FC3F7;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#29B6F6;stop-opacity:1" />
-                        </linearGradient>
-                        <linearGradient id="pinkGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" style="stop-color:#F48FB1;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#EC407A;stop-opacity:1" />
-                        </linearGradient>
-                        <linearGradient id="purpleGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" style="stop-color:#9575CD;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#7E57C2;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                </svg>
+                <img src="logo.png" alt="Child & Family Psychological Services" class="logo-img">
             </div>
             <div class="loading-bar">
                 <div class="loading-progress"></div>
@@ -92,12 +34,7 @@
     <header id="header">
         <nav class="nav-container">
             <div class="nav-logo">
-                <svg class="nav-logo-svg" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="25" cy="20" r="3" fill="#4FC3F7"/>
-                    <ellipse cx="25" cy="15" rx="4" ry="7" fill="#4FC3F7" opacity="0.9"/>
-                    <ellipse cx="20" cy="17" rx="3.5" ry="6" fill="#4FC3F7" opacity="0.85" transform="rotate(-30 20 17)"/>
-                    <ellipse cx="30" cy="17" rx="3.5" ry="6" fill="#4FC3F7" opacity="0.85" transform="rotate(30 30 17)"/>
-                </svg>
+                <img src="logo.png" alt="Child & Family" class="nav-logo-img">
                 <span class="nav-logo-text">Child & Family</span>
             </div>
             
@@ -125,6 +62,11 @@
     <!-- Hero Section -->
     <section id="home" class="hero-section">
         <div class="hero-background">
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-therapist-talking-to-a-patient-in-a-consultation-28311-large.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-overlay"></div>
             <div class="gradient-overlay"></div>
             <div class="hero-particles">
                 <div class="particle"></div>
@@ -137,51 +79,7 @@
         
         <div class="hero-content">
             <div class="hero-logo" data-aos="fade-down" data-aos-duration="1000">
-                <svg viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg">
-                    <g class="lotus-large">
-                        <circle cx="100" cy="120" r="15" fill="url(#heroBlueGradient)"/>
-                        <ellipse cx="100" cy="85" rx="20" ry="35" fill="url(#heroBlueGradient)" opacity="0.9"/>
-                        <ellipse cx="75" cy="95" rx="18" ry="32" fill="url(#heroBlueGradient)" opacity="0.85" transform="rotate(-30 75 95)"/>
-                        <ellipse cx="125" cy="95" rx="18" ry="32" fill="url(#heroBlueGradient)" opacity="0.85" transform="rotate(30 125 95)"/>
-                        <ellipse cx="60" cy="110" rx="16" ry="28" fill="url(#heroBlueGradient)" opacity="0.8" transform="rotate(-50 60 110)"/>
-                        <ellipse cx="140" cy="110" rx="16" ry="28" fill="url(#heroBlueGradient)" opacity="0.8" transform="rotate(50 140 110)"/>
-                        <circle cx="100" cy="60" r="4" fill="#4FC3F7"/>
-                        <circle cx="85" cy="75" r="3.5" fill="#4FC3F7"/>
-                        <circle cx="115" cy="75" r="3.5" fill="#4FC3F7"/>
-                        <circle cx="75" cy="85" r="3" fill="#4FC3F7"/>
-                        <circle cx="125" cy="85" r="3" fill="#4FC3F7"/>
-                    </g>
-                    <g class="lotus-small">
-                        <ellipse cx="70" cy="165" rx="12" ry="20" fill="url(#heroPinkGradient)" opacity="0.9"/>
-                        <ellipse cx="55" cy="172" rx="10" ry="18" fill="url(#heroPinkGradient)" opacity="0.85" transform="rotate(-25 55 172)"/>
-                        <ellipse cx="85" cy="172" rx="10" ry="18" fill="url(#heroPinkGradient)" opacity="0.85" transform="rotate(25 85 172)"/>
-                        <circle cx="70" cy="175" r="8" fill="url(#heroPinkGradient)"/>
-                    </g>
-                    <g class="wheel">
-                        <circle cx="130" cy="175" r="25" fill="none" stroke="url(#heroBlueGradient)" stroke-width="3"/>
-                        <line x1="130" y1="150" x2="130" y2="200" stroke="url(#heroBlueGradient)" stroke-width="2"/>
-                        <line x1="105" y1="175" x2="155" y2="175" stroke="url(#heroBlueGradient)" stroke-width="2"/>
-                        <line x1="112" y1="157" x2="148" y2="193" stroke="url(#heroBlueGradient)" stroke-width="2"/>
-                        <line x1="148" y1="157" x2="112" y2="193" stroke="url(#heroBlueGradient)" stroke-width="2"/>
-                        <circle cx="130" cy="175" r="5" fill="url(#heroBlueGradient)"/>
-                    </g>
-                    <path d="M 100 135 Q 90 160, 70 185" fill="none" stroke="url(#heroPurpleGradient)" stroke-width="3"/>
-                    <path d="M 100 135 Q 110 160, 130 175" fill="none" stroke="url(#heroPurpleGradient)" stroke-width="2"/>
-                    <defs>
-                        <linearGradient id="heroBlueGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" style="stop-color:#4FC3F7;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#29B6F6;stop-opacity:1" />
-                        </linearGradient>
-                        <linearGradient id="heroPinkGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" style="stop-color:#F48FB1;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#EC407A;stop-opacity:1" />
-                        </linearGradient>
-                        <linearGradient id="heroPurpleGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" style="stop-color:#9575CD;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#7E57C2;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                </svg>
+                <img src="/mnt/user-data/uploads/image0.png" alt="Child & Family Psychological Services">
             </div>
             
             <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">
@@ -404,12 +302,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="25" cy="20" r="3" fill="#4FC3F7"/>
-                        <ellipse cx="25" cy="15" rx="4" ry="7" fill="#4FC3F7" opacity="0.9"/>
-                        <ellipse cx="20" cy="17" rx="3.5" ry="6" fill="#4FC3F7" opacity="0.85" transform="rotate(-30 20 17)"/>
-                        <ellipse cx="30" cy="17" rx="3.5" ry="6" fill="#4FC3F7" opacity="0.85" transform="rotate(30 30 17)"/>
-                    </svg>
+                    <img src="logo.png" alt="Child & Family">
                     <div>
                         <h3>Child & Family</h3>
                         <p>Psychological Services</p>
