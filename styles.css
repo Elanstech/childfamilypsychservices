@@ -533,9 +533,9 @@ body {
 /* Hero Services Grid */
 .hero-services {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto var(--spacing-lg);
     padding: 0 var(--spacing-md);
 }
@@ -543,66 +543,50 @@ body {
 .service-category {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(20px);
-    padding: 1.5rem;
+    padding: 2rem;
     border-radius: 30px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     transition: all var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .service-category:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 40px rgba(79, 195, 247, 0.2);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(79, 195, 247, 0.25);
     background: rgba(255, 255, 255, 0.15);
 }
 
 .category-title {
-    font-size: 1.125rem;
+    font-size: 1.25rem;
     font-weight: 700;
     color: var(--white);
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     text-align: center;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     background: var(--gradient-blue);
-    padding: 0.75rem 1rem;
-    border-radius: 50px;
+    padding: 0.875rem 1.5rem;
+    border-radius: 100px;
     letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(79, 195, 247, 0.4);
+    width: 100%;
 }
 
-.category-items {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-.hero-service-item {
+.category-summary {
+    flex: 1;
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 0.875rem 1.25rem;
-    border-radius: 50px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
-    transition: all var(--transition-normal);
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--black);
 }
 
-.hero-service-item:hover {
-    transform: translateX(5px);
-    box-shadow: 0 6px 20px rgba(79, 195, 247, 0.3);
-    background: rgba(255, 255, 255, 1);
-}
-
-.service-bullet {
-    width: 10px;
-    height: 10px;
-    background: var(--gradient-blue);
-    border-radius: 50%;
-    flex-shrink: 0;
-    box-shadow: 0 2px 8px rgba(79, 195, 247, 0.4);
+.category-summary p {
+    color: var(--white);
+    font-size: 1rem;
+    line-height: 1.7;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    font-weight: 400;
 }
 
 .hero-cta {
@@ -1090,6 +1074,27 @@ section {
 /* ===================================
    Responsive Design
    =================================== */
+@media (max-width: 1024px) {
+    .hero-services {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+
+    .service-category {
+        padding: 1.5rem;
+    }
+
+    .category-title {
+        font-size: 1.125rem;
+        padding: 0.75rem 1.25rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .category-summary p {
+        font-size: 0.95rem;
+    }
+}
+
 @media (max-width: 768px) {
     .nav-menu {
         position: absolute;
@@ -1132,21 +1137,17 @@ section {
     }
 
     .service-category {
-        padding: 1.25rem;
+        padding: 1.5rem;
     }
 
     .category-title {
-        font-size: 1rem;
-        padding: 0.6rem 0.875rem;
+        font-size: 1.125rem;
+        padding: 0.75rem 1rem;
+        margin-bottom: 1rem;
     }
 
-    .category-items {
-        gap: 0.6rem;
-    }
-
-    .hero-service-item {
-        padding: 0.75rem 1.125rem;
-        font-size: 0.85rem;
+    .category-summary p {
+        font-size: 0.9rem;
     }
     
     .hero-cta {
@@ -1186,26 +1187,18 @@ section {
     }
 
     .service-category {
-        padding: 1rem;
+        padding: 1.25rem;
     }
 
     .category-title {
-        font-size: 0.9rem;
-        padding: 0.5rem 0.75rem;
+        font-size: 1rem;
+        padding: 0.65rem 0.875rem;
+        margin-bottom: 1rem;
     }
 
-    .category-items {
-        gap: 0.5rem;
-    }
-
-    .hero-service-item {
-        padding: 0.65rem 1rem;
-        font-size: 0.8rem;
-    }
-
-    .service-bullet {
-        width: 8px;
-        height: 8px;
+    .category-summary p {
+        font-size: 0.875rem;
+        line-height: 1.6;
     }
 }
 
