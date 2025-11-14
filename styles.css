@@ -1163,6 +1163,42 @@ body {
     pointer-events: none;
 }
 
+/* Section Header - Scoped to About */
+.about-section-placeholder .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.about-section-placeholder .section-label {
+    display: inline-block;
+    padding: 8px 24px;
+    background: linear-gradient(135deg, rgba(79, 195, 247, 0.1), rgba(41, 182, 246, 0.1));
+    color: var(--primary-blue);
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.about-section-placeholder .section-title {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.about-section-placeholder .section-description {
+    font-size: 1.125rem;
+    color: var(--dark-gray);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
 /* ============================================
    MAIN CONTENT GRID
    ============================================ */
@@ -1207,7 +1243,7 @@ body {
 }
 
 /* Card Icons */
-.card-icon-large {
+.about-content-card .card-icon-large {
     width: 80px;
     height: 80px;
     background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
@@ -1225,7 +1261,7 @@ body {
     box-shadow: 0 12px 35px rgba(79, 195, 247, 0.4);
 }
 
-.card-icon-large svg {
+.about-content-card .card-icon-large svg {
     width: 40px;
     height: 40px;
     stroke: white;
@@ -1248,12 +1284,12 @@ body {
 }
 
 /* Alternative gradient for second card */
-.approach-card .card-icon-large {
+.about-content-card.approach-card .card-icon-large {
     background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
     box-shadow: 0 8px 25px rgba(149, 117, 205, 0.3);
 }
 
-.approach-card:hover .card-icon-large {
+.about-content-card.approach-card:hover .card-icon-large {
     box-shadow: 0 12px 35px rgba(149, 117, 205, 0.4);
 }
 
@@ -1261,7 +1297,7 @@ body {
    VALUES SECTION
    ============================================ */
 
-.values-section {
+.about-section-placeholder .values-section {
     background: white;
     padding: 60px 50px;
     border-radius: 30px;
@@ -1269,7 +1305,7 @@ body {
     margin: 60px 0;
 }
 
-.values-title {
+.about-section-placeholder .values-title {
     text-align: center;
     font-size: 2rem;
     font-weight: 700;
@@ -1280,7 +1316,7 @@ body {
     width: 100%;
 }
 
-.values-title::after {
+.about-section-placeholder .values-title::after {
     content: '';
     position: absolute;
     bottom: -15px;
@@ -1292,22 +1328,22 @@ body {
     border-radius: 2px;
 }
 
-.values-grid {
+.about-section-placeholder .values-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 40px;
 }
 
-.value-item {
+.about-section-placeholder .value-item {
     text-align: center;
     transition: transform 0.3s ease;
 }
 
-.value-item:hover {
+.about-section-placeholder .value-item:hover {
     transform: translateY(-5px);
 }
 
-.value-icon {
+.about-section-placeholder .value-icon {
     width: 70px;
     height: 70px;
     background: linear-gradient(135deg, rgba(79, 195, 247, 0.1), rgba(41, 182, 246, 0.15));
@@ -1319,30 +1355,30 @@ body {
     transition: all 0.3s ease;
 }
 
-.value-item:hover .value-icon {
+.about-section-placeholder .value-item:hover .value-icon {
     background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
     transform: scale(1.05);
 }
 
-.value-icon svg {
+.about-section-placeholder .value-icon svg {
     width: 35px;
     height: 35px;
     stroke: var(--primary-blue);
     transition: stroke 0.3s ease;
 }
 
-.value-item:hover .value-icon svg {
+.about-section-placeholder .value-item:hover .value-icon svg {
     stroke: white;
 }
 
-.value-item h4 {
+.about-section-placeholder .value-item h4 {
     font-size: 1.25rem;
     font-weight: 700;
     color: var(--black);
     margin-bottom: 12px;
 }
 
-.value-item p {
+.about-section-placeholder .value-item p {
     color: var(--dark-gray);
     line-height: 1.6;
     font-size: 0.95rem;
@@ -1353,7 +1389,7 @@ body {
    EXCELLENCE BANNER
    ============================================ */
 
-.excellence-banner {
+.about-section-placeholder .excellence-banner {
     background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
     padding: 50px;
     border-radius: 30px;
@@ -1363,7 +1399,7 @@ body {
     overflow: hidden;
 }
 
-.excellence-banner::before {
+.about-section-placeholder .excellence-banner::before {
     content: '';
     position: absolute;
     top: -50%;
@@ -1374,7 +1410,7 @@ body {
     border-radius: 50%;
 }
 
-.banner-content {
+.about-section-placeholder .banner-content {
     display: flex;
     align-items: center;
     gap: 30px;
@@ -1382,7 +1418,7 @@ body {
     z-index: 1;
 }
 
-.banner-icon {
+.about-section-placeholder .banner-icon {
     flex-shrink: 0;
     width: 80px;
     height: 80px;
@@ -1394,21 +1430,21 @@ body {
     justify-content: center;
 }
 
-.banner-icon svg {
+.about-section-placeholder .banner-icon svg {
     width: 40px;
     height: 40px;
     stroke: white;
     fill: white;
 }
 
-.banner-text h3 {
+.about-section-placeholder .banner-text h3 {
     color: white;
     font-size: 1.75rem;
     font-weight: 700;
     margin-bottom: 12px;
 }
 
-.banner-text p {
+.about-section-placeholder .banner-text p {
     color: rgba(255, 255, 255, 0.95);
     line-height: 1.7;
     font-size: 1.05rem;
@@ -1419,7 +1455,7 @@ body {
    CTA SECTION
    ============================================ */
 
-.about-cta-section {
+.about-section-placeholder .about-cta-section {
     text-align: center;
     padding: 60px 40px;
     background: white;
@@ -1427,7 +1463,7 @@ body {
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
 }
 
-.about-cta-section h3 {
+.about-section-placeholder .about-cta-section h3 {
     font-size: 2.25rem;
     font-weight: 700;
     color: var(--black);
@@ -1435,7 +1471,7 @@ body {
     line-height: 1.3;
 }
 
-.about-cta-section p {
+.about-section-placeholder .about-cta-section p {
     color: var(--dark-gray);
     font-size: 1.125rem;
     line-height: 1.7;
@@ -1443,7 +1479,7 @@ body {
     margin: 0 auto 35px;
 }
 
-.cta-buttons {
+.about-section-placeholder .cta-buttons {
     display: flex;
     gap: 20px;
     justify-content: center;
@@ -1459,21 +1495,21 @@ body {
         gap: 25px;
     }
 
-    .values-grid {
+    .about-section-placeholder .values-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 30px;
     }
 
-    .banner-content {
+    .about-section-placeholder .banner-content {
         gap: 25px;
     }
 
-    .banner-icon {
+    .about-section-placeholder .banner-icon {
         width: 70px;
         height: 70px;
     }
 
-    .banner-icon svg {
+    .about-section-placeholder .banner-icon svg {
         width: 35px;
         height: 35px;
     }
@@ -1482,6 +1518,10 @@ body {
 @media (max-width: 768px) {
     .about-section-placeholder {
         padding: 60px 0;
+    }
+
+    .about-section-placeholder .section-title {
+        font-size: 2rem;
     }
 
     .about-content-grid {
@@ -1498,54 +1538,54 @@ body {
         font-size: 1.5rem;
     }
 
-    .values-section {
+    .about-section-placeholder .values-section {
         padding: 50px 30px;
         margin: 40px 0;
     }
 
-    .values-title {
+    .about-section-placeholder .values-title {
         font-size: 1.75rem;
         margin-bottom: 40px;
     }
 
-    .values-grid {
+    .about-section-placeholder .values-grid {
         grid-template-columns: 1fr;
         gap: 35px;
     }
 
-    .excellence-banner {
+    .about-section-placeholder .excellence-banner {
         padding: 40px 30px;
         margin: 40px 0;
     }
 
-    .banner-content {
+    .about-section-placeholder .banner-content {
         flex-direction: column;
         text-align: center;
         gap: 20px;
     }
 
-    .banner-text h3 {
+    .about-section-placeholder .banner-text h3 {
         font-size: 1.5rem;
     }
 
-    .banner-text p {
+    .about-section-placeholder .banner-text p {
         font-size: 1rem;
     }
 
-    .about-cta-section {
+    .about-section-placeholder .about-cta-section {
         padding: 50px 30px;
     }
 
-    .about-cta-section h3 {
+    .about-section-placeholder .about-cta-section h3 {
         font-size: 1.875rem;
     }
 
-    .cta-buttons {
+    .about-section-placeholder .cta-buttons {
         flex-direction: column;
         align-items: center;
     }
 
-    .cta-buttons .btn {
+    .about-section-placeholder .cta-buttons .btn {
         min-width: 250px;
     }
 }
@@ -1555,49 +1595,49 @@ body {
         padding: 35px 25px;
     }
 
-    .card-icon-large {
+    .about-content-card .card-icon-large {
         width: 70px;
         height: 70px;
     }
 
-    .card-icon-large svg {
+    .about-content-card .card-icon-large svg {
         width: 35px;
         height: 35px;
     }
 
-    .values-section {
+    .about-section-placeholder .values-section {
         padding: 40px 20px;
     }
 
-    .value-icon {
+    .about-section-placeholder .value-icon {
         width: 60px;
         height: 60px;
     }
 
-    .value-icon svg {
+    .about-section-placeholder .value-icon svg {
         width: 30px;
         height: 30px;
     }
 
-    .excellence-banner {
+    .about-section-placeholder .excellence-banner {
         padding: 35px 25px;
     }
 
-    .banner-icon {
+    .about-section-placeholder .banner-icon {
         width: 60px;
         height: 60px;
     }
 
-    .banner-icon svg {
+    .about-section-placeholder .banner-icon svg {
         width: 30px;
         height: 30px;
     }
 
-    .about-cta-section {
+    .about-section-placeholder .about-cta-section {
         padding: 40px 25px;
     }
 
-    .about-cta-section h3 {
+    .about-section-placeholder .about-cta-section h3 {
         font-size: 1.5rem;
     }
 }
