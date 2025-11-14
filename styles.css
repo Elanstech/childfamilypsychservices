@@ -3156,6 +3156,744 @@ body {
     }
 }
 
+/* ============================================
+   TEAM SECTION CAROUSEL - SCOPED STYLES
+   ============================================ */
+
+.team-section-carousel {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.team-section-carousel::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    left: -15%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(244, 143, 177, 0.04) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* Section Header - Scoped to Team */
+.team-section-carousel .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.team-section-carousel .section-label {
+    display: inline-block;
+    padding: 8px 24px;
+    background: linear-gradient(135deg, rgba(79, 195, 247, 0.1), rgba(41, 182, 246, 0.1));
+    color: var(--primary-blue);
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.team-section-carousel .section-title {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.team-section-carousel .section-description {
+    font-size: 1.125rem;
+    color: var(--dark-gray);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* ============================================
+   TEAM CAROUSEL WRAPPER
+   ============================================ */
+
+.team-carousel-wrapper {
+    position: relative;
+    margin: 60px 0 40px;
+    padding: 0 60px;
+}
+
+.team-carousel-container {
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.team-carousel-track {
+    display: flex;
+    gap: 30px;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 10px 0;
+}
+
+/* ============================================
+   TEAM CAROUSEL CARDS
+   ============================================ */
+
+.team-carousel-card {
+    min-width: calc(33.333% - 20px);
+    background: white;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.team-carousel-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary-blue), var(--primary-purple));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.team-carousel-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+}
+
+.team-carousel-card:hover::before {
+    transform: scaleX(1);
+}
+
+.team-card-inner {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* ============================================
+   TEAM PHOTO
+   ============================================ */
+
+.team-photo {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 25px;
+}
+
+.team-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid white;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
+}
+
+.team-carousel-card:hover .team-photo img {
+    transform: scale(1.05);
+    box-shadow: 0 12px 35px rgba(79, 195, 247, 0.3);
+    border-color: rgba(79, 195, 247, 0.2);
+}
+
+/* Owner Badge */
+.owner-badge {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
+    color: white;
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 15px rgba(149, 117, 205, 0.4);
+    animation: badgePulse 2s ease-in-out infinite;
+    z-index: 2;
+}
+
+@keyframes badgePulse {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(149, 117, 205, 0.4);
+    }
+    50% {
+        box-shadow: 0 6px 25px rgba(149, 117, 205, 0.6);
+    }
+}
+
+/* ============================================
+   TEAM INFO
+   ============================================ */
+
+.team-info {
+    text-align: center;
+    flex-grow: 1;
+    margin-bottom: 20px;
+}
+
+.team-info h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.team-info .credentials {
+    font-size: 0.95rem;
+    color: var(--primary-blue);
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.team-info .specialty {
+    font-size: 0.9rem;
+    color: var(--dark-gray);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    min-height: 48px;
+}
+
+.team-email {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--dark-gray);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 8px 20px;
+    border-radius: 50px;
+    background: linear-gradient(135deg, rgba(79, 195, 247, 0.05), rgba(149, 117, 205, 0.05));
+    transition: all 0.3s ease;
+}
+
+.team-email:hover {
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+    color: white;
+    transform: translateY(-2px);
+}
+
+.team-email svg {
+    width: 16px;
+    height: 16px;
+    transition: stroke 0.3s ease;
+}
+
+.team-email:hover svg {
+    stroke: white;
+}
+
+/* ============================================
+   LEARN MORE BUTTON
+   ============================================ */
+
+.team-learn-more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+    color: white;
+    border: none;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(79, 195, 247, 0.3);
+    font-family: var(--font-primary);
+}
+
+.team-learn-more:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(79, 195, 247, 0.4);
+}
+
+.team-learn-more svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+}
+
+.team-learn-more:hover svg {
+    transform: translateX(3px);
+}
+
+/* ============================================
+   NAVIGATION BUTTONS
+   ============================================ */
+
+.team-carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.team-carousel-nav:hover {
+    background: var(--primary-blue);
+    box-shadow: 0 6px 25px rgba(79, 195, 247, 0.4);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.team-carousel-nav svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--dark-gray);
+    transition: stroke 0.3s ease;
+}
+
+.team-carousel-nav:hover svg {
+    stroke: white;
+}
+
+.team-carousel-prev {
+    left: 0;
+}
+
+.team-carousel-next {
+    right: 0;
+}
+
+.team-carousel-nav:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* ============================================
+   CAROUSEL DOTS
+   ============================================ */
+
+.team-carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 40px;
+}
+
+.team-carousel-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--medium-gray);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.team-carousel-dot:hover {
+    background: var(--primary-blue);
+    transform: scale(1.2);
+}
+
+.team-carousel-dot.active {
+    background: var(--primary-blue);
+    width: 32px;
+    border-radius: 6px;
+}
+
+/* ============================================
+   TEAM MODALS
+   ============================================ */
+
+.team-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.team-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.team-modal .modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+}
+
+.team-modal .modal-content-wrapper {
+    position: relative;
+    background: white;
+    border-radius: 30px;
+    max-width: 800px;
+    width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.3);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+    z-index: 10;
+}
+
+.team-modal.active .modal-content-wrapper {
+    transform: scale(1);
+}
+
+/* Custom Scrollbar */
+.team-modal .modal-content-wrapper::-webkit-scrollbar {
+    width: 8px;
+}
+
+.team-modal .modal-content-wrapper::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.team-modal .modal-content-wrapper::-webkit-scrollbar-thumb {
+    background: var(--primary-blue);
+    border-radius: 10px;
+}
+
+/* Modal Close Button */
+.team-modal .modal-close {
+    position: sticky;
+    top: 20px;
+    left: 100%;
+    margin-left: -70px;
+    margin-bottom: -50px;
+    width: 45px;
+    height: 45px;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    z-index: 20;
+}
+
+.team-modal .modal-close:hover {
+    background: var(--primary-blue);
+    transform: rotate(90deg);
+}
+
+.team-modal .modal-close svg {
+    width: 22px;
+    height: 22px;
+    stroke: var(--dark-gray);
+    transition: stroke 0.3s ease;
+}
+
+.team-modal .modal-close:hover svg {
+    stroke: white;
+}
+
+/* Modal Header */
+.team-modal .modal-header {
+    text-align: center;
+    padding: 60px 40px 40px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 30px 30px 0 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.team-modal .modal-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(79, 195, 247, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.team-modal .modal-photo {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 25px;
+}
+
+.team-modal .modal-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid white;
+    box-shadow: 0 10px 35px rgba(79, 195, 247, 0.3);
+}
+
+.team-modal .modal-header h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 8px;
+}
+
+.team-modal .modal-credentials {
+    font-size: 1.125rem;
+    color: var(--primary-blue);
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.team-modal .modal-email {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--dark-gray);
+    text-decoration: none;
+    font-size: 0.95rem;
+    padding: 10px 24px;
+    border-radius: 50px;
+    background: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.team-modal .modal-email:hover {
+    background: var(--primary-blue);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(79, 195, 247, 0.3);
+}
+
+.team-modal .modal-email svg {
+    width: 18px;
+    height: 18px;
+}
+
+.team-modal .modal-email:hover svg {
+    stroke: white;
+}
+
+/* Modal Body */
+.team-modal .modal-body {
+    padding: 40px;
+}
+
+.team-modal .bio-section {
+    margin-bottom: 30px;
+}
+
+.team-modal .bio-section h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.team-modal .bio-section h3::before {
+    content: '';
+    width: 5px;
+    height: 24px;
+    background: linear-gradient(180deg, var(--primary-blue), var(--primary-purple));
+    border-radius: 3px;
+}
+
+.team-modal .bio-section p {
+    color: var(--dark-gray);
+    line-height: 1.8;
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.team-modal .bio-section p:last-child {
+    margin-bottom: 0;
+}
+
+/* Highlights Box */
+.team-modal .highlights-box {
+    background: linear-gradient(135deg, rgba(79, 195, 247, 0.05), rgba(149, 117, 205, 0.05));
+    padding: 30px;
+    border-radius: 20px;
+    border-left: 5px solid var(--primary-blue);
+    margin: 30px 0;
+}
+
+.team-modal .highlights-box h4 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 15px;
+}
+
+.team-modal .highlights-box ul {
+    list-style: none;
+    padding: 0;
+}
+
+.team-modal .highlights-box ul li {
+    padding: 8px 0 8px 30px;
+    color: var(--dark-gray);
+    line-height: 1.6;
+    position: relative;
+}
+
+.team-modal .highlights-box ul li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 22px;
+    height: 22px;
+    background: var(--primary-blue);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 1200px) {
+    .team-carousel-card {
+        min-width: calc(50% - 15px);
+    }
+}
+
+@media (max-width: 768px) {
+    .team-section-carousel {
+        padding: 60px 0;
+    }
+
+    .team-section-carousel .section-title {
+        font-size: 2rem;
+    }
+
+    .team-carousel-wrapper {
+        padding: 0 50px;
+    }
+
+    .team-carousel-card {
+        min-width: 100%;
+    }
+
+    .team-card-inner {
+        padding: 25px;
+    }
+
+    .team-photo {
+        width: 120px;
+        height: 120px;
+    }
+
+    .team-info h3 {
+        font-size: 1.25rem;
+    }
+
+    .team-info .specialty {
+        min-height: auto;
+    }
+
+    .team-carousel-nav {
+        width: 40px;
+        height: 40px;
+    }
+
+    .team-carousel-nav svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .team-modal .modal-body {
+        padding: 30px 25px;
+    }
+
+    .team-modal .modal-header {
+        padding: 50px 25px 30px;
+    }
+
+    .team-modal .modal-header h2 {
+        font-size: 1.75rem;
+    }
+
+    .team-modal .modal-close {
+        margin-left: -60px;
+        margin-bottom: -40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .team-carousel-wrapper {
+        padding: 0 45px;
+    }
+
+    .team-card-inner {
+        padding: 25px 20px;
+    }
+
+    .team-photo {
+        width: 110px;
+        height: 110px;
+    }
+
+    .team-carousel-nav {
+        width: 36px;
+        height: 36px;
+    }
+
+    .team-modal .modal-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .team-modal .modal-photo {
+        width: 120px;
+        height: 120px;
+    }
+
+    .team-modal .highlights-box {
+        padding: 25px 20px;
+    }
+}
+
 /* ===================================
    Footer
    =================================== */
