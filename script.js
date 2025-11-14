@@ -696,6 +696,53 @@ class ServiceWorkerManager {
 }
 
 /**
+ * StaffModalHandler Class
+ * Manages the staff modal open/close functionality
+ */
+class StaffModalHandler {
+    constructor() {
+        this.modal = document.getElementById('staffModal');
+        this.openBtn = document.getElementById('openStaffModal');
+        this.closeBtn = document.getElementById('closeModal');
+        this.overlay = document.getElementById('modalOverlay');
+        this.init();
+    }
+
+    init() {
+        if (!this.modal || !this.openBtn) return;
+
+        // Open modal
+        this.openBtn.addEventListener('click', () => this.open());
+
+        // Close modal
+        if (this.closeBtn) {
+            this.closeBtn.addEventListener('click', () => this.close());
+        }
+
+        if (this.overlay) {
+            this.overlay.addEventListener('click', () => this.close());
+        }
+
+        // Close on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.modal.classList.contains('active')) {
+                this.close();
+            }
+        });
+    }
+
+    open() {
+        this.modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    close() {
+        this.modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+}
+
+/**
  * App Class
  * Main application controller that initializes all components
  */
@@ -719,6 +766,7 @@ class App {
         this.components.konamiCode = new KonamiCode();
         this.components.performanceMonitor = new PerformanceMonitor();
         this.components.serviceWorkerManager = new ServiceWorkerManager();
+        this.components.staffModalHandler = new StaffModalHandler(); // ADD THIS LINE
     }
 
     getComponent(name) {
