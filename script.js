@@ -89,7 +89,213 @@ class TypedAnimation {
 }
 
 /**
- * Navigation Class
+ * ProgressTrackerNavigation Class
+ * Manages the progress tracker header functionality for one-page websites
+ */
+class ProgressTrackerNavigation {
+    constructor() {
+        this.header = document.getElementById('header');
+        this.progressDots = document.querySelectorAll('.progress-dot');
+        this.progressLine = document.querySelector('.progress-line');
+        this.progressTracker = document.querySelector('.progress-tracker');
+        this.mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        this.sections = document.querySelectorAll('section[id]');
+        this.progressBar = document.querySelector('.scroll-progress-bar');
+        this.lastScrollTop = 0;
+        
+        this.init();
+    }
+
+    init() {
+        this.setupScrollEffects();
+        this.setupActiveTracking();
+        this.setupSmoothScrolling();
+        this.setupMobileMenu();
+        this.setupAccessibility();
+    }
+
+    setupScrollEffects() {
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Add scrolled class to header
+            if (scrollTop > 50) {
+                this.header?.classList.add('scrolled');
+            } else {
+                this.header?.classList.remove('scrolled');
+            }
+            
+            this.updateProgressBar();
+            this.lastScrollTop = scrollTop;
+        });
+    }
+
+    updateProgressBar() {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        
+        if (this.progressBar) {
+            this.progressBar.style.width = `${scrolled}%`;
+        }
+    }
+
+    setupActiveTracking() {
+        window.addEventListener('scroll', () => this.updateActiveSection());
+        this.updateActiveSection(); // Initial call
+    }
+
+    updateActiveSection() {
+        const scrollY = window.pageYOffset;
+        let currentSection = null;
+        let currentIndex = 0;
+
+        // Find the current section
+        this.sections.forEach((section, index) => {
+            const sectionTop = section.offsetTop - 150;
+            const sectionHeight = section.offsetHeight;
+            
+            if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                currentSection = section.getAttribute('id');
+                currentIndex = index;
+            }
+        });
+
+        // Update dots
+        this.progressDots.forEach((dot, index) => {
+            const dotSection = dot.getAttribute('data-section');
+            
+            // Remove all states
+            dot.classList.remove('active', 'completed');
+            
+            // Add appropriate state
+            if (dotSection === currentSection) {
+                dot.classList.add('active');
+            } else if (index < currentIndex) {
+                dot.classList.add('completed');
+            }
+        });
+
+        // Update progress line
+        this.updateProgressLine(currentIndex);
+    }
+
+    updateProgressLine(currentIndex) {
+        if (!this.progressLine) return;
+        
+        const totalDots = this.progressDots.length;
+        const progressPercentage = totalDots > 1 ? (currentIndex / (totalDots - 1)) * 100 : 0;
+        
+        // Update via CSS custom property and style injection
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = `
+            .progress-line::after {
+                width: ${progressPercentage}% !important;
+            }
+        `;
+        
+        // Remove old style if exists
+        const oldStyle = document.getElementById('progress-line-style');
+        if (oldStyle) oldStyle.remove();
+        
+        styleSheet.id = 'progress-line-style';
+        document.head.appendChild(styleSheet);
+    }
+
+    setupSmoothScrolling() {
+        this.progressDots.forEach(dot => {
+            dot.addEventListener('click', (e) => this.handleDotClick(e, dot));
+        });
+    }
+
+    handleDotClick(e, dot) {
+        e.preventDefault();
+        const targetId = dot.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        
+        if (targetSection) {
+            const headerHeight = this.header?.offsetHeight || 80;
+            const targetPosition = targetSection.offsetTop - headerHeight;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+            
+            this.closeMobileMenu();
+        }
+    }
+
+    setupMobileMenu() {
+        if (!this.mobileMenuBtn) return;
+
+        this.mobileMenuBtn.addEventListener('click', () => this.toggleMobileMenu());
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (this.progressTracker?.classList.contains('active')) {
+                if (!this.progressTracker.contains(e.target) && 
+                    !this.mobileMenuBtn.contains(e.target)) {
+                    this.closeMobileMenu();
+                }
+            }
+        });
+
+        // Close menu after clicking a link
+        this.progressDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    this.closeMobileMenu();
+                }
+            });
+        });
+    }
+
+    toggleMobileMenu() {
+        this.progressTracker?.classList.toggle('active');
+        this.mobileMenuBtn?.classList.toggle('active');
+    }
+
+    closeMobileMenu() {
+        if (this.progressTracker?.classList.contains('active')) {
+            this.progressTracker.classList.remove('active');
+            this.mobileMenuBtn?.classList.remove('active');
+        }
+    }
+
+    setupAccessibility() {
+        // Close menu on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.progressTracker?.classList.contains('active')) {
+                this.closeMobileMenu();
+            }
+        });
+
+        // Trap focus in mobile menu when open
+        if (!this.progressTracker) return;
+
+        const focusableElements = this.progressTracker.querySelectorAll('a, button');
+        if (focusableElements.length === 0) return;
+
+        const firstFocusable = focusableElements[0];
+        const lastFocusable = focusableElements[focusableElements.length - 1];
+        
+        this.progressTracker.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab' && this.progressTracker.classList.contains('active')) {
+                if (e.shiftKey && document.activeElement === firstFocusable) {
+                    lastFocusable.focus();
+                    e.preventDefault();
+                } else if (!e.shiftKey && document.activeElement === lastFocusable) {
+                    firstFocusable.focus();
+                    e.preventDefault();
+                }
+            }
+        });
+    }
+}
+
+/**
+ * Navigation Class (Legacy - kept for backward compatibility)
  * Handles all navigation-related functionality
  */
 class Navigation {
@@ -117,9 +323,9 @@ class Navigation {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             
             if (scrollTop > 50) {
-                this.header.classList.add('scrolled');
+                this.header?.classList.add('scrolled');
             } else {
-                this.header.classList.remove('scrolled');
+                this.header?.classList.remove('scrolled');
             }
             
             this.lastScrollTop = scrollTop;
@@ -162,7 +368,7 @@ class Navigation {
         const targetSection = document.querySelector(targetId);
         
         if (targetSection) {
-            const headerHeight = this.header.offsetHeight;
+            const headerHeight = this.header?.offsetHeight || 80;
             const targetPosition = targetSection.offsetTop - headerHeight;
             
             window.scrollTo({
@@ -189,8 +395,8 @@ class Navigation {
     }
 
     toggleMobileMenu() {
-        this.navMenu.classList.toggle('active');
-        this.mobileMenuBtn.classList.toggle('active');
+        this.navMenu?.classList.toggle('active');
+        this.mobileMenuBtn?.classList.toggle('active');
         this.animateHamburger();
     }
 
@@ -202,8 +408,10 @@ class Navigation {
     }
 
     animateHamburger(open = null) {
+        if (!this.mobileMenuBtn) return;
+        
         const spans = this.mobileMenuBtn.querySelectorAll('span');
-        const isOpen = open !== null ? open : this.navMenu.classList.contains('active');
+        const isOpen = open !== null ? open : this.navMenu?.classList.contains('active');
         
         if (isOpen) {
             spans[0].style.transform = 'rotate(45deg) translateY(10px)';
@@ -515,6 +723,7 @@ class ScrollToTop {
         const btn = document.createElement('button');
         btn.innerHTML = '↑';
         btn.className = 'scroll-to-top';
+        btn.setAttribute('aria-label', 'Scroll to top');
         btn.style.cssText = `
             position: fixed;
             bottom: 30px;
@@ -689,7 +898,15 @@ class App {
         // Initialize all components
         this.components.preloader = new Preloader();
         this.components.typedAnimation = new TypedAnimation('#typed-text');
-        this.components.navigation = new Navigation();
+        
+        // Use ProgressTrackerNavigation for one-page design
+        // Falls back to Navigation if progress tracker elements not found
+        if (document.querySelector('.progress-tracker')) {
+            this.components.progressTrackerNavigation = new ProgressTrackerNavigation();
+        } else {
+            this.components.navigation = new Navigation();
+        }
+        
         this.components.scrollEffects = new ScrollEffects();
         this.components.particleAnimation = new ParticleAnimation();
         this.components.formHandler = new FormHandler('.contact-form');
