@@ -199,235 +199,288 @@
     </div>
 </section>
     
-<!-- About Section -->
-<section id="about" class="about-section">
+<!-- Services Section -->
+<section id="services" class="services-section-carousel">
     <div class="container">
         <div class="section-header" data-aos="fade-up">
-            <span class="section-label">About Us</span>
-            <h2 class="section-title">Excellence in Psychological Care</h2>
-            <p class="section-description">Led by Dr. Kristie Doheny, our team of dedicated professionals is committed to providing state-of-the-art treatment for children and families.</p>
+            <span class="section-label">Our Services</span>
+            <h2 class="section-title">Comprehensive Therapeutic Services</h2>
+            <p class="section-description">Explore our full range of specialized psychological services designed to support individuals and families.</p>
         </div>
         
-        <div class="about-grid">
-            <!-- Story Card -->
-            <div class="about-feature-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="feature-icon gradient-bg">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+        <!-- Carousel Container -->
+        <div class="carousel-wrapper" data-aos="fade-up" data-aos-delay="200">
+            <button class="carousel-nav carousel-prev" aria-label="Previous services">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M15 18l-6-6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            
+            <div class="carousel-container">
+                <div class="carousel-track">
+                    <!-- Service 1: Child Therapy -->
+                    <div class="carousel-card">
+                        <div class="card-glow"></div>
+                        <div class="card-icon-wrapper">
+                            <div class="card-icon gradient-1">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke-width="2"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-number">01</div>
+                        <h3>Child Therapy</h3>
+                        <p>Specialized therapeutic support helping children process emotions and build resilience through play and expressive therapy.</p>
+                        <button class="card-btn" data-modal="child-therapy">
+                            <span>Learn More</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Service 2: Adolescent Therapy -->
+                    <div class="carousel-card">
+                        <div class="card-glow"></div>
+                        <div class="card-icon-wrapper">
+                            <div class="card-icon gradient-2">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke-width="2"/>
+                                    <path d="M8 14C8 14 9.5 16 12 16C14.5 16 16 14 16 14" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-number">02</div>
+                        <h3>Adolescent Therapy</h3>
+                        <p>Specialized care for teenagers navigating identity, relationships, anxiety, depression, and life transitions.</p>
+                        <button class="card-btn" data-modal="adolescent-therapy">
+                            <span>Learn More</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Service 3: Individual Therapy -->
+                    <div class="carousel-card">
+                        <div class="card-glow"></div>
+                        <div class="card-icon-wrapper">
+                            <div class="card-icon gradient-3">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <circle cx="12" cy="7" r="4" stroke-width="2"/>
+                                    <path d="M5.5 21C5.5 17.134 8.634 14 12.5 14C16.366 14 19.5 17.134 19.5 21" stroke-width="2"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-number">03</div>
+                        <h3>Individual Therapy</h3>
+                        <p>Person-centered therapy for adults seeking support with anxiety, depression, trauma, and personal growth.</p>
+                        <button class="card-btn" data-modal="individual-therapy">
+                            <span>Learn More</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Service 4: Family Therapy -->
+                    <div class="carousel-card">
+                        <div class="card-glow"></div>
+                        <div class="card-icon-wrapper">
+                            <div class="card-icon gradient-4">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M17 21V19C17 16.7909 15.2091 15 13 15H5C2.79086 15 1 16.7909 1 19V21" stroke-width="2"/>
+                                    <circle cx="9" cy="7" r="4" stroke-width="2"/>
+                                    <path d="M23 21V19C23 17.1362 21.7252 15.5701 20 15.126M16 3.12988C17.7252 3.57396 19 5.13988 19 7C19 8.86012 17.7252 10.426 16 10.8701" stroke-width="2"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-number">04</div>
+                        <h3>Family Therapy</h3>
+                        <p>Strengthen family bonds and improve communication through collaborative sessions focused on healing and growth.</p>
+                        <button class="card-btn" data-modal="family-therapy">
+                            <span>Learn More</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Service 5: Marital Therapy -->
+                    <div class="carousel-card">
+                        <div class="card-glow"></div>
+                        <div class="card-icon-wrapper">
+                            <div class="card-icon gradient-5">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M20.84 4.61C20.3292 4.099 19.7228 3.69364 19.0554 3.41708C18.3879 3.14052 17.6725 2.99817 16.95 2.99817C16.2275 2.99817 15.5121 3.14052 14.8446 3.41708C14.1772 3.69364 13.5708 4.099 13.06 4.61L12 5.67L10.94 4.61C9.9083 3.5783 8.50903 2.99882 7.05 2.99882C5.59096 2.99882 4.19169 3.5783 3.16 4.61C2.1283 5.64169 1.54882 7.04097 1.54882 8.5C1.54882 9.95903 2.1283 11.3583 3.16 12.39L4.22 13.45L12 21.23L19.78 13.45L20.84 12.39C21.351 11.8792 21.7563 11.2728 22.0329 10.6053C22.3095 9.93789 22.4518 9.22248 22.4518 8.5C22.4518 7.77752 22.3095 7.06211 22.0329 6.39464C21.7563 5.72718 21.351 5.12075 20.84 4.61V4.61Z" stroke-width="2"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-number">05</div>
+                        <h3>Marital Therapy</h3>
+                        <p>Couples counseling to strengthen relationships, improve communication, and resolve conflicts effectively.</p>
+                        <button class="card-btn" data-modal="marital-therapy">
+                            <span>Learn More</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Service 6: Divorce Support -->
+                    <div class="carousel-card">
+                        <div class="card-glow"></div>
+                        <div class="card-icon-wrapper">
+                            <div class="card-icon gradient-6">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M3 12C3 4.5885 4.5885 3 12 3C19.4115 3 21 4.5885 21 12C21 19.4115 19.4115 21 12 21C4.5885 21 3 19.4115 3 12Z" stroke-width="2"/>
+                                    <path d="M12 8V12L15 15" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-number">06</div>
+                        <h3>Divorce Support</h3>
+                        <p>Therapeutic guidance for individuals and families navigating separation, divorce, and co-parenting challenges.</p>
+                        <button class="card-btn" data-modal="divorce-support">
+                            <span>Learn More</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Service 7: Reunification Therapy -->
+                    <div class="carousel-card">
+                        <div class="card-glow"></div>
+                        <div class="card-icon-wrapper">
+                            <div class="card-icon gradient-1">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke-width="2"/>
+                                    <circle cx="9" cy="7" r="4" stroke-width="2"/>
+                                    <path d="M22 21V19C22 18.1137 21.7044 17.2528 21.1614 16.5523C20.6184 15.8519 19.8581 15.3516 19 15.13M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89317 18.7122 8.75608 18.1676 9.45768C17.623 10.1593 16.8604 10.6597 16 10.88" stroke-width="2"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-number">07</div>
+                        <h3>Reunification Therapy</h3>
+                        <p>Specialized therapy to repair and rebuild parent-child relationships after separation or estrangement.</p>
+                        <button class="card-btn" data-modal="reunification-therapy">
+                            <span>Learn More</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Service 8: Therapeutic Supervised Visitation -->
+                    <div class="carousel-card">
+                        <div class="card-glow"></div>
+                        <div class="card-icon-wrapper">
+                            <div class="card-icon gradient-2">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M15 3H19C20.1046 3 21 3.89543 21 5V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3H9" stroke-width="2"/>
+                                    <path d="M9 12L11 14L15 10" stroke-width="2" stroke-linecap="round"/>
+                                    <circle cx="12" cy="7" r="2" stroke-width="2"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-number">08</div>
+                        <h3>Therapeutic Supervised Visitation</h3>
+                        <p>Professionally monitored visits ensuring safe, therapeutic parent-child interactions in a supportive environment.</p>
+                        <button class="card-btn" data-modal="supervised-visitation">
+                            <span>Learn More</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Service 9: Parent Coordination -->
+                    <div class="carousel-card">
+                        <div class="card-glow"></div>
+                        <div class="card-icon-wrapper">
+                            <div class="card-icon gradient-3">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke-width="2"/>
+                                    <path d="M2 12H22" stroke-width="2"/>
+                                    <path d="M12 2C14.5013 4.73835 15.9228 8.29203 16 12C15.9228 15.708 14.5013 19.2616 12 22C9.49872 19.2616 8.07725 15.708 8 12C8.07725 8.29203 9.49872 4.73835 12 2V2Z" stroke-width="2"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-number">09</div>
+                        <h3>Parent Coordination</h3>
+                        <p>Court-appointed services to help high-conflict parents implement custody agreements and reduce disputes.</p>
+                        <button class="card-btn" data-modal="parent-coordination">
+                            <span>Learn More</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Service 10: Custody Evaluations -->
+                    <div class="carousel-card">
+                        <div class="card-glow"></div>
+                        <div class="card-icon-wrapper">
+                            <div class="card-icon gradient-4">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke-width="2"/>
+                                    <path d="M14 2V8H20M16 13H8M16 17H8M10 9H8" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-number">10</div>
+                        <h3>Custody Evaluations</h3>
+                        <p>Comprehensive psychological assessments to assist courts in determining child custody and parenting arrangements.</p>
+                        <button class="card-btn" data-modal="custody-evaluations">
+                            <span>Learn More</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Service 11: Mental Health Evaluations -->
+                    <div class="carousel-card">
+                        <div class="card-glow"></div>
+                        <div class="card-icon-wrapper">
+                            <div class="card-icon gradient-5">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z" stroke-width="2"/>
+                                    <path d="M2 21V19C2 17.9391 2.42143 16.9217 3.17157 16.1716C3.92172 15.4214 4.93913 15 6 15H12C13.0609 15 14.0783 15.4214 14.8284 16.1716C15.5786 16.9217 16 17.9391 16 19V21M16 11H22M19 8V14" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-number">11</div>
+                        <h3>Mental Health Evaluations</h3>
+                        <p>Professional psychological assessments for ADHD, autism spectrum disorder, learning disabilities, and more.</p>
+                        <button class="card-btn" data-modal="mental-health-evaluations">
+                            <span>Learn More</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
-                <h3>Our Foundation</h3>
-                <p>Founded by a group of psychologists and social workers dedicated to developing state-of-the-art outpatient programs. We continue to provide the most effective assessment and treatment services for children, adolescents, adults, and families.</p>
             </div>
-
-            <!-- Affiliation Card -->
-            <div class="about-feature-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="feature-icon gradient-bg">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
-                <h3>SUNY Stony Brook</h3>
-                <p>Our staff associations with SUNY at Stony Brook ensure access to the most up-to-date, evidence-based therapeutic techniques and research-driven treatment approaches.</p>
-            </div>
-
-            <!-- Training Card -->
-            <div class="about-feature-card" data-aos="fade-up" data-aos-delay="300">
-                <div class="feature-icon gradient-bg">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89317 18.7122 8.75608 18.1676 9.45768C17.623 10.1593 16.8604 10.6597 16 10.88" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
-                <h3>Training Facility</h3>
-                <p>As a certified training facility, students in clinical psychology receive hands-on training in our office under the direct supervision of licensed psychologists.</p>
-            </div>
-        </div>
-
-        <!-- Stats Section -->
-        <div class="about-stats" data-aos="fade-up" data-aos-delay="400">
-            <div class="stat-item">
-                <div class="stat-number">10+</div>
-                <div class="stat-label">Years Experience</div>
-            </div>
-            <div class="stat-divider"></div>
-            <div class="stat-item">
-                <div class="stat-number">1000+</div>
-                <div class="stat-label">Families Helped</div>
-            </div>
-            <div class="stat-divider"></div>
-            <div class="stat-item">
-                <div class="stat-number">100%</div>
-                <div class="stat-label">Dedicated Care</div>
-            </div>
-        </div>
-
-        <!-- Meet Our Team CTA -->
-        <div class="about-cta" data-aos="fade-up" data-aos-delay="500">
-            <h3>Meet Dr. Kristie Doheny, Owner & Lead Psychologist</h3>
-            <p>Learn about our dedicated professional who will support your journey to wellness</p>
-            <button class="btn btn-primary" id="openStaffModal">
-                <span>View Full Profile</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="20" height="20">
-                    <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            
+            <button class="carousel-nav carousel-next" aria-label="Next services">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M9 18l6-6-6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </button>
         </div>
+        
+        <!-- Carousel Dots -->
+        <div class="carousel-dots"></div>
     </div>
 </section>
 
-<!-- Staff Modal -->
-<div id="staffModal" class="modal">
-    <div class="modal-overlay" id="modalOverlay"></div>
-    <div class="modal-container">
-        <button class="modal-close" id="closeModal" aria-label="Close modal">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M18 6L6 18M6 6l12 12" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-        </button>
-        
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="section-label">Our Team</span>
-                <h2>Meet Our Professional</h2>
-                <p>Experienced clinician dedicated to your family's well-being</p>
-            </div>
-
-            <div class="staff-profile">
-                <div class="staff-profile-header">
-                    <div class="staff-avatar">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <div class="staff-info">
-                        <h3>Dr. Kristie Doheny</h3>
-                        <p class="staff-title">PsyD, Owner & Lead Psychologist</p>
-                        <a href="mailto:childfamily12@gmail.com" class="staff-email">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="16" height="16">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke-width="2"/>
-                                <polyline points="22,6 12,13 2,6" stroke-width="2"/>
-                            </svg>
-                            childfamily12@gmail.com
-                        </a>
-                    </div>
-                </div>
-
-                <div class="staff-details">
-                    <div class="detail-section">
-                        <h4>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="20" height="20">
-                                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke-width="2"/>
-                            </svg>
-                            About Dr. Doheny
-                        </h4>
-                        <p>With over 10 years of experience working with children, adolescents, adults, and families, Dr. Doheny specializes in person-centered therapy which enables her to create individualized treatment for each client.</p>
-                        <p style="margin-top: 15px;">"While we can't change difficult situations of the past, we can work together to better understand and resolve challenges in your life. By applying complementary therapy approaches and techniques, we will unearth long-standing behavior patterns or negative perceptions that may be holding you back from experiencing a more fulfilling and meaningful life."</p>
-                    </div>
-
-                    <div class="detail-section">
-                        <h4>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="20" height="20">
-                                <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.7088 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999" stroke-width="2" stroke-linecap="round"/>
-                                <path d="M22 4L12 14.01L9 11.01" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            Therapeutic Approaches
-                        </h4>
-                        <p>Dr. Doheny uses humanistic therapy techniques and believes that every individual or family is unique and the treatment should be catered to their needs.</p>
-                        <ul class="specializations-list">
-                            <li>Person-Centered Therapy</li>
-                            <li>Play Therapy & Sandplay Therapy</li>
-                            <li>Expressive Therapy</li>
-                            <li>Cognitive-Behavioral Therapy (CBT)</li>
-                            <li>Neurofeedback & Biofeedback</li>
-                        </ul>
-                    </div>
-
-                    <div class="detail-section">
-                        <h4>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="20" height="20">
-                                <path d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z" stroke-width="2"/>
-                                <path d="M2 21V19C2 17.9391 2.42143 16.9217 3.17157 16.1716C3.92172 15.4214 4.93913 15 6 15H12C13.0609 15 14.0783 15.4214 14.8284 16.1716C15.5786 16.9217 16 17.9391 16 19V21" stroke-width="2"/>
-                                <path d="M16 11H22M19 8V14" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                            Psychological Evaluations
-                        </h4>
-                        <p>Comprehensive assessment services offered for:</p>
-                        <ul class="specializations-list">
-                            <li>ADHD Assessment</li>
-                            <li>Learning Disabilities</li>
-                            <li>Autism Spectrum Disorder (ADOS-2)</li>
-                            <li>Developmental Delays</li>
-                        </ul>
-                    </div>
-
-                    <div class="philosophy-highlight">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="24" height="24">
-                            <path d="M20.84 4.61C20.3292 4.099 19.7228 3.69364 19.0554 3.41708C18.3879 3.14052 17.6725 2.99817 16.95 2.99817C16.2275 2.99817 15.5121 3.14052 14.8446 3.41708C14.1772 3.69364 13.5708 4.099 13.06 4.61L12 5.67L10.94 4.61C9.9083 3.5783 8.50903 2.99882 7.05 2.99882C5.59096 2.99882 4.19169 3.5783 3.16 4.61C2.1283 5.64169 1.54882 7.04097 1.54882 8.5C1.54882 9.95903 2.1283 11.3583 3.16 12.39L4.22 13.45L12 21.23L19.78 13.45L20.84 12.39C21.351 11.8792 21.7563 11.2728 22.0329 10.6053C22.3095 9.93789 22.4518 9.22248 22.4518 8.5C22.4518 7.77752 22.3095 7.06211 22.0329 6.39464C21.7563 5.72718 21.351 5.12075 20.84 4.61V4.61Z" stroke-width="2"/>
-                        </svg>
-                        <p>"If you're looking for extra support and guidance through a challenging situation or you're just ready to move in a new direction in your life, I look forward to working with you to achieve your goals."</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- Service Modals Container -->
+<div class="service-modals-container"></div>
     
-    <!-- Services Section -->
-    <section id="services" class="services-section">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <span class="section-label">Our Services</span>
-                <h2 class="section-title">Comprehensive Mental Health Support</h2>
-                <p class="section-description">Tailored therapeutic services for children, adolescents, and families.</p>
-            </div>
-            
-            <div class="services-grid">
-                <div class="service-card" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="service-number">01</div>
-                    <h3>Child Therapy</h3>
-                    <p>Individual therapy sessions designed to help children process emotions, build resilience, and develop healthy coping strategies.</p>
-                </div>
-                
-                <div class="service-card" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="service-number">02</div>
-                    <h3>Family Counseling</h3>
-                    <p>Strengthen family bonds and improve communication through collaborative therapy sessions focused on understanding and growth.</p>
-                </div>
-                
-                <div class="service-card" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="service-number">03</div>
-                    <h3>Adolescent Support</h3>
-                    <p>Specialized care for teenagers navigating identity, relationships, anxiety, depression, and life transitions.</p>
-                </div>
-                
-                <div class="service-card" data-aos="zoom-in" data-aos-delay="400">
-                    <div class="service-number">04</div>
-                    <h3>Behavioral Assessment</h3>
-                    <p>Comprehensive evaluations to understand behavioral patterns and develop effective intervention strategies.</p>
-                </div>
-                
-                <div class="service-card" data-aos="zoom-in" data-aos-delay="500">
-                    <div class="service-number">05</div>
-                    <h3>Parent Coaching</h3>
-                    <p>Guidance and tools for parents to support their child's emotional development and address behavioral challenges.</p>
-                </div>
-                
-                <div class="service-card" data-aos="zoom-in" data-aos-delay="600">
-                    <div class="service-number">06</div>
-                    <h3>Crisis Intervention</h3>
-                    <p>Immediate support during mental health emergencies, providing stabilization and connecting families to resources.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    
+    
     <!-- Video Section -->
     <section id="video" class="video-section">
         <div class="container">
