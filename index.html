@@ -31,17 +31,17 @@
         </div>
     </div>
     
- <!-- Progress Tracker Header -->
+<!-- Progress Tracker Header - No Mobile Menu -->
 <header id="header" class="progress-header">
     <div class="nav-container">
         <!-- Logo -->
         <a href="#home" class="nav-logo">
-            <img src="logo.png" alt="Logo" class="nav-logo-img">
+            <img src="assets/logo.png" alt="Logo" class="nav-logo-img">
             <span class="nav-logo-text">CFPS</span>
         </a>
 
-        <!-- Progress Tracker -->
-        <nav class="progress-tracker">
+        <!-- Desktop Progress Tracker (Center) -->
+        <nav class="progress-tracker desktop-tracker">
             <div class="progress-track">
                 <div class="progress-line"></div>
                 <a href="#home" class="progress-dot" data-section="home">
@@ -67,12 +67,17 @@
             </div>
         </nav>
 
-        <!-- Mobile Menu Button -->
-        <button class="mobile-menu-btn" aria-label="Toggle menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
+        <!-- Mobile Progress Tracker (Right Side) -->
+        <nav class="progress-tracker mobile-tracker">
+            <div class="current-section-label"></div>
+            <div class="mobile-dots">
+                <a href="#home" class="mobile-dot" data-section="home" aria-label="Home"></a>
+                <a href="#about" class="mobile-dot" data-section="about" aria-label="About"></a>
+                <a href="#services" class="mobile-dot" data-section="services" aria-label="Services"></a>
+                <a href="#video" class="mobile-dot" data-section="video" aria-label="Video"></a>
+                <a href="#contact" class="mobile-dot" data-section="contact" aria-label="Contact"></a>
+            </div>
+        </nav>
     </div>
 
     <!-- Scroll Progress Bar -->
