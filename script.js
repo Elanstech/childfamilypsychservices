@@ -1359,6 +1359,435 @@ class ServicesCarousel {
     }
 }
 
+class TeamCarousel {
+    constructor() {
+        this.track = document.querySelector('.team-carousel-track');
+        this.cards = Array.from(document.querySelectorAll('.team-carousel-card'));
+        this.prevBtn = document.querySelector('.team-carousel-prev');
+        this.nextBtn = document.querySelector('.team-carousel-next');
+        this.dotsContainer = document.querySelector('.team-carousel-dots');
+        
+        this.currentIndex = 0;
+        this.cardWidth = 0;
+        this.cardsPerView = this.getCardsPerView();
+        this.totalPages = Math.ceil(this.cards.length / this.cardsPerView);
+        
+        // Touch/swipe support
+        this.touchStartX = 0;
+        this.touchEndX = 0;
+        
+        // Team data for modals
+        this.teamData = this.getTeamData();
+        
+        this.init();
+    }
+
+    init() {
+        if (!this.track || this.cards.length === 0) return;
+        
+        this.calculateCardWidth();
+        this.createDots();
+        this.setupEventListeners();
+        this.updateCarousel();
+        this.generateModals();
+        
+        // Recalculate on window resize
+        window.addEventListener('resize', () => {
+            this.handleResize();
+        });
+    }
+
+    getCardsPerView() {
+        const width = window.innerWidth;
+        if (width < 768) return 1;
+        if (width < 1200) return 2;
+        return 3;
+    }
+
+    calculateCardWidth() {
+        if (this.cards.length > 0) {
+            const cardStyle = window.getComputedStyle(this.cards[0]);
+            const cardMargin = parseFloat(cardStyle.marginRight) || 30;
+            this.cardWidth = this.cards[0].offsetWidth + cardMargin;
+        }
+    }
+
+    createDots() {
+        if (!this.dotsContainer) return;
+        
+        this.dotsContainer.innerHTML = '';
+        for (let i = 0; i < this.totalPages; i++) {
+            const dot = document.createElement('button');
+            dot.classList.add('team-carousel-dot');
+            dot.setAttribute('aria-label', `Go to page ${i + 1}`);
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => this.goToPage(i));
+            this.dotsContainer.appendChild(dot);
+        }
+        this.dots = Array.from(document.querySelectorAll('.team-carousel-dot'));
+    }
+
+    setupEventListeners() {
+        // Navigation buttons
+        if (this.prevBtn) {
+            this.prevBtn.addEventListener('click', () => this.prev());
+        }
+        if (this.nextBtn) {
+            this.nextBtn.addEventListener('click', () => this.next());
+        }
+
+        // Touch events for mobile swipe
+        if (this.track) {
+            this.track.addEventListener('touchstart', (e) => this.handleTouchStart(e), { passive: true });
+            this.track.addEventListener('touchmove', (e) => this.handleTouchMove(e), { passive: true });
+            this.track.addEventListener('touchend', () => this.handleTouchEnd());
+        }
+
+        // Learn more buttons
+        const learnMoreButtons = document.querySelectorAll('.team-learn-more');
+        learnMoreButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const teamId = btn.getAttribute('data-team');
+                this.openModal(teamId);
+            });
+        });
+    }
+
+    handleTouchStart(e) {
+        this.touchStartX = e.touches[0].clientX;
+    }
+
+    handleTouchMove(e) {
+        this.touchEndX = e.touches[0].clientX;
+    }
+
+    handleTouchEnd() {
+        const threshold = 50;
+        const diff = this.touchStartX - this.touchEndX;
+
+        if (Math.abs(diff) > threshold) {
+            if (diff > 0) {
+                this.next();
+            } else {
+                this.prev();
+            }
+        }
+    }
+
+    prev() {
+        if (this.currentIndex > 0) {
+            this.currentIndex--;
+            this.updateCarousel();
+        }
+    }
+
+    next() {
+        if (this.currentIndex < this.totalPages - 1) {
+            this.currentIndex++;
+            this.updateCarousel();
+        }
+    }
+
+    goToPage(pageIndex) {
+        this.currentIndex = pageIndex;
+        this.updateCarousel();
+    }
+
+    updateCarousel() {
+        const offset = -this.currentIndex * this.cardWidth * this.cardsPerView;
+        if (this.track) {
+            this.track.style.transform = `translateX(${offset}px)`;
+        }
+
+        // Update dots
+        if (this.dots) {
+            this.dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === this.currentIndex);
+            });
+        }
+
+        // Update navigation buttons
+        if (this.prevBtn) {
+            this.prevBtn.disabled = this.currentIndex === 0;
+        }
+        if (this.nextBtn) {
+            this.nextBtn.disabled = this.currentIndex === this.totalPages - 1;
+        }
+    }
+
+    handleResize() {
+        const newCardsPerView = this.getCardsPerView();
+        if (newCardsPerView !== this.cardsPerView) {
+            this.cardsPerView = newCardsPerView;
+            this.totalPages = Math.ceil(this.cards.length / this.cardsPerView);
+            this.currentIndex = Math.min(this.currentIndex, this.totalPages - 1);
+            this.createDots();
+        }
+        this.calculateCardWidth();
+        this.updateCarousel();
+    }
+
+    getTeamData() {
+        return {
+            'kristie-doheny': {
+                name: 'Dr. Kristie Doheny',
+                credentials: 'PsyD, Owner & Lead Psychologist',
+                email: 'childfamily12@gmail.com',
+                photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=faces',
+                isOwner: true,
+                bio: [
+                    'While we can\'t change difficult situations of the past, we can work together to better understand and resolve challenges in your life. By applying complementary therapy approaches and techniques, we will unearth long-standing behavior patterns or negative perceptions that may be holding you back from experiencing a more fulfilling and meaningful life.',
+                    'If you\'re looking for extra support and guidance through a challenging situation or you\'re just ready to move in a new direction in your life, I look forward to working with you to achieve your goals.',
+                    'With over 10 years of experience working with children, adolescents, adults, and families, I specialize in person-centered therapy which enables me to create individualized treatment for each client I meet.'
+                ],
+                highlights: [
+                    'Over 10 years of experience with children, adolescents, adults, and families',
+                    'Specializes in person-centered therapy',
+                    'Offers psychological evaluations for ADHD, learning disabilities, autism spectrum disorder (ADOS-2), and developmental delays',
+                    'Uses humanistic therapy techniques including play therapy, sandplay therapy, expressive therapy',
+                    'Trained in cognitive-behavioral therapy, neurofeedback, and biofeedback',
+                    'Creates individualized treatment plans for each client'
+                ]
+            },
+            'jane-albertson': {
+                name: 'Dr. Jane Albertson-Kelly',
+                credentials: 'PhD, Clinical Psychologist',
+                email: 'childfamily12@gmail.com',
+                photo: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=faces',
+                isOwner: false,
+                bio: [
+                    'Dr. Albertson-Kelly has worked with individuals and families in crisis for over 15 years. She holds a doctorate in clinical psychology as well as a Master\'s Degree in Education.',
+                    'She has been affiliated with the Adolescent Psychiatric Unit at Mather Hospital, the North Suffolk Center Child Treatment Program, and the Northport VA. A former teacher, Dr. Albertson-Kelly has particular interests in working with families adjusting to separation and divorce, as well as adolescents.',
+                    'She is recognized as an expert witness in the areas of parenting, custody and sexual abuse and has presented on topics related to these areas.'
+                ],
+                highlights: [
+                    'Over 15 years working with individuals and families in crisis',
+                    'Doctorate in Clinical Psychology and Master\'s Degree in Education',
+                    'Former teacher with expertise in adolescent care',
+                    'Specializes in families adjusting to separation and divorce',
+                    'Expert witness in parenting, custody, and sexual abuse cases',
+                    'Affiliated with Mather Hospital, North Suffolk Center, and Northport VA'
+                ]
+            },
+            'barbara-burkhard': {
+                name: 'Dr. Barbara Burkhard',
+                credentials: 'PhD, Clinical Psychologist',
+                email: 'childfamily12@gmail.com',
+                photo: 'https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=400&h=400&fit=crop&crop=faces',
+                isOwner: false,
+                bio: [
+                    'Dr. Burkhard has provided psychological services to young children and their families for over 35 years. She holds a doctorate in clinical psychology from Stony Brook University and has specialized training in the area of child abuse assessment.',
+                    'She has served as program director for several Suffolk County programs serving children and families including the Child Treatment Program of North Suffolk Mental Health Center, Inc. and Parents Anonymous of Suffolk County.',
+                    'She has received awards from both Suffolk County and the State University for her work. Dr. Burkhard currently provides treatment and assessment for children and parents including treatment for distressed and traumatized children. She also provides expert testimony in child abuse and custody proceedings.'
+                ],
+                highlights: [
+                    'Over 35 years providing psychological services to children and families',
+                    'Doctorate in Clinical Psychology from Stony Brook University',
+                    'Specialized training in child abuse assessment',
+                    'Former program director for multiple Suffolk County programs',
+                    'Award recipient from Suffolk County and State University',
+                    'Expert testimony in child abuse and custody proceedings'
+                ]
+            },
+            'jessica-panagiotidis': {
+                name: 'Jessica Panagiotidis',
+                credentials: 'MS, CRC, LMSW',
+                email: 'childfamily12@gmail.com',
+                photo: 'https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=400&h=400&fit=crop&crop=faces',
+                isOwner: false,
+                bio: [
+                    'Jessica attended St. John\'s University and graduated with a Bachelor\'s Degree in Psychology in 1996. She began working as a Job Placement Specialist for adults with developmental disabilities while employed with AHRC. Her passion for helping people with disabilities led to her decision to further her training.',
+                    'Jessica graduated from Hofstra University with a Master\'s Degree in Education, specifically vocational rehabilitation counseling in 1999. She began working as a Vocational Rehabilitation Counselor with ACCES-VR in 2001 where she helps individuals with various disabilities find employment and live independent lives.',
+                    'Jessica decided to pursue a second Master\'s Degree in Social Work and graduated from Adelphi University in 2017. She obtained her licensure and is fulfilling her passion in clinical counseling. Her experience ranges from children to adults with respect to individual, group, and family counseling services.'
+                ],
+                highlights: [
+                    'Bachelor\'s in Psychology from St. John\'s University',
+                    'Master\'s in Vocational Rehabilitation Counseling from Hofstra University',
+                    'Master\'s in Social Work from Adelphi University',
+                    'Certified Rehabilitation Counselor (CRC)',
+                    'Experience with individuals with developmental disabilities',
+                    'Provides individual, group, and family counseling services'
+                ]
+            },
+            'jennifer-cuevas': {
+                name: 'Jennifer Cuevas',
+                credentials: 'LCSW, Licensed Clinical Social Worker',
+                email: 'childfamily12@gmail.com',
+                photo: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400&h=400&fit=crop&crop=faces',
+                isOwner: false,
+                bio: [
+                    'I\'m a licensed clinical social worker with 25 years experience working with children, adolescents and families. My areas of specialty are children and adolescents with developmental disabilities, autism, chronic illness, mental illness, anxiety, depression and trauma.',
+                    'I am a Disaster Mental Health Worker for the Red Cross. I do regular television and radio appearances on various news outlets, such as Cablevision News 12, NEWSMAX, CBS & WFAN, to provide psychological commentary on multiple topics.',
+                    'I have specialized experience advocating for children to secure special education services from NY public school system, within parameters of IDEA (Individuals with Disabilities Act) and DASA (NY Dignity for All Students Act), protecting children from bullying and discrimination. I provide trauma recovery counseling for all ages.',
+                    'I am the parent of a special needs child. I fully understand the complexities of accessing all a child needs and deserves, to become a happy and productive person. I look forward to being able to assist you!'
+                ],
+                highlights: [
+                    '25 years experience with children, adolescents, and families',
+                    'Specializes in developmental disabilities, autism, and trauma',
+                    'Disaster Mental Health Worker for the Red Cross',
+                    'Regular media appearances on News 12, NEWSMAX, CBS, and WFAN',
+                    'Expert in special education advocacy (IDEA and DASA)',
+                    'Parent of a special needs child with personal understanding'
+                ]
+            },
+            'katherine-kruser': {
+                name: 'Katherine Kruser',
+                credentials: 'LP, Licensed Psychologist',
+                email: 'childfamily12@gmail.com',
+                photo: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=faces',
+                isOwner: false,
+                bio: [
+                    'The therapeutic relationship is one that should hold no judgments, be empathetic, be safe, and should ultimately empower the client to cope with the issues that they face. Creating a specific treatment plan using a person-centered approach will allow for an autonomous environment.',
+                    'I worked in music education for over 20 years which gives me extensive experience working with children and adolescents. I graduated from Southern New Hampshire graduate Clinical Mental Health Counseling program.',
+                    'My counseling experience is founded in the play therapy modality where children can explore feelings and emotions through therapeutic play. I support children, adolescents and adults with a wide range of issues including anxiety, depression, ADHD, behavioral challenges in school, low self esteem, and poor social skills.',
+                    'I am currently working in two different locations: Patchogue and Hauppauge. I look forward to working with your child and supporting them with whatever struggles they have.'
+                ],
+                highlights: [
+                    'Over 20 years in music education',
+                    'Graduate of Southern New Hampshire Clinical Mental Health Counseling program',
+                    'Specialized in play therapy modality',
+                    'Certified life coach',
+                    'Treats anxiety, depression, ADHD, and behavioral challenges',
+                    'Available in Patchogue and Hauppauge locations'
+                ]
+            },
+            'dominique-galanek': {
+                name: 'Dominique Galanek',
+                credentials: 'LP, Licensed Psychologist',
+                email: 'childfamily12@gmail.com',
+                photo: 'https://images.unsplash.com/photo-1554151228-14d9def656e4?w=400&h=400&fit=crop&crop=faces',
+                isOwner: false,
+                bio: [
+                    'My passion is working with children, adolescents, and young adults who are experiencing mental health symptoms and/or have been involved with the criminal justice system. Through the field of psychology, we have learned that much of our life trajectory is determined by experiences in these formative years.',
+                    'My goal is to help individuals through their anxiety, depression, and other life stressors by providing support and tools; in doing this, we can work together to achieve the goals you have!',
+                    'I have earned both my Masters in Forensic Psychology and Masters in Forensic Mental Health Counseling from John Jay College of Criminal Justice. By using a multitude of therapeutic practices such as psychodynamic, cognitive-behavioral, and motivational interviewing the therapy process is individualized to fit you best!',
+                    'Taking the first step is one of the most challenging parts of the process and by looking for help you have already taken such a huge leap! Please do not hesitate to reach out.'
+                ],
+                highlights: [
+                    'Masters in Forensic Psychology from John Jay College',
+                    'Masters in Forensic Mental Health Counseling',
+                    'Specializes in youth involved with criminal justice system',
+                    'Uses psychodynamic, cognitive-behavioral, and motivational interviewing',
+                    'Provides talk therapy, play therapy, neurofeedback, and biofeedback',
+                    'Focuses on anxiety, depression, and life stressors'
+                ]
+            },
+            'leana-silipo': {
+                name: 'Leana Silipo',
+                credentials: 'LMSW, Licensed Social Worker',
+                email: 'childfamily12@gmail.com',
+                photo: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&h=400&fit=crop&crop=faces',
+                isOwner: false,
+                bio: [
+                    'LGBTQ+ licensed social worker passionate about queer history and advocacy. My goal is providing affirming mental health care to all those under the LGBTQ+ umbrella.',
+                    'Life is messy, complicated, and often out of our control. Being amidst this chaos can feel overwhelming and isolating, especially if you are still figuring out your identity and how you fit into the world. My aim is to help clients figure out what aspects of life they do have control over and empower them to take a stand or make a change.',
+                    'This control can come in the form of exploration and acceptance or recognizing and disrupting unhealthy patterns. I strive to create a collaborative and warm space to foster a therapeutic relationship based on trust, empathy, and validation.',
+                    'Many clients also find speaking to a therapist with a personal understanding and experience of their own to be beneficial, especially within the queer community. I believe healing and peace are found within balance and would love to aid you in finding or creating that in your own life. When you\'re ready, let\'s begin!'
+                ],
+                highlights: [
+                    'LGBTQ+ affirming mental health care specialist',
+                    'Passionate about queer history and advocacy',
+                    'Specializes in identity exploration and acceptance',
+                    'Creates collaborative and warm therapeutic spaces',
+                    'Focus on trust, empathy, and validation',
+                    'Personal understanding of LGBTQ+ experiences'
+                ]
+            }
+        };
+    }
+
+    generateModals() {
+        const container = document.querySelector('.team-modals-container');
+        if (!container) return;
+
+        Object.keys(this.teamData).forEach(teamId => {
+            const member = this.teamData[teamId];
+            
+            const modalHTML = `
+                <div class="team-modal" id="team-modal-${teamId}">
+                    <div class="modal-overlay"></div>
+                    <div class="modal-content-wrapper">
+                        <button class="modal-close" aria-label="Close modal">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M18 6L6 18M6 6l12 12" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                        
+                        <div class="modal-header">
+                            <div class="modal-photo">
+                                <img src="${member.photo}" alt="${member.name}">
+                            </div>
+                            <h2>${member.name}</h2>
+                            <p class="modal-credentials">${member.credentials}</p>
+                            <a href="mailto:${member.email}" class="modal-email">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke-width="2"/>
+                                    <polyline points="22,6 12,13 2,6" stroke-width="2"/>
+                                </svg>
+                                ${member.email}
+                            </a>
+                        </div>
+                        
+                        <div class="modal-body">
+                            <div class="bio-section">
+                                <h3>Professional Background</h3>
+                                ${member.bio.map(paragraph => `<p>${paragraph}</p>`).join('')}
+                            </div>
+                            
+                            <div class="highlights-box">
+                                <h4>Experience & Expertise</h4>
+                                <ul>
+                                    ${member.highlights.map(item => `<li>${item}</li>`).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            container.insertAdjacentHTML('beforeend', modalHTML);
+        });
+
+        this.setupModalListeners();
+    }
+
+    setupModalListeners() {
+        const modals = document.querySelectorAll('.team-modal');
+        
+        modals.forEach(modal => {
+            const overlay = modal.querySelector('.modal-overlay');
+            const closeBtn = modal.querySelector('.modal-close');
+            
+            if (overlay) {
+                overlay.addEventListener('click', () => this.closeModal(modal));
+            }
+            
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => this.closeModal(modal));
+            }
+            
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    this.closeModal(modal);
+                }
+            });
+        });
+    }
+
+    openModal(teamId) {
+        const modal = document.getElementById(`team-modal-${teamId}`);
+        if (modal) {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    closeModal(modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+}
+
 /**
  * App Class
  * Main application controller that initializes all components
@@ -1385,6 +1814,7 @@ class App {
         this.components.serviceWorkerManager = new ServiceWorkerManager();
         this.components.staffModalHandler = new StaffModalHandler();
         this.components.servicesCarousel = new ServicesCarousel();
+        this.components.teamCarousel = new TeamCarousel();
     }
 
     getComponent(name) {
