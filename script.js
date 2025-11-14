@@ -1,797 +1,732 @@
-// ============================================
-// CHILD & FAMILY PSYCHOLOGICAL SERVICES
-// Main JavaScript File - ES6+ (2025)
-// Developer: Elanstech
-// ============================================
+// ===================================
+// ES6 Class-Based Architecture
+// ===================================
 
-'use strict';
-
-// ============================================
-// PRELOADER
-// ============================================
+/**
+ * Preloader Class
+ * Handles the loading animation and initialization
+ */
 class Preloader {
-    constructor() {
-        this.preloader = document.getElementById('preloader');
+    constructor(duration = 2500) {
+        this.element = document.getElementById('preloader');
+        this.duration = duration;
         this.init();
     }
 
     init() {
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                this.hide();
-            }, 1500);
-        });
+        document.body.style.overflow = 'hidden';
+        window.addEventListener('load', () => this.hide());
     }
 
     hide() {
-        if (this.preloader) {
-            this.preloader.style.opacity = '0';
+        setTimeout(() => {
+            this.element.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            this.initializeAOS();
+            
             setTimeout(() => {
-                this.preloader.style.display = 'none';
-            }, 500);
+                if (this.element && this.element.parentNode) {
+                    this.element.remove();
+                }
+            }, 600);
+        }, this.duration);
+    }
+
+    initializeAOS() {
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100,
+            easing: 'ease-out-cubic'
+        });
+    }
+}
+
+/**
+ * TypedAnimation Class
+ * Manages the Typed.js animation in the hero section
+ */
+class TypedAnimation {
+    constructor(selector, options = {}) {
+        this.selector = selector;
+        this.defaultOptions = {
+            strings: [
+                'compassionate therapy for children',
+                'family counseling services',
+                'support for adolescents',
+                'expert psychological care',
+                'evidence-based treatment',
+                'a safe space to heal'
+            ],
+            typeSpeed: 50,
+            backSpeed: 30,
+            backDelay: 2000,
+            startDelay: 500,
+            loop: true,
+            showCursor: true,
+            cursorChar: '|',
+            autoInsertCss: true
+        };
+        this.options = { ...this.defaultOptions, ...options };
+        this.init();
+    }
+
+    init() {
+        document.addEventListener('DOMContentLoaded', () => {
+            this.typed = new Typed(this.selector, this.options);
+        });
+    }
+
+    destroy() {
+        if (this.typed) {
+            this.typed.destroy();
         }
     }
 }
 
-// ============================================
-// NAVIGATION
-// ============================================
-class Navigation {
+/**
+ * ProgressTrackerNavigation Class
+ * Unified progress tracker for desktop and mobile
+ */
+class ProgressTrackerNavigation {
     constructor() {
         this.header = document.getElementById('header');
-        this.navLinks = document.querySelectorAll('.nav-link');
-        this.mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        this.navMenu = document.querySelector('.nav-menu');
-        this.sections = document.querySelectorAll('section');
+        this.desktopDots = document.querySelectorAll('.desktop-tracker .progress-dot');
+        this.mobileDots = document.querySelectorAll('.mobile-tracker .mobile-dot');
+        this.progressLine = document.querySelector('.progress-line');
+        this.currentSectionLabel = document.querySelector('.current-section-label');
+        this.sections = document.querySelectorAll('section[id]');
+        this.progressBar = document.querySelector('.scroll-progress-bar');
+        this.lastScrollTop = 0;
+        
+        // Section names for mobile label
+        this.sectionNames = {
+            'home': 'Home',
+            'about': 'About',
+            'services': 'Services',
+            'video': 'Video',
+            'contact': 'Contact'
+        };
         
         this.init();
     }
-    
+
     init() {
-        this.handleStickyHeader();
-        this.handleMobileMenu();
-        this.handleActiveLinks();
-        this.handleScrollSpy();
+        this.setupScrollEffects();
+        this.setupActiveTracking();
+        this.setupSmoothScrolling();
+        this.setupAccessibility();
     }
-    
-    handleStickyHeader() {
-        const onScroll = () => {
-            if (window.scrollY > 100) {
+
+    setupScrollEffects() {
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 50) {
                 this.header?.classList.add('scrolled');
             } else {
                 this.header?.classList.remove('scrolled');
             }
-        };
-
-        window.addEventListener('scroll', throttle(onScroll, 10));
-    }
-    
-    handleMobileMenu() {
-        if (this.mobileMenuBtn && this.navMenu) {
-            this.mobileMenuBtn.addEventListener('click', () => {
-                this.navMenu.classList.toggle('active');
-                this.mobileMenuBtn.classList.toggle('active');
-            });
-        }
-    }
-    
-    handleActiveLinks() {
-        this.navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                this.setActiveLink(link);
-                this.closeMobileMenu();
-            });
+            
+            this.updateProgressBar();
+            this.lastScrollTop = scrollTop;
         });
     }
 
-    setActiveLink(activeLink) {
-        this.navLinks.forEach(link => link.classList.remove('active'));
-        activeLink.classList.add('active');
-    }
-
-    closeMobileMenu() {
-        if (this.navMenu?.classList.contains('active')) {
-            this.navMenu.classList.remove('active');
-            this.mobileMenuBtn?.classList.remove('active');
+    updateProgressBar() {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        
+        if (this.progressBar) {
+            this.progressBar.style.width = `${scrolled}%`;
         }
     }
-    
-    handleScrollSpy() {
-        const updateActiveSection = () => {
-            let current = '';
-            
-            this.sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                
-                if (window.pageYOffset >= sectionTop - 200) {
-                    current = section.getAttribute('id');
-                }
-            });
-            
-            this.navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
-        };
 
-        window.addEventListener('scroll', throttle(updateActiveSection, 50));
+    setupActiveTracking() {
+        window.addEventListener('scroll', () => this.updateActiveSection());
+        this.updateActiveSection();
+    }
+
+    updateActiveSection() {
+        const scrollY = window.pageYOffset;
+        let currentSection = null;
+        let currentIndex = 0;
+
+        // Find the current section
+        this.sections.forEach((section, index) => {
+            const sectionTop = section.offsetTop - 150;
+            const sectionHeight = section.offsetHeight;
+            
+            if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                currentSection = section.getAttribute('id');
+                currentIndex = index;
+            }
+        });
+
+        // Update desktop dots
+        this.desktopDots.forEach((dot, index) => {
+            const dotSection = dot.getAttribute('data-section');
+            dot.classList.remove('active', 'completed');
+            
+            if (dotSection === currentSection) {
+                dot.classList.add('active');
+            } else if (index < currentIndex) {
+                dot.classList.add('completed');
+            }
+        });
+
+        // Update mobile dots
+        this.mobileDots.forEach((dot, index) => {
+            const dotSection = dot.getAttribute('data-section');
+            dot.classList.remove('active', 'completed');
+            
+            if (dotSection === currentSection) {
+                dot.classList.add('active');
+            } else if (index < currentIndex) {
+                dot.classList.add('completed');
+            }
+        });
+
+        // Update mobile section label
+        if (this.currentSectionLabel && currentSection) {
+            this.currentSectionLabel.textContent = this.sectionNames[currentSection] || currentSection;
+        }
+
+        // Update progress line
+        this.updateProgressLine(currentIndex);
+    }
+
+    updateProgressLine(currentIndex) {
+        if (!this.progressLine) return;
+        
+        const totalDots = this.desktopDots.length;
+        const progressPercentage = totalDots > 1 ? (currentIndex / (totalDots - 1)) * 100 : 0;
+        
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = `
+            .progress-line::after {
+                width: ${progressPercentage}% !important;
+            }
+        `;
+        
+        const oldStyle = document.getElementById('progress-line-style');
+        if (oldStyle) oldStyle.remove();
+        
+        styleSheet.id = 'progress-line-style';
+        document.head.appendChild(styleSheet);
+    }
+
+    setupSmoothScrolling() {
+        // Desktop dots
+        this.desktopDots.forEach(dot => {
+            dot.addEventListener('click', (e) => this.handleDotClick(e, dot));
+        });
+
+        // Mobile dots
+        this.mobileDots.forEach(dot => {
+            dot.addEventListener('click', (e) => this.handleDotClick(e, dot));
+        });
+    }
+
+    handleDotClick(e, dot) {
+        e.preventDefault();
+        const targetId = dot.getAttribute('href') || `#${dot.getAttribute('data-section')}`;
+        const targetSection = document.querySelector(targetId);
+        
+        if (targetSection) {
+            const headerHeight = this.header?.offsetHeight || 80;
+            const targetPosition = targetSection.offsetTop - headerHeight;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        }
+    }
+
+    setupAccessibility() {
+        // Keyboard navigation for desktop dots
+        this.desktopDots.forEach((dot, index) => {
+            dot.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    dot.click();
+                }
+            });
+        });
+
+        // Keyboard navigation for mobile dots
+        this.mobileDots.forEach((dot, index) => {
+            dot.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    dot.click();
+                }
+            });
+        });
     }
 }
 
-// ============================================
-// SCROLL PROGRESS BAR
-// ============================================
-class ScrollProgress {
+/**
+ * ScrollEffects Class
+ * Manages scroll-based animations and effects
+ */
+class ScrollEffects {
     constructor() {
         this.progressBar = document.querySelector('.scroll-progress-bar');
-        this.init();
-    }
-    
-    init() {
-        if (!this.progressBar) return;
-
-        const updateProgress = () => {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrollPercentage = (scrollTop / scrollHeight) * 100;
-            this.progressBar.style.width = `${scrollPercentage}%`;
-        };
-
-        window.addEventListener('scroll', throttle(updateProgress, 10));
-    }
-}
-
-// ============================================
-// TYPED.JS EFFECT (WITH FALLBACK)
-// ============================================
-class TypedEffect {
-    constructor() {
-        this.element = document.getElementById('typed-text');
-        this.strings = [
-            'compassionate care',
-            'expert guidance',
-            'family support',
-            'healing solutions',
-            'personalized therapy',
-            'professional assessments'
-        ];
-        this.currentIndex = 0;
-        this.init();
-    }
-    
-    init() {
-        if (!this.element) return;
-
-        // Check if Typed.js is loaded
-        if (typeof Typed !== 'undefined') {
-            this.initTyped();
-        } else {
-            console.warn('Typed.js not loaded, using fallback animation');
-            this.initFallback();
-        }
-    }
-    
-    initTyped() {
-        try {
-            new Typed('#typed-text', {
-                strings: this.strings,
-                typeSpeed: 50,
-                backSpeed: 30,
-                backDelay: 2000,
-                loop: true,
-                cursorChar: '|',
-                smartBackspace: true
-            });
-        } catch (error) {
-            console.error('Typed.js initialization failed:', error);
-            this.initFallback();
-        }
-    }
-    
-    initFallback() {
-        const rotateText = () => {
-            this.element.textContent = this.strings[this.currentIndex];
-            this.currentIndex = (this.currentIndex + 1) % this.strings.length;
-        };
-        
-        rotateText();
-        setInterval(rotateText, 3000);
-    }
-}
-
-// ============================================
-// SMOOTH SCROLL
-// ============================================
-class SmoothScroll {
-    constructor() {
+        this.heroBackground = document.querySelector('.hero-background');
+        this.heroVideo = document.querySelector('.hero-video');
         this.init();
     }
 
     init() {
-        const links = document.querySelectorAll('a[href^="#"]');
-        
-        links.forEach(link => {
-            link.addEventListener('click', (e) => {
-                this.handleClick(e, link);
-            });
+        window.addEventListener('scroll', () => {
+            this.updateProgressBar();
+            this.updateParallax();
         });
     }
 
-    handleClick(e, link) {
-        const href = link.getAttribute('href');
+    updateProgressBar() {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
         
-        if (href !== '#' && href.length > 1) {
-            e.preventDefault();
-            const target = document.querySelector(href);
+        if (this.progressBar) {
+            this.progressBar.style.width = `${scrolled}%`;
+        }
+    }
+
+    updateParallax() {
+        const scrolled = window.pageYOffset;
+        
+        if (this.heroBackground) {
+            this.heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
+        }
+
+        if (this.heroVideo) {
+            this.heroVideo.style.transform = `translate(-50%, -50%) translateY(${scrolled * 0.3}px) scale(1.1)`;
+        }
+    }
+}
+
+/**
+ * ParticleAnimation Class
+ * Handles dynamic particle animations
+ */
+class ParticleAnimation {
+    constructor(selector = '.particle') {
+        this.particles = document.querySelectorAll(selector);
+        this.init();
+    }
+
+    init() {
+        this.particles.forEach((particle, index) => {
+            const animationDuration = 10 + Math.random() * 10;
+            particle.style.animationDuration = `${animationDuration}s`;
             
-            if (target) {
-                const headerOffset = 80;
-                const elementPosition = target.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        }
+            this.animateParticle(particle, animationDuration);
+        });
+    }
+
+    animateParticle(particle, duration) {
+        setInterval(() => {
+            const randomX = Math.random() * 100;
+            const randomY = Math.random() * 100;
+            particle.style.left = `${randomX}%`;
+            particle.style.top = `${randomY}%`;
+        }, duration * 1000);
     }
 }
 
-// ============================================
-// AOS ANIMATION INITIALIZATION
-// ============================================
-class AOSManager {
-    constructor() {
+/**
+ * FormHandler Class
+ * Manages form submissions and validations
+ */
+class FormHandler {
+    constructor(selector) {
+        this.form = document.querySelector(selector);
+        this.inputs = document.querySelectorAll(`${selector} input, ${selector} textarea`);
         this.init();
     }
 
     init() {
-        if (typeof AOS !== 'undefined') {
-            AOS.init({
-                duration: 1000,
-                easing: 'ease-out-cubic',
-                once: true,
-                offset: 50,
-                disable: window.innerWidth < 768 ? true : false
-            });
-
-            // Refresh AOS on window resize
-            window.addEventListener('resize', debounce(() => {
-                AOS.refresh();
-            }, 200));
-        } else {
-            console.warn('AOS library not loaded');
-        }
-    }
-}
-
-// ============================================
-// STAFF MODAL FUNCTIONALITY
-// ============================================
-class StaffModal {
-    constructor() {
-        this.modal = document.getElementById('staffModal');
-        this.openBtn = document.getElementById('openStaffModal');
-        this.closeBtn = document.getElementById('closeModal');
-        this.overlay = document.getElementById('modalOverlay');
+        if (!this.form) return;
         
-        this.init();
-    }
-    
-    init() {
-        if (!this.modal) return;
-
-        this.handleOpenModal();
-        this.handleCloseModal();
-        this.handleKeyboardClose();
-    }
-    
-    handleOpenModal() {
-        if (this.openBtn) {
-            this.openBtn.addEventListener('click', () => {
-                this.open();
-            });
-        }
-    }
-    
-    handleCloseModal() {
-        const closeElements = [this.closeBtn, this.overlay];
-        
-        closeElements.forEach(element => {
-            if (element) {
-                element.addEventListener('click', () => {
-                    this.close();
-                });
-            }
-        });
-    }
-    
-    handleKeyboardClose() {
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && this.modal.classList.contains('active')) {
-                this.close();
-            }
-        });
-    }
-    
-    open() {
-        this.modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        
-        // Trap focus within modal
-        this.trapFocus();
-    }
-    
-    close() {
-        this.modal.classList.remove('active');
-        document.body.style.overflow = '';
+        this.setupSubmitHandler();
+        this.setupInputEffects();
     }
 
-    trapFocus() {
-        const focusableElements = this.modal.querySelectorAll(
-            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-        );
-        const firstElement = focusableElements[0];
-        const lastElement = focusableElements[focusableElements.length - 1];
-
-        this.modal.addEventListener('keydown', (e) => {
-            if (e.key === 'Tab') {
-                if (e.shiftKey && document.activeElement === firstElement) {
-                    e.preventDefault();
-                    lastElement.focus();
-                } else if (!e.shiftKey && document.activeElement === lastElement) {
-                    e.preventDefault();
-                    firstElement.focus();
-                }
-            }
-        });
-    }
-}
-
-// ============================================
-// CONTACT FORM HANDLER
-// ============================================
-class ContactForm {
-    constructor() {
-        this.form = document.querySelector('.contact-form');
-        this.init();
-    }
-    
-    init() {
-        if (this.form) {
-            this.form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                this.handleSubmit(e);
-            });
-
-            // Add real-time validation
-            this.addValidation();
-        }
+    setupSubmitHandler() {
+        this.form.addEventListener('submit', (e) => this.handleSubmit(e));
     }
 
-    addValidation() {
-        const inputs = this.form.querySelectorAll('input, textarea');
-        
-        inputs.forEach(input => {
-            input.addEventListener('blur', () => {
-                this.validateField(input);
-            });
-
-            input.addEventListener('input', () => {
-                if (input.classList.contains('error')) {
-                    this.validateField(input);
-                }
-            });
-        });
-    }
-
-    validateField(field) {
-        const value = field.value.trim();
-        let isValid = true;
-
-        if (field.hasAttribute('required') && !value) {
-            isValid = false;
-        }
-
-        if (field.type === 'email' && value) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            isValid = emailRegex.test(value);
-        }
-
-        if (isValid) {
-            field.classList.remove('error');
-            this.removeErrorMessage(field);
-        } else {
-            field.classList.add('error');
-            this.showErrorMessage(field);
-        }
-
-        return isValid;
-    }
-
-    showErrorMessage(field) {
-        const existingError = field.parentElement.querySelector('.error-message');
-        if (existingError) return;
-
-        const errorDiv = document.createElement('div');
-        errorDiv.className = 'error-message';
-        errorDiv.style.color = '#ef4444';
-        errorDiv.style.fontSize = '0.875rem';
-        errorDiv.style.marginTop = '5px';
-
-        if (field.type === 'email') {
-            errorDiv.textContent = 'Please enter a valid email address';
-        } else {
-            errorDiv.textContent = 'This field is required';
-        }
-
-        field.parentElement.appendChild(errorDiv);
-    }
-
-    removeErrorMessage(field) {
-        const errorMsg = field.parentElement.querySelector('.error-message');
-        if (errorMsg) {
-            errorMsg.remove();
-        }
-    }
-    
     handleSubmit(e) {
-        // Validate all fields
-        const inputs = this.form.querySelectorAll('input[required], textarea[required]');
-        let isFormValid = true;
-
-        inputs.forEach(input => {
-            if (!this.validateField(input)) {
-                isFormValid = false;
-            }
-        });
-
-        if (!isFormValid) {
-            this.showMessage('Please fill in all required fields correctly.', 'error');
-            return;
-        }
-
-        const formData = new FormData(this.form);
-        const data = Object.fromEntries(formData.entries());
+        e.preventDefault();
         
-        console.log('Form submitted:', data);
-        
-        // Show success message
-        this.showMessage('Thank you! Your message has been sent successfully. We will contact you soon.', 'success');
-        
-        // Reset form
-        this.form.reset();
-        
-        // In production, send to backend
-        // this.sendToBackend(data);
-    }
-    
-    showMessage(message, type = 'success') {
-        // Remove existing messages
-        const existingMessage = document.querySelector('.form-message');
-        if (existingMessage) {
-            existingMessage.remove();
-        }
-
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `form-message form-message--${type}`;
-        messageDiv.style.padding = '15px 20px';
-        messageDiv.style.borderRadius = '8px';
-        messageDiv.style.marginBottom = '20px';
-        messageDiv.style.fontWeight = '500';
-        messageDiv.style.opacity = '0';
-        messageDiv.style.transition = 'opacity 0.3s ease';
-        
-        if (type === 'success') {
-            messageDiv.style.backgroundColor = '#d1fae5';
-            messageDiv.style.color = '#065f46';
-            messageDiv.style.border = '1px solid #6ee7b7';
-        } else {
-            messageDiv.style.backgroundColor = '#fee2e2';
-            messageDiv.style.color = '#991b1b';
-            messageDiv.style.border = '1px solid #fca5a5';
-        }
-        
-        messageDiv.textContent = message;
-        
-        this.form.insertAdjacentElement('beforebegin', messageDiv);
-        
-        // Fade in
-        setTimeout(() => {
-            messageDiv.style.opacity = '1';
-        }, 10);
-        
-        // Fade out and remove
-        setTimeout(() => {
-            messageDiv.style.opacity = '0';
-            setTimeout(() => messageDiv.remove(), 300);
-        }, 5000);
-    }
-    
-    async sendToBackend(data) {
-        try {
-            const response = await fetch('/api/contact', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-            
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            
-            const result = await response.json();
-            return result;
-        } catch (error) {
-            console.error('Error submitting form:', error);
-            this.showMessage('Sorry, there was an error sending your message. Please try again or contact us directly.', 'error');
-            throw error;
-        }
-    }
-}
-
-// ============================================
-// VIDEO PLACEHOLDER INTERACTION
-// ============================================
-class VideoPlayer {
-    constructor() {
-        this.videoPlaceholder = document.querySelector('.video-placeholder');
-        this.init();
-    }
-    
-    init() {
-        if (this.videoPlaceholder) {
-            this.videoPlaceholder.addEventListener('click', () => {
-                this.handleClick();
-            });
-        }
-    }
-    
-    handleClick() {
-        // Replace with your actual video embed URL (YouTube, Vimeo, etc.)
-        const videoURL = 'https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1';
-        const iframe = document.createElement('iframe');
-        
-        iframe.setAttribute('src', videoURL);
-        iframe.setAttribute('frameborder', '0');
-        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
-        iframe.setAttribute('allowfullscreen', '');
-        iframe.style.width = '100%';
-        iframe.style.height = '100%';
-        iframe.style.borderRadius = '20px';
-        
-        const videoWrapper = this.videoPlaceholder.parentElement;
-        videoWrapper.innerHTML = '';
-        videoWrapper.appendChild(iframe);
-    }
-}
-
-// ============================================
-// PARALLAX EFFECT FOR HERO PARTICLES
-// ============================================
-class ParallaxEffect {
-    constructor() {
-        this.particles = document.querySelectorAll('.particle');
-        this.heroSection = document.querySelector('.hero-section');
-        this.init();
-    }
-    
-    init() {
-        if (this.particles.length === 0) return;
-
-        const handleScroll = () => {
-            const scrolled = window.pageYOffset;
-            const heroBottom = this.heroSection?.offsetHeight || 1000;
-
-            // Only apply parallax within hero section
-            if (scrolled < heroBottom) {
-                this.particles.forEach((particle, index) => {
-                    const speed = (index + 1) * 0.05;
-                    particle.style.transform = `translateY(${scrolled * speed}px)`;
-                });
-            }
+        const formData = {
+            name: document.getElementById('name')?.value,
+            email: document.getElementById('email')?.value,
+            phone: document.getElementById('phone')?.value,
+            message: document.getElementById('message')?.value
         };
+        
+        console.log('Form submitted:', formData);
+        
+        this.showSuccessMessage();
+        this.form.reset();
+    }
 
-        window.addEventListener('scroll', throttle(handleScroll, 10));
+    showSuccessMessage() {
+        alert('Thank you for your message! We will get back to you soon.');
+    }
+
+    setupInputEffects() {
+        this.inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('focused');
+            });
+            
+            input.addEventListener('blur', () => {
+                if (input.value === '') {
+                    input.parentElement.classList.remove('focused');
+                }
+            });
+        });
     }
 }
 
-// ============================================
-// INTERSECTION OBSERVER FOR ANIMATIONS
-// ============================================
-class AnimationObserver {
-    constructor() {
-        this.animatedElements = document.querySelectorAll('[data-aos]');
+/**
+ * VideoPlayer Class
+ * Handles video placeholder and embedding
+ */
+class VideoPlayer {
+    constructor(selector = '.video-placeholder', videoId = 'dQw4w9WgXcQ') {
+        this.placeholder = document.querySelector(selector);
+        this.videoId = videoId;
         this.init();
     }
-    
+
     init() {
-        if (!('IntersectionObserver' in window)) {
-            console.warn('IntersectionObserver not supported');
-            return;
+        if (!this.placeholder) return;
+        
+        this.placeholder.addEventListener('click', () => this.loadVideo());
+    }
+
+    loadVideo() {
+        const videoEmbed = `
+            <iframe 
+                width="100%" 
+                height="100%" 
+                src="https://www.youtube.com/embed/${this.videoId}?autoplay=1" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+            ></iframe>
+        `;
+        
+        const videoWrapper = document.querySelector('.video-wrapper');
+        if (videoWrapper) {
+            videoWrapper.innerHTML = videoEmbed;
         }
+    }
+}
 
-        if (this.animatedElements.length === 0) return;
+/**
+ * CardObserver Class
+ * Manages intersection observer for card animations
+ */
+class CardObserver {
+    constructor(selector = '.about-card, .service-card, .info-card, .service-card-overlay') {
+        this.cards = document.querySelectorAll(selector);
+        this.options = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        this.init();
+    }
 
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('aos-animate');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            },
-            {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            }
+    init() {
+        this.observer = new IntersectionObserver(
+            (entries) => this.handleIntersection(entries),
+            this.options
         );
         
-        this.animatedElements.forEach(element => {
-            observer.observe(element);
+        this.setupCards();
+    }
+
+    setupCards() {
+        this.cards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            this.observer.observe(card);
+        });
+    }
+
+    handleIntersection(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
         });
     }
 }
 
-// ============================================
-// UTILITY FUNCTIONS
-// ============================================
+/**
+ * LogoAnimation Class
+ * Handles interactive logo animations
+ */
+class LogoAnimation {
+    constructor(selector = '.hero-logo img, .hero-logo svg') {
+        this.logo = document.querySelector(selector);
+        this.init();
+    }
 
-const debounce = (func, wait = 20) => {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-};
+    init() {
+        if (!this.logo) return;
+        
+        this.logo.addEventListener('mouseenter', () => this.animate());
+    }
 
-const throttle = (func, limit = 20) => {
-    let inThrottle;
-    return function executedFunction(...args) {
-        if (!inThrottle) {
-            func.apply(this, args);
-            inThrottle = true;
-            setTimeout(() => inThrottle = false, limit);
+    animate() {
+        if (this.logo.tagName === 'IMG') {
+            this.logo.style.transition = 'transform 0.3s ease, filter 0.3s ease';
+            this.logo.style.transform = 'scale(1.05)';
+            this.logo.style.filter = 'drop-shadow(0 15px 40px rgba(79, 195, 247, 0.5))';
+            
+            setTimeout(() => {
+                this.logo.style.transform = 'scale(1)';
+                this.logo.style.filter = 'drop-shadow(0 10px 30px rgba(79, 195, 247, 0.3))';
+            }, 300);
+            return;
         }
-    };
-};
 
-// ============================================
-// PERFORMANCE MONITORING
-// ============================================
+        const lotusLarge = this.logo.querySelector('.lotus-large');
+        const lotusSmall = this.logo.querySelector('.lotus-small');
+        const wheel = this.logo.querySelector('.wheel');
+        
+        if (lotusLarge) lotusLarge.style.animation = 'petalPulse 0.8s ease-in-out';
+        if (lotusSmall) lotusSmall.style.animation = 'petalPulse 0.8s ease-in-out 0.2s';
+        if (wheel) wheel.style.animation = 'rotateWheel 2s linear';
+        
+        setTimeout(() => {
+            if (lotusLarge) lotusLarge.style.animation = '';
+            if (lotusSmall) lotusSmall.style.animation = '';
+            if (wheel) wheel.style.animation = 'rotateWheel 8s linear infinite';
+        }, 1000);
+    }
+}
+
+/**
+ * ScrollToTop Class
+ * Creates and manages scroll-to-top button
+ */
+class ScrollToTop {
+    constructor() {
+        this.button = this.createButton();
+        this.init();
+    }
+
+    createButton() {
+        const btn = document.createElement('button');
+        btn.innerHTML = '↑';
+        btn.className = 'scroll-to-top';
+        btn.setAttribute('aria-label', 'Scroll to top');
+        btn.style.cssText = `
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #4FC3F7, #29B6F6);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(79, 195, 247, 0.4);
+            z-index: 999;
+        `;
+        document.body.appendChild(btn);
+        return btn;
+    }
+
+    init() {
+        window.addEventListener('scroll', () => this.toggleVisibility());
+        this.button.addEventListener('click', () => this.scrollToTop());
+        this.button.addEventListener('mouseenter', () => this.handleHover(true));
+        this.button.addEventListener('mouseleave', () => this.handleHover(false));
+    }
+
+    toggleVisibility() {
+        if (window.pageYOffset > 500) {
+            this.button.style.opacity = '1';
+            this.button.style.visibility = 'visible';
+        } else {
+            this.button.style.opacity = '0';
+            this.button.style.visibility = 'hidden';
+        }
+    }
+
+    scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    handleHover(isHovered) {
+        if (isHovered) {
+            this.button.style.transform = 'translateY(-5px)';
+            this.button.style.boxShadow = '0 6px 20px rgba(79, 195, 247, 0.5)';
+        } else {
+            this.button.style.transform = 'translateY(0)';
+            this.button.style.boxShadow = '0 4px 15px rgba(79, 195, 247, 0.4)';
+        }
+    }
+}
+
+/**
+ * KonamiCode Class
+ * Easter egg functionality
+ */
+class KonamiCode {
+    constructor() {
+        this.code = [];
+        this.sequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        this.init();
+    }
+
+    init() {
+        document.addEventListener('keydown', (e) => this.checkCode(e));
+    }
+
+    checkCode(e) {
+        this.code.push(e.key);
+        this.code = this.code.slice(-10);
+        
+        if (this.code.join('') === this.sequence.join('')) {
+            this.activate();
+        }
+    }
+
+    activate() {
+        document.body.style.animation = 'rainbow 2s linear infinite';
+        
+        setTimeout(() => {
+            document.body.style.animation = '';
+        }, 5000);
+        
+        this.addRainbowAnimation();
+        console.log('🎉 Konami Code activated! 🎉');
+    }
+
+    addRainbowAnimation() {
+        if (document.getElementById('rainbow-animation')) return;
+        
+        const style = document.createElement('style');
+        style.id = 'rainbow-animation';
+        style.innerHTML = `
+            @keyframes rainbow {
+                0% { filter: hue-rotate(0deg); }
+                100% { filter: hue-rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+}
+
+/**
+ * PerformanceMonitor Class
+ * Monitors and logs performance metrics
+ */
 class PerformanceMonitor {
     constructor() {
         this.init();
     }
 
     init() {
-        if ('performance' in window) {
-            window.addEventListener('load', () => {
-                setTimeout(() => {
-                    const perfData = window.performance.timing;
-                    const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
-                    console.log(`%cPage Load Time: ${pageLoadTime}ms`, 'color: #10b981; font-weight: bold;');
-                }, 0);
-            });
-        }
+        window.addEventListener('load', () => this.logPerformance());
+    }
+
+    logPerformance() {
+        if (!('performance' in window)) return;
+        
+        const perfData = window.performance.timing;
+        const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
+        
+        console.log(`Page load time: ${pageLoadTime}ms`);
+        
+        this.logConsoleMessage();
+    }
+
+    logConsoleMessage() {
+        console.log('%c🌸 Child & Family Psychological Services 🌸', 'font-size: 20px; color: #4FC3F7; font-weight: bold;');
+        console.log('%cWebsite loaded successfully!', 'font-size: 14px; color: #9575CD;');
     }
 }
 
-// ============================================
-// CONSOLE WELCOME MESSAGE
-// ============================================
-const showWelcomeMessage = () => {
-    const styles = [
-        'color: #6366f1',
-        'font-size: 20px',
-        'font-weight: bold',
-        'padding: 10px',
-        'text-shadow: 2px 2px 4px rgba(0,0,0,0.1)'
-    ].join(';');
-    
-    const subStyles = [
-        'color: #8b5cf6',
-        'font-size: 14px',
-        'font-weight: 500'
-    ].join(';');
-
-    console.log('%c🌟 Child & Family Psychological Services', styles);
-    console.log('%c💻 Developed with ❤️ by Elanstech | 2025', subStyles);
-    console.log('%cVersion: 1.0.0 | Last Updated: 2025-11-14', 'color: #6b7280; font-size: 12px;');
-};
-
-// ============================================
-// ERROR HANDLING
-// ============================================
-class ErrorHandler {
+/**
+ * ServiceWorkerManager Class
+ * Manages service worker registration
+ */
+class ServiceWorkerManager {
     constructor() {
         this.init();
     }
 
     init() {
-        window.addEventListener('error', (e) => {
-            console.error('Global Error:', {
-                message: e.message,
-                filename: e.filename,
-                lineno: e.lineno,
-                colno: e.colno,
-                error: e.error
-            });
-        });
+        if (!('serviceWorker' in navigator)) return;
+        
+        window.addEventListener('load', () => this.register());
+    }
 
-        window.addEventListener('unhandledrejection', (e) => {
-            console.error('Unhandled Promise Rejection:', e.reason);
-        });
+    register() {
+        // Uncomment below when you have a service worker file
+        // navigator.serviceWorker.register('/service-worker.js')
+        //     .then(registration => console.log('SW registered:', registration))
+        //     .catch(error => console.log('SW registration failed:', error));
     }
 }
 
-// ============================================
-// APPLICATION INITIALIZATION
-// ============================================
+/**
+ * App Class
+ * Main application controller that initializes all components
+ */
 class App {
     constructor() {
-        this.components = [];
+        this.components = {};
         this.init();
     }
 
     init() {
-        // Wait for DOM to be ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => this.initializeComponents());
-        } else {
-            this.initializeComponents();
-        }
+        this.components.preloader = new Preloader();
+        this.components.typedAnimation = new TypedAnimation('#typed-text');
+        this.components.progressTrackerNavigation = new ProgressTrackerNavigation();
+        this.components.scrollEffects = new ScrollEffects();
+        this.components.particleAnimation = new ParticleAnimation();
+        this.components.formHandler = new FormHandler('.contact-form');
+        this.components.videoPlayer = new VideoPlayer();
+        this.components.cardObserver = new CardObserver();
+        this.components.logoAnimation = new LogoAnimation();
+        this.components.scrollToTop = new ScrollToTop();
+        this.components.konamiCode = new KonamiCode();
+        this.components.performanceMonitor = new PerformanceMonitor();
+        this.components.serviceWorkerManager = new ServiceWorkerManager();
     }
 
-    initializeComponents() {
-        try {
-            // Show welcome message
-            showWelcomeMessage();
-
-            // Initialize all components
-            this.components = [
-                new Preloader(),
-                new Navigation(),
-                new ScrollProgress(),
-                new TypedEffect(),
-                new SmoothScroll(),
-                new AOSManager(),
-                new StaffModal(),
-                new ContactForm(),
-                new VideoPlayer(),
-                new ParallaxEffect(),
-                new AnimationObserver(),
-                new PerformanceMonitor(),
-                new ErrorHandler()
-            ];
-
-            console.log('%c✅ All components initialized successfully', 'color: #10b981; font-weight: bold;');
-        } catch (error) {
-            console.error('Failed to initialize application:', error);
-        }
+    getComponent(name) {
+        return this.components[name];
     }
 }
 
-// ============================================
-// START APPLICATION
-// ============================================
+// ===================================
+// Initialize Application
+// ===================================
 const app = new App();
-
-// Make utilities available globally if needed
-window.ChildFamilyApp = {
-    debounce,
-    throttle,
-    version: '1.0.0',
-    lastUpdated: '2025-11-14'
-};
