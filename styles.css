@@ -180,7 +180,7 @@ body {
 }
 
 /* ===================================
-   Progress Tracker Header Styles
+   Progress Tracker Header Styles - Mobile Optimized
    =================================== */
 
 .progress-header {
@@ -207,9 +207,13 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
-/* Logo Styles */
+/* ===================================
+   Logo Styles
+   =================================== */
+
 .nav-logo {
     display: flex;
     align-items: center;
@@ -235,13 +239,18 @@ body {
 }
 
 /* ===================================
-   Progress Tracker Navigation
+   Desktop Progress Tracker
    =================================== */
 
-.progress-tracker {
+.desktop-tracker {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    display: block;
+}
+
+.mobile-tracker {
+    display: none;
 }
 
 .progress-track {
@@ -353,7 +362,7 @@ body {
     font-weight: 600;
 }
 
-/* Completed State (sections already scrolled past) */
+/* Completed State */
 .progress-dot.completed .dot-circle {
     background: var(--primary-blue);
     border-color: var(--primary-blue);
@@ -364,24 +373,81 @@ body {
     transform: translate(-50%, -50%) scale(1);
 }
 
-/* Mobile Menu Button */
-.mobile-menu-btn {
-    display: none;
+/* ===================================
+   Mobile Progress Tracker
+   =================================== */
+
+.mobile-tracker {
     flex-direction: column;
-    gap: 4px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-    z-index: 2;
+    align-items: flex-end;
+    gap: 0.5rem;
 }
 
-.mobile-menu-btn span {
-    width: 25px;
-    height: 3px;
-    background: var(--primary-blue);
-    border-radius: 2px;
+.current-section-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--primary-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.mobile-dots {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.mobile-dot {
+    width: 10px;
+    height: 10px;
+    background: var(--medium-gray);
+    border: 2px solid var(--medium-gray);
+    border-radius: 50%;
     transition: all 0.3s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+.mobile-dot::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 6px;
+    height: 6px;
+    background: var(--white);
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+/* Active mobile dot */
+.mobile-dot.active {
+    background: var(--primary-blue);
+    border-color: var(--primary-blue);
+    transform: scale(1.4);
+}
+
+.mobile-dot.active::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Completed mobile dot */
+.mobile-dot.completed {
+    background: var(--primary-blue);
+    border-color: var(--primary-blue);
+}
+
+/* Touch area for mobile */
+.mobile-dot::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
 }
 
 /* Scroll Progress Bar */
@@ -416,77 +482,17 @@ body {
 }
 
 @media (max-width: 768px) {
-    .progress-tracker {
-        position: fixed;
-        top: 80px;
-        left: 0;
-        right: 0;
-        transform: translateX(0);
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        padding: 1rem 0;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-    
-    .progress-tracker.active {
-        opacity: 1;
-        visibility: visible;
-    }
-    
-    .progress-track {
-        flex-direction: column;
-        gap: 1.5rem;
-        padding: 0 2rem;
-    }
-    
-    .progress-line {
-        width: 3px;
-        height: 100%;
-        left: 2rem;
-        top: 0;
-        transform: translateX(-50%);
-    }
-    
-    .progress-dot {
-        flex-direction: row;
-        width: 100%;
-        justify-content: flex-start;
-        gap: 1rem;
-    }
-    
-    .dot-label {
-        opacity: 1;
-        transform: translateY(0);
-        order: 2;
-    }
-    
-    .dot-circle {
-        order: 1;
-    }
-    
-    .mobile-menu-btn {
-        display: flex;
-    }
-    
-    .mobile-menu-btn.active span:nth-child(1) {
-        transform: rotate(45deg) translateY(7px);
-    }
-    
-    .mobile-menu-btn.active span:nth-child(2) {
-        opacity: 0;
-    }
-    
-    .mobile-menu-btn.active span:nth-child(3) {
-        transform: rotate(-45deg) translateY(-7px);
-    }
-}
-
-@media (max-width: 480px) {
     .nav-container {
         padding: 0.875rem 1.5rem;
+    }
+
+    /* Hide desktop tracker, show mobile tracker */
+    .desktop-tracker {
+        display: none;
+    }
+    
+    .mobile-tracker {
+        display: flex;
     }
     
     .nav-logo-text {
@@ -497,6 +503,69 @@ body {
         width: 35px;
         height: 35px;
     }
+}
+
+@media (max-width: 480px) {
+    .nav-container {
+        padding: 0.75rem 1rem;
+    }
+
+    .nav-logo-img {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .nav-logo-text {
+        font-size: 1rem;
+    }
+    
+    .current-section-label {
+        font-size: 0.7rem;
+    }
+    
+    .mobile-dots {
+        gap: 0.4rem;
+    }
+    
+    .mobile-dot {
+        width: 8px;
+        height: 8px;
+    }
+}
+
+/* ===================================
+   Alternative Mobile Design: Vertical Side Bar
+   Add this class to header for vertical version
+   =================================== */
+
+.progress-header.vertical-mobile .mobile-tracker {
+    position: fixed;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    flex-direction: column;
+    gap: 0.75rem;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 1rem 0.5rem;
+    border-radius: 25px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.progress-header.vertical-mobile .current-section-label {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 0.65rem;
+}
+
+.progress-header.vertical-mobile .mobile-dots {
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.progress-header.vertical-mobile .mobile-dot {
+    width: 12px;
+    height: 12px;
 }
 
 /* ===================================
