@@ -1,732 +1,550 @@
-// ===================================
-// ES6 Class-Based Architecture
-// ===================================
+// ============================================
+// CHILD & FAMILY PSYCHOLOGICAL SERVICES
+// Main JavaScript File - ES6+
+// ============================================
 
-/**
- * Preloader Class
- * Handles the loading animation and initialization
- */
-class Preloader {
-    constructor(duration = 2500) {
-        this.element = document.getElementById('preloader');
-        this.duration = duration;
+// ============================================
+// PRELOADER
+// ============================================
+const handlePreloader = () => {
+    const preloader = document.getElementById('preloader');
+    
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            preloader.style.opacity = '0';
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 500);
+        }, 1500);
+    });
+};
+
+handlePreloader();
+
+// ============================================
+// NAVIGATION
+// ============================================
+
+class Navigation {
+    constructor() {
+        this.header = document.getElementById('header');
+        this.navLinks = document.querySelectorAll('.nav-link');
+        this.mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        this.navMenu = document.querySelector('.nav-menu');
+        this.sections = document.querySelectorAll('section');
+        
         this.init();
     }
-
+    
     init() {
-        document.body.style.overflow = 'hidden';
-        window.addEventListener('load', () => this.hide());
+        this.handleStickyHeader();
+        this.handleMobileMenu();
+        this.handleActiveLinks();
+        this.handleScrollSpy();
     }
-
-    hide() {
-        setTimeout(() => {
-            this.element.classList.add('hidden');
-            document.body.style.overflow = 'auto';
-            this.initializeAOS();
-            
-            setTimeout(() => {
-                if (this.element && this.element.parentNode) {
-                    this.element.remove();
+    
+    handleStickyHeader() {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                this.header.classList.add('scrolled');
+            } else {
+                this.header.classList.remove('scrolled');
+            }
+        });
+    }
+    
+    handleMobileMenu() {
+        if (this.mobileMenuBtn) {
+            this.mobileMenuBtn.addEventListener('click', () => {
+                this.navMenu.classList.toggle('active');
+                this.mobileMenuBtn.classList.toggle('active');
+            });
+        }
+    }
+    
+    handleActiveLinks() {
+        this.navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                this.navLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                
+                // Close mobile menu when link is clicked
+                if (this.navMenu.classList.contains('active')) {
+                    this.navMenu.classList.remove('active');
+                    this.mobileMenuBtn.classList.remove('active');
                 }
-            }, 600);
-        }, this.duration);
+            });
+        });
     }
-
-    initializeAOS() {
-        AOS.init({
-            duration: 1000,
-            once: true,
-            offset: 100,
-            easing: 'ease-out-cubic'
+    
+    handleScrollSpy() {
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            this.sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (window.pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            this.navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
         });
     }
 }
 
-/**
- * TypedAnimation Class
- * Manages the Typed.js animation in the hero section
- */
-class TypedAnimation {
-    constructor(selector, options = {}) {
-        this.selector = selector;
-        this.defaultOptions = {
-            strings: [
-                'compassionate therapy for children',
-                'family counseling services',
-                'support for adolescents',
-                'expert psychological care',
-                'evidence-based treatment',
-                'a safe space to heal'
-            ],
+// Initialize Navigation
+const navigation = new Navigation();
+
+// ============================================
+// SCROLL PROGRESS BAR
+// ============================================
+
+class ScrollProgress {
+    constructor() {
+        this.progressBar = document.querySelector('.scroll-progress-bar');
+        this.init();
+    }
+    
+    init() {
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercentage = (scrollTop / scrollHeight) * 100;
+            this.progressBar.style.width = `${scrollPercentage}%`;
+        });
+    }
+}
+
+// Initialize Scroll Progress
+const scrollProgress = new ScrollProgress();
+
+// ============================================
+// TYPED.JS EFFECT (WITH FALLBACK)
+// ============================================
+
+class TypedEffect {
+    constructor() {
+        this.element = document.getElementById('typed-text');
+        this.strings = [
+            'compassionate care',
+            'expert guidance',
+            'family support',
+            'healing solutions',
+            'personalized therapy',
+            'professional assessments'
+        ];
+        this.init();
+    }
+    
+    init() {
+        // Check if Typed.js is loaded
+        if (typeof Typed !== 'undefined') {
+            this.initTyped();
+        } else {
+            // Fallback to simple text rotation
+            this.initFallback();
+        }
+    }
+    
+    initTyped() {
+        new Typed('#typed-text', {
+            strings: this.strings,
             typeSpeed: 50,
             backSpeed: 30,
             backDelay: 2000,
-            startDelay: 500,
             loop: true,
-            showCursor: true,
             cursorChar: '|',
-            autoInsertCss: true
-        };
-        this.options = { ...this.defaultOptions, ...options };
-        this.init();
-    }
-
-    init() {
-        document.addEventListener('DOMContentLoaded', () => {
-            this.typed = new Typed(this.selector, this.options);
+            smartBackspace: true
         });
     }
-
-    destroy() {
-        if (this.typed) {
-            this.typed.destroy();
-        }
-    }
-}
-
-/**
- * ProgressTrackerNavigation Class
- * Unified progress tracker for desktop and mobile
- */
-class ProgressTrackerNavigation {
-    constructor() {
-        this.header = document.getElementById('header');
-        this.desktopDots = document.querySelectorAll('.desktop-tracker .progress-dot');
-        this.mobileDots = document.querySelectorAll('.mobile-tracker .mobile-dot');
-        this.progressLine = document.querySelector('.progress-line');
-        this.currentSectionLabel = document.querySelector('.current-section-label');
-        this.sections = document.querySelectorAll('section[id]');
-        this.progressBar = document.querySelector('.scroll-progress-bar');
-        this.lastScrollTop = 0;
-        
-        // Section names for mobile label
-        this.sectionNames = {
-            'home': 'Home',
-            'about': 'About',
-            'services': 'Services',
-            'video': 'Video',
-            'contact': 'Contact'
-        };
-        
-        this.init();
-    }
-
-    init() {
-        this.setupScrollEffects();
-        this.setupActiveTracking();
-        this.setupSmoothScrolling();
-        this.setupAccessibility();
-    }
-
-    setupScrollEffects() {
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (scrollTop > 50) {
-                this.header?.classList.add('scrolled');
-            } else {
-                this.header?.classList.remove('scrolled');
-            }
-            
-            this.updateProgressBar();
-            this.lastScrollTop = scrollTop;
-        });
-    }
-
-    updateProgressBar() {
-        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (winScroll / height) * 100;
-        
-        if (this.progressBar) {
-            this.progressBar.style.width = `${scrolled}%`;
-        }
-    }
-
-    setupActiveTracking() {
-        window.addEventListener('scroll', () => this.updateActiveSection());
-        this.updateActiveSection();
-    }
-
-    updateActiveSection() {
-        const scrollY = window.pageYOffset;
-        let currentSection = null;
+    
+    initFallback() {
         let currentIndex = 0;
-
-        // Find the current section
-        this.sections.forEach((section, index) => {
-            const sectionTop = section.offsetTop - 150;
-            const sectionHeight = section.offsetHeight;
-            
-            if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-                currentSection = section.getAttribute('id');
-                currentIndex = index;
-            }
-        });
-
-        // Update desktop dots
-        this.desktopDots.forEach((dot, index) => {
-            const dotSection = dot.getAttribute('data-section');
-            dot.classList.remove('active', 'completed');
-            
-            if (dotSection === currentSection) {
-                dot.classList.add('active');
-            } else if (index < currentIndex) {
-                dot.classList.add('completed');
-            }
-        });
-
-        // Update mobile dots
-        this.mobileDots.forEach((dot, index) => {
-            const dotSection = dot.getAttribute('data-section');
-            dot.classList.remove('active', 'completed');
-            
-            if (dotSection === currentSection) {
-                dot.classList.add('active');
-            } else if (index < currentIndex) {
-                dot.classList.add('completed');
-            }
-        });
-
-        // Update mobile section label
-        if (this.currentSectionLabel && currentSection) {
-            this.currentSectionLabel.textContent = this.sectionNames[currentSection] || currentSection;
-        }
-
-        // Update progress line
-        this.updateProgressLine(currentIndex);
-    }
-
-    updateProgressLine(currentIndex) {
-        if (!this.progressLine) return;
         
-        const totalDots = this.desktopDots.length;
-        const progressPercentage = totalDots > 1 ? (currentIndex / (totalDots - 1)) * 100 : 0;
+        const rotateText = () => {
+            this.element.textContent = this.strings[currentIndex];
+            currentIndex = (currentIndex + 1) % this.strings.length;
+        };
         
-        const styleSheet = document.createElement('style');
-        styleSheet.textContent = `
-            .progress-line::after {
-                width: ${progressPercentage}% !important;
-            }
-        `;
-        
-        const oldStyle = document.getElementById('progress-line-style');
-        if (oldStyle) oldStyle.remove();
-        
-        styleSheet.id = 'progress-line-style';
-        document.head.appendChild(styleSheet);
-    }
-
-    setupSmoothScrolling() {
-        // Desktop dots
-        this.desktopDots.forEach(dot => {
-            dot.addEventListener('click', (e) => this.handleDotClick(e, dot));
-        });
-
-        // Mobile dots
-        this.mobileDots.forEach(dot => {
-            dot.addEventListener('click', (e) => this.handleDotClick(e, dot));
-        });
-    }
-
-    handleDotClick(e, dot) {
-        e.preventDefault();
-        const targetId = dot.getAttribute('href') || `#${dot.getAttribute('data-section')}`;
-        const targetSection = document.querySelector(targetId);
-        
-        if (targetSection) {
-            const headerHeight = this.header?.offsetHeight || 80;
-            const targetPosition = targetSection.offsetTop - headerHeight;
-            
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
-            });
-        }
-    }
-
-    setupAccessibility() {
-        // Keyboard navigation for desktop dots
-        this.desktopDots.forEach((dot, index) => {
-            dot.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    dot.click();
-                }
-            });
-        });
-
-        // Keyboard navigation for mobile dots
-        this.mobileDots.forEach((dot, index) => {
-            dot.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    dot.click();
-                }
-            });
-        });
+        rotateText(); // Initial display
+        setInterval(rotateText, 3000);
     }
 }
 
-/**
- * ScrollEffects Class
- * Manages scroll-based animations and effects
- */
-class ScrollEffects {
-    constructor() {
-        this.progressBar = document.querySelector('.scroll-progress-bar');
-        this.heroBackground = document.querySelector('.hero-background');
-        this.heroVideo = document.querySelector('.hero-video');
-        this.init();
-    }
+// Initialize Typed Effect
+const typedEffect = new TypedEffect();
 
-    init() {
-        window.addEventListener('scroll', () => {
-            this.updateProgressBar();
-            this.updateParallax();
+// ============================================
+// SMOOTH SCROLL
+// ============================================
+
+const smoothScroll = () => {
+    const links = document.querySelectorAll('a[href^="#"]');
+    
+    links.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            
+            if (href !== '#' && href.length > 1) {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                
+                if (target) {
+                    const headerOffset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+};
+
+smoothScroll();
+
+// ============================================
+// AOS ANIMATION INITIALIZATION
+// ============================================
+
+const initAOS = () => {
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 50,
+            disable: 'mobile'
         });
     }
+};
 
-    updateProgressBar() {
-        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (winScroll / height) * 100;
+// Initialize AOS when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAOS);
+} else {
+    initAOS();
+}
+
+// ============================================
+// STAFF MODAL FUNCTIONALITY
+// ============================================
+
+class StaffModal {
+    constructor() {
+        this.modal = document.getElementById('staffModal');
+        this.openBtn = document.getElementById('openStaffModal');
+        this.closeBtn = document.getElementById('closeModal');
+        this.overlay = document.getElementById('modalOverlay');
         
-        if (this.progressBar) {
-            this.progressBar.style.width = `${scrolled}%`;
+        this.init();
+    }
+    
+    init() {
+        this.handleOpenModal();
+        this.handleCloseModal();
+        this.handleKeyboardClose();
+    }
+    
+    handleOpenModal() {
+        if (this.openBtn) {
+            this.openBtn.addEventListener('click', () => {
+                this.open();
+            });
         }
     }
+    
+    handleCloseModal() {
+        const closeElements = [this.closeBtn, this.overlay];
+        
+        closeElements.forEach(element => {
+            if (element) {
+                element.addEventListener('click', () => {
+                    this.close();
+                });
+            }
+        });
+    }
+    
+    handleKeyboardClose() {
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.modal.classList.contains('active')) {
+                this.close();
+            }
+        });
+    }
+    
+    open() {
+        this.modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    close() {
+        this.modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
 
-    updateParallax() {
+// Initialize Staff Modal
+const staffModal = new StaffModal();
+
+// ============================================
+// CONTACT FORM HANDLER
+// ============================================
+
+class ContactForm {
+    constructor() {
+        this.form = document.querySelector('.contact-form');
+        this.init();
+    }
+    
+    init() {
+        if (this.form) {
+            this.form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                this.handleSubmit(e);
+            });
+        }
+    }
+    
+    handleSubmit(e) {
+        const formData = new FormData(this.form);
+        const data = Object.fromEntries(formData.entries());
+        
+        console.log('Form submitted:', data);
+        
+        // Show success message
+        this.showMessage('Thank you! Your message has been sent successfully.', 'success');
+        
+        // Reset form
+        this.form.reset();
+        
+        // In production, you would send this to your backend:
+        // this.sendToBackend(data);
+    }
+    
+    showMessage(message, type = 'success') {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `form-message form-message--${type}`;
+        messageDiv.textContent = message;
+        
+        this.form.insertAdjacentElement('beforebegin', messageDiv);
+        
+        setTimeout(() => {
+            messageDiv.style.opacity = '0';
+            setTimeout(() => messageDiv.remove(), 300);
+        }, 5000);
+    }
+    
+    async sendToBackend(data) {
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            
+            const result = await response.json();
+            return result;
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            this.showMessage('Sorry, there was an error sending your message. Please try again.', 'error');
+        }
+    }
+}
+
+// Initialize Contact Form
+const contactForm = new ContactForm();
+
+// ============================================
+// VIDEO PLACEHOLDER INTERACTION
+// ============================================
+
+class VideoPlayer {
+    constructor() {
+        this.videoPlaceholder = document.querySelector('.video-placeholder');
+        this.init();
+    }
+    
+    init() {
+        if (this.videoPlaceholder) {
+            this.videoPlaceholder.addEventListener('click', () => {
+                this.handleClick();
+            });
+        }
+    }
+    
+    handleClick() {
+        // Replace with your actual video embed URL
+        const videoURL = 'YOUR_VIDEO_URL_HERE';
+        const iframe = document.createElement('iframe');
+        
+        iframe.setAttribute('src', videoURL);
+        iframe.setAttribute('frameborder', '0');
+        iframe.setAttribute('allowfullscreen', '');
+        iframe.style.width = '100%';
+        iframe.style.height = '100%';
+        iframe.style.borderRadius = '20px';
+        
+        const videoWrapper = this.videoPlaceholder.parentElement;
+        videoWrapper.innerHTML = '';
+        videoWrapper.appendChild(iframe);
+    }
+}
+
+// Initialize Video Player
+const videoPlayer = new VideoPlayer();
+
+// ============================================
+// PARALLAX EFFECT FOR HERO PARTICLES
+// ============================================
+
+class ParallaxEffect {
+    constructor() {
+        this.particles = document.querySelectorAll('.particle');
+        this.init();
+    }
+    
+    init() {
+        if (this.particles.length > 0) {
+            window.addEventListener('scroll', () => {
+                this.handleScroll();
+            });
+        }
+    }
+    
+    handleScroll() {
         const scrolled = window.pageYOffset;
         
-        if (this.heroBackground) {
-            this.heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
-        }
-
-        if (this.heroVideo) {
-            this.heroVideo.style.transform = `translate(-50%, -50%) translateY(${scrolled * 0.3}px) scale(1.1)`;
-        }
-    }
-}
-
-/**
- * ParticleAnimation Class
- * Handles dynamic particle animations
- */
-class ParticleAnimation {
-    constructor(selector = '.particle') {
-        this.particles = document.querySelectorAll(selector);
-        this.init();
-    }
-
-    init() {
         this.particles.forEach((particle, index) => {
-            const animationDuration = 10 + Math.random() * 10;
-            particle.style.animationDuration = `${animationDuration}s`;
-            
-            this.animateParticle(particle, animationDuration);
+            const speed = (index + 1) * 0.05;
+            particle.style.transform = `translateY(${scrolled * speed}px)`;
         });
-    }
-
-    animateParticle(particle, duration) {
-        setInterval(() => {
-            const randomX = Math.random() * 100;
-            const randomY = Math.random() * 100;
-            particle.style.left = `${randomX}%`;
-            particle.style.top = `${randomY}%`;
-        }, duration * 1000);
     }
 }
 
-/**
- * FormHandler Class
- * Manages form submissions and validations
- */
-class FormHandler {
-    constructor(selector) {
-        this.form = document.querySelector(selector);
-        this.inputs = document.querySelectorAll(`${selector} input, ${selector} textarea`);
+// Initialize Parallax Effect
+const parallaxEffect = new ParallaxEffect();
+
+// ============================================
+// UTILITY FUNCTIONS
+// ============================================
+
+const debounce = (func, wait = 20) => {
+    let timeout;
+    return (...args) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+};
+
+const throttle = (func, limit = 20) => {
+    let inThrottle;
+    return function(...args) {
+        if (!inThrottle) {
+            func.apply(this, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+};
+
+// ============================================
+// INTERSECTION OBSERVER FOR ANIMATIONS
+// ============================================
+
+class AnimationObserver {
+    constructor() {
+        this.animatedElements = document.querySelectorAll('[data-aos]');
         this.init();
     }
-
+    
     init() {
-        if (!this.form) return;
-        
-        this.setupSubmitHandler();
-        this.setupInputEffects();
-    }
-
-    setupSubmitHandler() {
-        this.form.addEventListener('submit', (e) => this.handleSubmit(e));
-    }
-
-    handleSubmit(e) {
-        e.preventDefault();
-        
-        const formData = {
-            name: document.getElementById('name')?.value,
-            email: document.getElementById('email')?.value,
-            phone: document.getElementById('phone')?.value,
-            message: document.getElementById('message')?.value
-        };
-        
-        console.log('Form submitted:', formData);
-        
-        this.showSuccessMessage();
-        this.form.reset();
-    }
-
-    showSuccessMessage() {
-        alert('Thank you for your message! We will get back to you soon.');
-    }
-
-    setupInputEffects() {
-        this.inputs.forEach(input => {
-            input.addEventListener('focus', () => {
-                input.parentElement.classList.add('focused');
-            });
-            
-            input.addEventListener('blur', () => {
-                if (input.value === '') {
-                    input.parentElement.classList.remove('focused');
+        if ('IntersectionObserver' in window && this.animatedElements.length > 0) {
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('aos-animate');
+                        }
+                    });
+                },
+                {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
                 }
-            });
-        });
-    }
-}
-
-/**
- * VideoPlayer Class
- * Handles video placeholder and embedding
- */
-class VideoPlayer {
-    constructor(selector = '.video-placeholder', videoId = 'dQw4w9WgXcQ') {
-        this.placeholder = document.querySelector(selector);
-        this.videoId = videoId;
-        this.init();
-    }
-
-    init() {
-        if (!this.placeholder) return;
-        
-        this.placeholder.addEventListener('click', () => this.loadVideo());
-    }
-
-    loadVideo() {
-        const videoEmbed = `
-            <iframe 
-                width="100%" 
-                height="100%" 
-                src="https://www.youtube.com/embed/${this.videoId}?autoplay=1" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen
-                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-            ></iframe>
-        `;
-        
-        const videoWrapper = document.querySelector('.video-wrapper');
-        if (videoWrapper) {
-            videoWrapper.innerHTML = videoEmbed;
-        }
-    }
-}
-
-/**
- * CardObserver Class
- * Manages intersection observer for card animations
- */
-class CardObserver {
-    constructor(selector = '.about-card, .service-card, .info-card, .service-card-overlay') {
-        this.cards = document.querySelectorAll(selector);
-        this.options = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        this.init();
-    }
-
-    init() {
-        this.observer = new IntersectionObserver(
-            (entries) => this.handleIntersection(entries),
-            this.options
-        );
-        
-        this.setupCards();
-    }
-
-    setupCards() {
-        this.cards.forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            this.observer.observe(card);
-        });
-    }
-
-    handleIntersection(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }
-}
-
-/**
- * LogoAnimation Class
- * Handles interactive logo animations
- */
-class LogoAnimation {
-    constructor(selector = '.hero-logo img, .hero-logo svg') {
-        this.logo = document.querySelector(selector);
-        this.init();
-    }
-
-    init() {
-        if (!this.logo) return;
-        
-        this.logo.addEventListener('mouseenter', () => this.animate());
-    }
-
-    animate() {
-        if (this.logo.tagName === 'IMG') {
-            this.logo.style.transition = 'transform 0.3s ease, filter 0.3s ease';
-            this.logo.style.transform = 'scale(1.05)';
-            this.logo.style.filter = 'drop-shadow(0 15px 40px rgba(79, 195, 247, 0.5))';
+            );
             
-            setTimeout(() => {
-                this.logo.style.transform = 'scale(1)';
-                this.logo.style.filter = 'drop-shadow(0 10px 30px rgba(79, 195, 247, 0.3))';
-            }, 300);
-            return;
-        }
-
-        const lotusLarge = this.logo.querySelector('.lotus-large');
-        const lotusSmall = this.logo.querySelector('.lotus-small');
-        const wheel = this.logo.querySelector('.wheel');
-        
-        if (lotusLarge) lotusLarge.style.animation = 'petalPulse 0.8s ease-in-out';
-        if (lotusSmall) lotusSmall.style.animation = 'petalPulse 0.8s ease-in-out 0.2s';
-        if (wheel) wheel.style.animation = 'rotateWheel 2s linear';
-        
-        setTimeout(() => {
-            if (lotusLarge) lotusLarge.style.animation = '';
-            if (lotusSmall) lotusSmall.style.animation = '';
-            if (wheel) wheel.style.animation = 'rotateWheel 8s linear infinite';
-        }, 1000);
-    }
-}
-
-/**
- * ScrollToTop Class
- * Creates and manages scroll-to-top button
- */
-class ScrollToTop {
-    constructor() {
-        this.button = this.createButton();
-        this.init();
-    }
-
-    createButton() {
-        const btn = document.createElement('button');
-        btn.innerHTML = '↑';
-        btn.className = 'scroll-to-top';
-        btn.setAttribute('aria-label', 'Scroll to top');
-        btn.style.cssText = `
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #4FC3F7, #29B6F6);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(79, 195, 247, 0.4);
-            z-index: 999;
-        `;
-        document.body.appendChild(btn);
-        return btn;
-    }
-
-    init() {
-        window.addEventListener('scroll', () => this.toggleVisibility());
-        this.button.addEventListener('click', () => this.scrollToTop());
-        this.button.addEventListener('mouseenter', () => this.handleHover(true));
-        this.button.addEventListener('mouseleave', () => this.handleHover(false));
-    }
-
-    toggleVisibility() {
-        if (window.pageYOffset > 500) {
-            this.button.style.opacity = '1';
-            this.button.style.visibility = 'visible';
-        } else {
-            this.button.style.opacity = '0';
-            this.button.style.visibility = 'hidden';
-        }
-    }
-
-    scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-
-    handleHover(isHovered) {
-        if (isHovered) {
-            this.button.style.transform = 'translateY(-5px)';
-            this.button.style.boxShadow = '0 6px 20px rgba(79, 195, 247, 0.5)';
-        } else {
-            this.button.style.transform = 'translateY(0)';
-            this.button.style.boxShadow = '0 4px 15px rgba(79, 195, 247, 0.4)';
+            this.animatedElements.forEach(element => {
+                observer.observe(element);
+            });
         }
     }
 }
 
-/**
- * KonamiCode Class
- * Easter egg functionality
- */
-class KonamiCode {
-    constructor() {
-        this.code = [];
-        this.sequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-        this.init();
-    }
+// Initialize Animation Observer
+const animationObserver = new AnimationObserver();
 
-    init() {
-        document.addEventListener('keydown', (e) => this.checkCode(e));
-    }
+// ============================================
+// CONSOLE WELCOME MESSAGE
+// ============================================
 
-    checkCode(e) {
-        this.code.push(e.key);
-        this.code = this.code.slice(-10);
-        
-        if (this.code.join('') === this.sequence.join('')) {
-            this.activate();
-        }
-    }
+const showWelcomeMessage = () => {
+    const styles = [
+        'color: #6366f1',
+        'font-size: 16px',
+        'font-weight: bold',
+        'padding: 10px'
+    ].join(';');
+    
+    console.log('%c🌟 Child & Family Psychological Services', styles);
+    console.log('%cDeveloped with ❤️ by Elanstech', 'color: #8b5cf6; font-size: 12px;');
+};
 
-    activate() {
-        document.body.style.animation = 'rainbow 2s linear infinite';
-        
-        setTimeout(() => {
-            document.body.style.animation = '';
-        }, 5000);
-        
-        this.addRainbowAnimation();
-        console.log('🎉 Konami Code activated! 🎉');
-    }
+showWelcomeMessage();
 
-    addRainbowAnimation() {
-        if (document.getElementById('rainbow-animation')) return;
-        
-        const style = document.createElement('style');
-        style.id = 'rainbow-animation';
-        style.innerHTML = `
-            @keyframes rainbow {
-                0% { filter: hue-rotate(0deg); }
-                100% { filter: hue-rotate(360deg); }
-            }
-        `;
-        document.head.appendChild(style);
-    }
-}
+// ============================================
+// ERROR HANDLING
+// ============================================
 
-/**
- * PerformanceMonitor Class
- * Monitors and logs performance metrics
- */
-class PerformanceMonitor {
-    constructor() {
-        this.init();
-    }
+window.addEventListener('error', (e) => {
+    console.error('An error occurred:', e.error);
+});
 
-    init() {
-        window.addEventListener('load', () => this.logPerformance());
-    }
+window.addEventListener('unhandledrejection', (e) => {
+    console.error('Unhandled promise rejection:', e.reason);
+});
 
-    logPerformance() {
-        if (!('performance' in window)) return;
-        
-        const perfData = window.performance.timing;
-        const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
-        
-        console.log(`Page load time: ${pageLoadTime}ms`);
-        
-        this.logConsoleMessage();
-    }
+// ============================================
+// EXPORT FOR MODULE USAGE (OPTIONAL)
+// ============================================
 
-    logConsoleMessage() {
-        console.log('%c🌸 Child & Family Psychological Services 🌸', 'font-size: 20px; color: #4FC3F7; font-weight: bold;');
-        console.log('%cWebsite loaded successfully!', 'font-size: 14px; color: #9575CD;');
-    }
-}
-
-/**
- * ServiceWorkerManager Class
- * Manages service worker registration
- */
-class ServiceWorkerManager {
-    constructor() {
-        this.init();
-    }
-
-    init() {
-        if (!('serviceWorker' in navigator)) return;
-        
-        window.addEventListener('load', () => this.register());
-    }
-
-    register() {
-        // Uncomment below when you have a service worker file
-        // navigator.serviceWorker.register('/service-worker.js')
-        //     .then(registration => console.log('SW registered:', registration))
-        //     .catch(error => console.log('SW registration failed:', error));
-    }
-}
-
-/**
- * App Class
- * Main application controller that initializes all components
- */
-class App {
-    constructor() {
-        this.components = {};
-        this.init();
-    }
-
-    init() {
-        this.components.preloader = new Preloader();
-        this.components.typedAnimation = new TypedAnimation('#typed-text');
-        this.components.progressTrackerNavigation = new ProgressTrackerNavigation();
-        this.components.scrollEffects = new ScrollEffects();
-        this.components.particleAnimation = new ParticleAnimation();
-        this.components.formHandler = new FormHandler('.contact-form');
-        this.components.videoPlayer = new VideoPlayer();
-        this.components.cardObserver = new CardObserver();
-        this.components.logoAnimation = new LogoAnimation();
-        this.components.scrollToTop = new ScrollToTop();
-        this.components.konamiCode = new KonamiCode();
-        this.components.performanceMonitor = new PerformanceMonitor();
-        this.components.serviceWorkerManager = new ServiceWorkerManager();
-    }
-
-    getComponent(name) {
-        return this.components[name];
-    }
-}
-
-// ===================================
-// Initialize Application
-// ===================================
-const app = new App();
+export {
+    Navigation,
+    ScrollProgress,
+    TypedEffect,
+    StaffModal,
+    ContactForm,
+    VideoPlayer,
+    ParallaxEffect,
+    AnimationObserver,
+    debounce,
+    throttle
+};
