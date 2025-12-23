@@ -1,5 +1,6 @@
 // ===================================
 // ES6 Class-Based Architecture
+// Child & Family Psychological Services
 // ===================================
 
 /**
@@ -99,12 +100,11 @@ class ProgressTrackerNavigation {
         this.progressBar = document.querySelector('.scroll-progress-bar');
         this.lastScrollTop = 0;
         
-        // Section names for mobile label
         this.sectionNames = {
             'home': 'Home',
             'about': 'About',
             'services': 'Services',
-            'video': 'Video',
+            'team': 'Team',
             'contact': 'Contact'
         };
         
@@ -153,7 +153,6 @@ class ProgressTrackerNavigation {
         let currentSection = null;
         let currentIndex = 0;
 
-        // Find the current section
         this.sections.forEach((section, index) => {
             const sectionTop = section.offsetTop - 150;
             const sectionHeight = section.offsetHeight;
@@ -164,7 +163,6 @@ class ProgressTrackerNavigation {
             }
         });
 
-        // Update desktop dots
         this.desktopDots.forEach((dot, index) => {
             const dotSection = dot.getAttribute('data-section');
             dot.classList.remove('active', 'completed');
@@ -176,7 +174,6 @@ class ProgressTrackerNavigation {
             }
         });
 
-        // Update mobile dots
         this.mobileDots.forEach((dot, index) => {
             const dotSection = dot.getAttribute('data-section');
             dot.classList.remove('active', 'completed');
@@ -188,12 +185,10 @@ class ProgressTrackerNavigation {
             }
         });
 
-        // Update mobile section label
         if (this.currentSectionLabel && currentSection) {
             this.currentSectionLabel.textContent = this.sectionNames[currentSection] || currentSection;
         }
 
-        // Update progress line
         this.updateProgressLine(currentIndex);
     }
 
@@ -218,12 +213,10 @@ class ProgressTrackerNavigation {
     }
 
     setupSmoothScrolling() {
-        // Desktop dots
         this.desktopDots.forEach(dot => {
             dot.addEventListener('click', (e) => this.handleDotClick(e, dot));
         });
 
-        // Mobile dots
         this.mobileDots.forEach(dot => {
             dot.addEventListener('click', (e) => this.handleDotClick(e, dot));
         });
@@ -246,8 +239,7 @@ class ProgressTrackerNavigation {
     }
 
     setupAccessibility() {
-        // Keyboard navigation for desktop dots
-        this.desktopDots.forEach((dot, index) => {
+        this.desktopDots.forEach((dot) => {
             dot.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
@@ -256,8 +248,7 @@ class ProgressTrackerNavigation {
             });
         });
 
-        // Keyboard navigation for mobile dots
-        this.mobileDots.forEach((dot, index) => {
+        this.mobileDots.forEach((dot) => {
             dot.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
@@ -276,7 +267,6 @@ class ScrollEffects {
     constructor() {
         this.progressBar = document.querySelector('.scroll-progress-bar');
         this.heroBackground = document.querySelector('.hero-background');
-        this.heroVideo = document.querySelector('.hero-video');
         this.init();
     }
 
@@ -300,12 +290,8 @@ class ScrollEffects {
     updateParallax() {
         const scrolled = window.pageYOffset;
         
-        if (this.heroBackground) {
+        if (this.heroBackground && window.innerWidth > 768) {
             this.heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
-        }
-
-        if (this.heroVideo) {
-            this.heroVideo.style.transform = `translate(-50%, -50%) translateY(${scrolled * 0.3}px) scale(1.1)`;
         }
     }
 }
@@ -341,12 +327,12 @@ class ParticleAnimation {
 
 /**
  * FormHandler Class
- * Manages form submissions and validations
+ * Manages contact form submissions and validations
  */
 class FormHandler {
     constructor(selector) {
         this.form = document.querySelector(selector);
-        this.inputs = document.querySelectorAll(`${selector} input, ${selector} textarea`);
+        this.inputs = document.querySelectorAll(`${selector} input, ${selector} textarea, ${selector} select`);
         this.init();
     }
 
@@ -355,6 +341,7 @@ class FormHandler {
         
         this.setupSubmitHandler();
         this.setupInputEffects();
+        this.setupValidation();
     }
 
     setupSubmitHandler() {
@@ -362,23 +349,45 @@ class FormHandler {
     }
 
     handleSubmit(e) {
-        e.preventDefault();
-        
+        // For mailto forms, let the default action proceed
         const formData = {
             name: document.getElementById('name')?.value,
             email: document.getElementById('email')?.value,
             phone: document.getElementById('phone')?.value,
+            service: document.getElementById('service')?.value,
             message: document.getElementById('message')?.value
         };
         
         console.log('Form submitted:', formData);
         
-        this.showSuccessMessage();
-        this.form.reset();
+        // Show success message after a brief delay
+        setTimeout(() => {
+            this.showSuccessMessage();
+        }, 100);
     }
 
     showSuccessMessage() {
-        alert('Thank you for your message! We will get back to you soon.');
+        const notification = document.createElement('div');
+        notification.className = 'form-notification success';
+        notification.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M22 11.08V12a10 10 0 11-5.93-9.14" stroke-width="2" stroke-linecap="round"/>
+                <polyline points="22 4 12 14.01 9 11.01" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div>
+                <strong>Thank you for reaching out!</strong>
+                <p>Your email client should open shortly. We'll respond within 24 hours.</p>
+            </div>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => notification.classList.add('show'), 10);
+        
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => notification.remove(), 300);
+        }, 5000);
     }
 
     setupInputEffects() {
@@ -394,41 +403,24 @@ class FormHandler {
             });
         });
     }
-}
 
-/**
- * VideoPlayer Class
- * Handles video placeholder and embedding
- */
-class VideoPlayer {
-    constructor(selector = '.video-placeholder', videoId = 'dQw4w9WgXcQ') {
-        this.placeholder = document.querySelector(selector);
-        this.videoId = videoId;
-        this.init();
+    setupValidation() {
+        this.inputs.forEach(input => {
+            if (input.hasAttribute('required')) {
+                input.addEventListener('blur', () => {
+                    this.validateField(input);
+                });
+            }
+        });
     }
 
-    init() {
-        if (!this.placeholder) return;
-        
-        this.placeholder.addEventListener('click', () => this.loadVideo());
-    }
-
-    loadVideo() {
-        const videoEmbed = `
-            <iframe 
-                width="100%" 
-                height="100%" 
-                src="https://www.youtube.com/embed/${this.videoId}?autoplay=1" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen
-                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-            ></iframe>
-        `;
-        
-        const videoWrapper = document.querySelector('.video-wrapper');
-        if (videoWrapper) {
-            videoWrapper.innerHTML = videoEmbed;
+    validateField(input) {
+        if (input.value.trim() === '' && input.hasAttribute('required')) {
+            input.classList.add('error');
+            return false;
+        } else {
+            input.classList.remove('error');
+            return true;
         }
     }
 }
@@ -480,7 +472,7 @@ class CardObserver {
  * Handles interactive logo animations
  */
 class LogoAnimation {
-    constructor(selector = '.hero-logo img, .hero-logo svg') {
+    constructor(selector = '.hero-logo img') {
         this.logo = document.querySelector(selector);
         this.init();
     }
@@ -492,31 +484,14 @@ class LogoAnimation {
     }
 
     animate() {
-        if (this.logo.tagName === 'IMG') {
-            this.logo.style.transition = 'transform 0.3s ease, filter 0.3s ease';
-            this.logo.style.transform = 'scale(1.05)';
-            this.logo.style.filter = 'drop-shadow(0 15px 40px rgba(79, 195, 247, 0.5))';
-            
-            setTimeout(() => {
-                this.logo.style.transform = 'scale(1)';
-                this.logo.style.filter = 'drop-shadow(0 10px 30px rgba(79, 195, 247, 0.3))';
-            }, 300);
-            return;
-        }
-
-        const lotusLarge = this.logo.querySelector('.lotus-large');
-        const lotusSmall = this.logo.querySelector('.lotus-small');
-        const wheel = this.logo.querySelector('.wheel');
-        
-        if (lotusLarge) lotusLarge.style.animation = 'petalPulse 0.8s ease-in-out';
-        if (lotusSmall) lotusSmall.style.animation = 'petalPulse 0.8s ease-in-out 0.2s';
-        if (wheel) wheel.style.animation = 'rotateWheel 2s linear';
+        this.logo.style.transition = 'transform 0.3s ease, filter 0.3s ease';
+        this.logo.style.transform = 'scale(1.05)';
+        this.logo.style.filter = 'drop-shadow(0 15px 40px rgba(79, 195, 247, 0.5))';
         
         setTimeout(() => {
-            if (lotusLarge) lotusLarge.style.animation = '';
-            if (lotusSmall) lotusSmall.style.animation = '';
-            if (wheel) wheel.style.animation = 'rotateWheel 8s linear infinite';
-        }, 1000);
+            this.logo.style.transform = 'scale(1)';
+            this.logo.style.filter = 'drop-shadow(0 4px 20px rgba(79, 195, 247, 0.25))';
+        }, 300);
     }
 }
 
@@ -593,158 +568,8 @@ class ScrollToTop {
 }
 
 /**
- * KonamiCode Class
- * Easter egg functionality
- */
-class KonamiCode {
-    constructor() {
-        this.code = [];
-        this.sequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-        this.init();
-    }
-
-    init() {
-        document.addEventListener('keydown', (e) => this.checkCode(e));
-    }
-
-    checkCode(e) {
-        this.code.push(e.key);
-        this.code = this.code.slice(-10);
-        
-        if (this.code.join('') === this.sequence.join('')) {
-            this.activate();
-        }
-    }
-
-    activate() {
-        document.body.style.animation = 'rainbow 2s linear infinite';
-        
-        setTimeout(() => {
-            document.body.style.animation = '';
-        }, 5000);
-        
-        this.addRainbowAnimation();
-        console.log('🎉 Konami Code activated! 🎉');
-    }
-
-    addRainbowAnimation() {
-        if (document.getElementById('rainbow-animation')) return;
-        
-        const style = document.createElement('style');
-        style.id = 'rainbow-animation';
-        style.innerHTML = `
-            @keyframes rainbow {
-                0% { filter: hue-rotate(0deg); }
-                100% { filter: hue-rotate(360deg); }
-            }
-        `;
-        document.head.appendChild(style);
-    }
-}
-
-/**
- * PerformanceMonitor Class
- * Monitors and logs performance metrics
- */
-class PerformanceMonitor {
-    constructor() {
-        this.init();
-    }
-
-    init() {
-        window.addEventListener('load', () => this.logPerformance());
-    }
-
-    logPerformance() {
-        if (!('performance' in window)) return;
-        
-        const perfData = window.performance.timing;
-        const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
-        
-        console.log(`Page load time: ${pageLoadTime}ms`);
-        
-        this.logConsoleMessage();
-    }
-
-    logConsoleMessage() {
-        console.log('%c🌸 Child & Family Psychological Services 🌸', 'font-size: 20px; color: #4FC3F7; font-weight: bold;');
-        console.log('%cWebsite loaded successfully!', 'font-size: 14px; color: #9575CD;');
-    }
-}
-
-/**
- * ServiceWorkerManager Class
- * Manages service worker registration
- */
-class ServiceWorkerManager {
-    constructor() {
-        this.init();
-    }
-
-    init() {
-        if (!('serviceWorker' in navigator)) return;
-        
-        window.addEventListener('load', () => this.register());
-    }
-
-    register() {
-        // Uncomment below when you have a service worker file
-        // navigator.serviceWorker.register('/service-worker.js')
-        //     .then(registration => console.log('SW registered:', registration))
-        //     .catch(error => console.log('SW registration failed:', error));
-    }
-}
-
-/**
- * StaffModalHandler Class
- * Manages the staff modal open/close functionality
- */
-class StaffModalHandler {
-    constructor() {
-        this.modal = document.getElementById('staffModal');
-        this.openBtn = document.getElementById('openStaffModal');
-        this.closeBtn = document.getElementById('closeModal');
-        this.overlay = document.getElementById('modalOverlay');
-        this.init();
-    }
-
-    init() {
-        if (!this.modal || !this.openBtn) return;
-
-        // Open modal
-        this.openBtn.addEventListener('click', () => this.open());
-
-        // Close modal
-        if (this.closeBtn) {
-            this.closeBtn.addEventListener('click', () => this.close());
-        }
-
-        if (this.overlay) {
-            this.overlay.addEventListener('click', () => this.close());
-        }
-
-        // Close on ESC key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && this.modal.classList.contains('active')) {
-                this.close();
-            }
-        });
-    }
-
-    open() {
-        this.modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-
-    close() {
-        this.modal.classList.remove('active');
-        document.body.style.overflow = 'auto';
-    }
-}
-
-/**
  * ServicesCarousel Class
- * Manages carousel navigation, modals, and responsive behavior
+ * Manages services carousel navigation and modals
  */
 class ServicesCarousel {
     constructor() {
@@ -759,11 +584,9 @@ class ServicesCarousel {
         this.cardsPerView = this.getCardsPerView();
         this.totalPages = Math.ceil(this.cards.length / this.cardsPerView);
         
-        // Touch/swipe support
         this.touchStartX = 0;
         this.touchEndX = 0;
         
-        // Modal data for all services
         this.serviceData = this.getServiceData();
         
         this.init();
@@ -778,7 +601,6 @@ class ServicesCarousel {
         this.updateCarousel();
         this.generateModals();
         
-        // Recalculate on window resize
         window.addEventListener('resize', () => {
             this.handleResize();
         });
@@ -815,7 +637,6 @@ class ServicesCarousel {
     }
 
     setupEventListeners() {
-        // Navigation buttons
         if (this.prevBtn) {
             this.prevBtn.addEventListener('click', () => this.prev());
         }
@@ -823,14 +644,12 @@ class ServicesCarousel {
             this.nextBtn.addEventListener('click', () => this.next());
         }
 
-        // Touch events for mobile swipe
         if (this.track) {
             this.track.addEventListener('touchstart', (e) => this.handleTouchStart(e), { passive: true });
             this.track.addEventListener('touchmove', (e) => this.handleTouchMove(e), { passive: true });
             this.track.addEventListener('touchend', () => this.handleTouchEnd());
         }
 
-        // Modal buttons
         const modalButtons = document.querySelectorAll('.card-btn');
         modalButtons.forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -887,14 +706,12 @@ class ServicesCarousel {
             this.track.style.transform = `translateX(${offset}px)`;
         }
 
-        // Update dots
         if (this.dots) {
             this.dots.forEach((dot, index) => {
                 dot.classList.toggle('active', index === this.currentIndex);
             });
         }
 
-        // Update navigation buttons
         if (this.prevBtn) {
             this.prevBtn.disabled = this.currentIndex === 0;
         }
@@ -915,7 +732,6 @@ class ServicesCarousel {
         this.updateCarousel();
     }
 
-    // Service data for modals
     getServiceData() {
         return {
             'child-therapy': {
@@ -1196,7 +1012,6 @@ class ServicesCarousel {
         };
     }
 
-    // Generate modal HTML for all services
     generateModals() {
         const container = document.querySelector('.service-modals-container');
         if (!container) return;
@@ -1277,7 +1092,6 @@ class ServicesCarousel {
             container.insertAdjacentHTML('beforeend', modalHTML);
         });
         
-        // Setup modal event listeners
         this.setupModalListeners();
     }
 
@@ -1312,17 +1126,14 @@ class ServicesCarousel {
             const closeBtn = modal.querySelector('.modal-close');
             const ctaBtn = modal.querySelector('.modal-cta-btn');
             
-            // Close modal on overlay click
             if (overlay) {
                 overlay.addEventListener('click', () => this.closeModal(modal));
             }
             
-            // Close modal on close button click
             if (closeBtn) {
                 closeBtn.addEventListener('click', () => this.closeModal(modal));
             }
             
-            // Close modal on CTA button click (smooth scroll to contact)
             if (ctaBtn) {
                 ctaBtn.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -1336,7 +1147,6 @@ class ServicesCarousel {
                 });
             }
             
-            // Close modal on ESC key
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && modal.classList.contains('active')) {
                     this.closeModal(modal);
@@ -1359,6 +1169,10 @@ class ServicesCarousel {
     }
 }
 
+/**
+ * TeamCarousel Class
+ * Manages team member carousel and modals
+ */
 class TeamCarousel {
     constructor() {
         this.track = document.querySelector('.team-carousel-track');
@@ -1372,11 +1186,9 @@ class TeamCarousel {
         this.cardsPerView = this.getCardsPerView();
         this.totalPages = Math.ceil(this.cards.length / this.cardsPerView);
         
-        // Touch/swipe support
         this.touchStartX = 0;
         this.touchEndX = 0;
         
-        // Team data for modals
         this.teamData = this.getTeamData();
         
         this.init();
@@ -1391,7 +1203,6 @@ class TeamCarousel {
         this.updateCarousel();
         this.generateModals();
         
-        // Recalculate on window resize
         window.addEventListener('resize', () => {
             this.handleResize();
         });
@@ -1428,7 +1239,6 @@ class TeamCarousel {
     }
 
     setupEventListeners() {
-        // Navigation buttons
         if (this.prevBtn) {
             this.prevBtn.addEventListener('click', () => this.prev());
         }
@@ -1436,14 +1246,12 @@ class TeamCarousel {
             this.nextBtn.addEventListener('click', () => this.next());
         }
 
-        // Touch events for mobile swipe
         if (this.track) {
             this.track.addEventListener('touchstart', (e) => this.handleTouchStart(e), { passive: true });
             this.track.addEventListener('touchmove', (e) => this.handleTouchMove(e), { passive: true });
             this.track.addEventListener('touchend', () => this.handleTouchEnd());
         }
 
-        // Learn more buttons
         const learnMoreButtons = document.querySelectorAll('.team-learn-more');
         learnMoreButtons.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -1499,14 +1307,12 @@ class TeamCarousel {
             this.track.style.transform = `translateX(${offset}px)`;
         }
 
-        // Update dots
         if (this.dots) {
             this.dots.forEach((dot, index) => {
                 dot.classList.toggle('active', index === this.currentIndex);
             });
         }
 
-        // Update navigation buttons
         if (this.prevBtn) {
             this.prevBtn.disabled = this.currentIndex === 0;
         }
@@ -1533,7 +1339,7 @@ class TeamCarousel {
                 name: 'Dr. Kristie Doheny',
                 credentials: 'PsyD, Owner & Lead Psychologist',
                 email: 'childfamily12@gmail.com',
-                photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=faces',
+                photo: 'krisite.jpeg',
                 isOwner: true,
                 bio: [
                     'While we can\'t change difficult situations of the past, we can work together to better understand and resolve challenges in your life. By applying complementary therapy approaches and techniques, we will unearth long-standing behavior patterns or negative perceptions that may be holding you back from experiencing a more fulfilling and meaningful life.',
@@ -1553,7 +1359,7 @@ class TeamCarousel {
                 name: 'Dr. Jane Albertson-Kelly',
                 credentials: 'PhD, Clinical Psychologist',
                 email: 'childfamily12@gmail.com',
-                photo: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=faces',
+                photo: 'jane.jpg',
                 isOwner: false,
                 bio: [
                     'Dr. Albertson-Kelly has worked with individuals and families in crisis for over 15 years. She holds a doctorate in clinical psychology as well as a Master\'s Degree in Education.',
@@ -1573,7 +1379,7 @@ class TeamCarousel {
                 name: 'Dr. Barbara Burkhard',
                 credentials: 'PhD, Clinical Psychologist',
                 email: 'childfamily12@gmail.com',
-                photo: 'https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=400&h=400&fit=crop&crop=faces',
+                photo: 'Barbara.jpg',
                 isOwner: false,
                 bio: [
                     'Dr. Burkhard has provided psychological services to young children and their families for over 35 years. She holds a doctorate in clinical psychology from Stony Brook University and has specialized training in the area of child abuse assessment.',
@@ -1789,6 +1595,31 @@ class TeamCarousel {
 }
 
 /**
+ * PerformanceMonitor Class
+ * Monitors and logs performance metrics
+ */
+class PerformanceMonitor {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        window.addEventListener('load', () => this.logPerformance());
+    }
+
+    logPerformance() {
+        if (!('performance' in window)) return;
+        
+        const perfData = window.performance.timing;
+        const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
+        
+        console.log(`%c🌸 Child & Family Psychological Services 🌸`, 'font-size: 20px; color: #4FC3F7; font-weight: bold;');
+        console.log(`%cPage load time: ${pageLoadTime}ms`, 'font-size: 14px; color: #9575CD;');
+        console.log(`%cWebsite loaded successfully!`, 'font-size: 14px; color: #4CAF50;');
+    }
+}
+
+/**
  * App Class
  * Main application controller that initializes all components
  */
@@ -1805,16 +1636,12 @@ class App {
         this.components.scrollEffects = new ScrollEffects();
         this.components.particleAnimation = new ParticleAnimation();
         this.components.formHandler = new FormHandler('.contact-form');
-        this.components.videoPlayer = new VideoPlayer();
         this.components.cardObserver = new CardObserver();
         this.components.logoAnimation = new LogoAnimation();
         this.components.scrollToTop = new ScrollToTop();
-        this.components.konamiCode = new KonamiCode();
-        this.components.performanceMonitor = new PerformanceMonitor();
-        this.components.serviceWorkerManager = new ServiceWorkerManager();
-        this.components.staffModalHandler = new StaffModalHandler();
         this.components.servicesCarousel = new ServicesCarousel();
         this.components.teamCarousel = new TeamCarousel();
+        this.components.performanceMonitor = new PerformanceMonitor();
     }
 
     getComponent(name) {
