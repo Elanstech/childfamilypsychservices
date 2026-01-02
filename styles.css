@@ -4816,6 +4816,323 @@ body {
     }
 }
 
+/* ============================================
+   FLOATING ACTION BUTTONS - FAB CONTACT MENU
+   ============================================ */
+
+/* Move Back to Top Button to LEFT SIDE */
+.scroll-to-top {
+    left: 30px !important;
+    right: auto !important;
+}
+
+/* FAB Contact Menu - RIGHT SIDE */
+.fab-contact-menu {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.fab-contact-menu.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Main FAB Button */
+.fab-main-button {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(79, 195, 247, 0.4);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fab-main-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 30px rgba(79, 195, 247, 0.5);
+}
+
+.fab-main-button:active {
+    transform: scale(0.95);
+}
+
+/* FAB Icons */
+.fab-icon-contact,
+.fab-icon-close {
+    width: 28px;
+    height: 28px;
+    stroke: white;
+    position: absolute;
+    transition: all 0.3s ease;
+}
+
+.fab-icon-contact {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
+.fab-icon-close {
+    opacity: 0;
+    transform: rotate(-90deg);
+}
+
+.fab-contact-menu.open .fab-icon-contact {
+    opacity: 0;
+    transform: rotate(90deg);
+}
+
+.fab-contact-menu.open .fab-icon-close {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
+/* FAB Buttons Container */
+.fab-buttons-container {
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    pointer-events: none;
+}
+
+.fab-contact-menu.open .fab-buttons-container {
+    pointer-events: auto;
+}
+
+/* Individual FAB Buttons */
+.fab-button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
+    position: relative;
+}
+
+.fab-button.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.fab-button::before {
+    content: attr(aria-label);
+    position: absolute;
+    right: 60px;
+    background: var(--black);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.fab-button::after {
+    content: '';
+    position: absolute;
+    right: 52px;
+    width: 0;
+    height: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left: 8px solid var(--black);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.fab-button:hover::before,
+.fab-button:hover::after {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.fab-button:hover {
+    transform: translateY(0) scale(1.1);
+}
+
+.fab-button:active {
+    transform: translateY(0) scale(0.95);
+}
+
+.fab-button svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Phone Button - Green */
+.fab-phone {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+}
+
+.fab-phone svg {
+    stroke: white;
+}
+
+.fab-phone:hover {
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+/* Email Button - Pink */
+.fab-email {
+    background: linear-gradient(135deg, var(--primary-pink), var(--secondary-pink));
+    color: white;
+}
+
+.fab-email svg {
+    stroke: white;
+}
+
+.fab-email:hover {
+    box-shadow: 0 6px 20px rgba(244, 143, 177, 0.4);
+}
+
+/* LinkedIn Button - Blue */
+.fab-linkedin {
+    background: linear-gradient(135deg, #0077B5, #005885);
+    color: white;
+}
+
+.fab-linkedin:hover {
+    box-shadow: 0 6px 20px rgba(0, 119, 181, 0.4);
+}
+
+/* Ripple Effect on Click */
+.fab-main-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.fab-main-button:active::after {
+    width: 100%;
+    height: 100%;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN FOR FABs
+   ============================================ */
+
+@media (max-width: 768px) {
+    .scroll-to-top {
+        bottom: 20px;
+        left: 20px !important;
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+    }
+
+    .fab-contact-menu {
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .fab-main-button {
+        width: 55px;
+        height: 55px;
+    }
+
+    .fab-icon-contact,
+    .fab-icon-close {
+        width: 26px;
+        height: 26px;
+    }
+
+    .fab-button {
+        width: 48px;
+        height: 48px;
+    }
+
+    .fab-button svg {
+        width: 22px;
+        height: 22px;
+    }
+
+    .fab-buttons-container {
+        bottom: 65px;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .scroll-to-top {
+        bottom: 15px;
+        left: 15px !important;
+        width: 42px;
+        height: 42px;
+        font-size: 1.2rem;
+    }
+
+    .fab-contact-menu {
+        bottom: 15px;
+        right: 15px;
+    }
+
+    .fab-main-button {
+        width: 52px;
+        height: 52px;
+    }
+
+    .fab-icon-contact,
+    .fab-icon-close {
+        width: 24px;
+        height: 24px;
+    }
+
+    .fab-button {
+        width: 45px;
+        height: 45px;
+    }
+
+    .fab-button svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .fab-buttons-container {
+        bottom: 60px;
+        gap: 8px;
+    }
+
+    /* Simplify tooltips on very small screens */
+    .fab-button::before {
+        font-size: 0.75rem;
+        padding: 6px 12px;
+    }
+}
+
 /* ===================================
    FOOTER
    =================================== */
