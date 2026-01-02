@@ -1689,6 +1689,108 @@ class LocationsEnhancement {
 }
 
 /**
+ * FABContactMenu Class
+ * Creates a floating action button with expandable contact options
+ */
+class FABContactMenu {
+    constructor() {
+        this.fabMenu = document.querySelector('.fab-contact-menu');
+        this.isOpen = false;
+        this.init();
+    }
+
+    init() {
+        if (!this.fabMenu) return;
+        
+        this.mainButton = this.fabMenu.querySelector('.fab-main-button');
+        this.buttons = this.fabMenu.querySelectorAll('.fab-button');
+        this.buttonsContainer = this.fabMenu.querySelector('.fab-buttons-container');
+        
+        this.setupEventListeners();
+        this.setupVisibilityControl();
+    }
+
+    setupEventListeners() {
+        // Toggle menu on main button click
+        this.mainButton.addEventListener('click', () => this.toggle());
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!this.fabMenu.contains(e.target) && this.isOpen) {
+                this.close();
+            }
+        });
+
+        // Close menu after clicking a contact button
+        this.buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                setTimeout(() => this.close(), 300);
+            });
+        });
+
+        // Keyboard accessibility
+        this.mainButton.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.toggle();
+            } else if (e.key === 'Escape' && this.isOpen) {
+                this.close();
+            }
+        });
+    }
+
+    setupVisibilityControl() {
+        // Show FAB when scrolled down
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                this.fabMenu.classList.add('visible');
+            } else {
+                this.fabMenu.classList.remove('visible');
+                if (this.isOpen) {
+                    this.close();
+                }
+            }
+        });
+    }
+
+    toggle() {
+        if (this.isOpen) {
+            this.close();
+        } else {
+            this.open();
+        }
+    }
+
+    open() {
+        this.isOpen = true;
+        this.fabMenu.classList.add('open');
+        this.mainButton.setAttribute('aria-expanded', 'true');
+        
+        // Stagger animation for buttons
+        this.buttons.forEach((button, index) => {
+            setTimeout(() => {
+                button.classList.add('show');
+            }, index * 50);
+        });
+    }
+
+    close() {
+        this.isOpen = false;
+        this.fabMenu.classList.remove('open');
+        this.mainButton.setAttribute('aria-expanded', 'false');
+        
+        this.buttons.forEach(button => {
+            button.classList.remove('show');
+        });
+    }
+}
+
+// Initialize FAB Contact Menu
+document.addEventListener('DOMContentLoaded', () => {
+    new FABContactMenu();
+});
+
+/**
  * PerformanceMonitor Class
  * Monitors and logs performance metrics
  */
@@ -1736,6 +1838,7 @@ class App {
         this.components.teamCarousel = new TeamCarousel();
         this.components.teamCarousel = new LocationsEnhancement();
         this.components.performanceMonitor = new PerformanceMonitor();
+        this.components.fabContactMenu = new FABContactMenu();
     }
 
     getComponent(name) {
