@@ -3895,6 +3895,572 @@ body {
 }
 
 /* ============================================
+   FAQ SECTION
+   ============================================ */
+
+.faq-section {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.faq-section::before {
+    content: '';
+    position: absolute;
+    top: -30%;
+    left: -15%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(149, 117, 205, 0.04) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* Featured FAQs */
+.featured-faqs {
+    max-width: 900px;
+    margin: 0 auto 60px;
+}
+
+/* FAQ Item */
+.faq-item {
+    background: white;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 25px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--black);
+    transition: all 0.3s ease;
+}
+
+.faq-question:hover {
+    color: var(--primary-blue);
+}
+
+.faq-icon {
+    width: 24px;
+    height: 24px;
+    stroke: var(--primary-blue);
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-icon {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 500px;
+}
+
+.faq-answer p {
+    padding: 0 30px 25px;
+    color: var(--dark-gray);
+    line-height: 1.8;
+    font-size: 1rem;
+}
+
+/* Category Tabs */
+.faq-categories {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.category-tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: white;
+    border: 2px solid var(--medium-gray);
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--dark-gray);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.category-tab svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--dark-gray);
+    transition: stroke 0.3s ease;
+}
+
+.category-tab:hover {
+    background: linear-gradient(135deg, rgba(79, 195, 247, 0.1), rgba(149, 117, 205, 0.1));
+    border-color: var(--primary-blue);
+    color: var(--primary-blue);
+}
+
+.category-tab:hover svg {
+    stroke: var(--primary-blue);
+}
+
+.category-tab.active {
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 4px 15px rgba(79, 195, 247, 0.3);
+}
+
+.category-tab.active svg {
+    stroke: white;
+}
+
+/* Categorized FAQs */
+.categorized-faqs {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.faq-category-content {
+    display: none;
+}
+
+.faq-category-content.active {
+    display: block;
+    animation: fadeInUp 0.4s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   INSURANCE SECTION
+   ============================================ */
+
+.insurance-section {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.insurance-section::before {
+    content: '';
+    position: absolute;
+    bottom: -40%;
+    right: -10%;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(79, 195, 247, 0.04) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* Insurance Notice */
+.insurance-notice {
+    background: linear-gradient(135deg, 
+        rgba(79, 195, 247, 0.08) 0%, 
+        rgba(149, 117, 205, 0.08) 100%);
+    padding: 40px;
+    border-radius: 25px;
+    border: 2px solid rgba(79, 195, 247, 0.2);
+    margin-bottom: 60px;
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.notice-icon {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 20px rgba(79, 195, 247, 0.3);
+}
+
+.notice-icon svg {
+    width: 32px;
+    height: 32px;
+    stroke: white;
+}
+
+.notice-content h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 20px;
+}
+
+.notice-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.notice-item {
+    display: flex;
+    gap: 15px;
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+    border-left: 4px solid;
+}
+
+.notice-item.accepted {
+    border-left-color: #4CAF50;
+}
+
+.notice-item.not-accepted {
+    border-left-color: #EC407A;
+}
+
+.notice-item svg {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.notice-item.accepted svg {
+    stroke: #4CAF50;
+}
+
+.notice-item.not-accepted svg {
+    stroke: #EC407A;
+}
+
+.notice-item strong {
+    display: block;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 8px;
+}
+
+.notice-item p {
+    color: var(--dark-gray);
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+/* Infinite Scroll Insurance Logos */
+.insurance-logos-wrapper {
+    margin-bottom: 60px;
+    overflow: hidden;
+    position: relative;
+}
+
+.insurance-logos-wrapper::before,
+.insurance-logos-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 200px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.insurance-logos-wrapper::before {
+    left: 0;
+    background: linear-gradient(90deg, #f8f9fa 0%, transparent 100%);
+}
+
+.insurance-logos-wrapper::after {
+    right: 0;
+    background: linear-gradient(270deg, #f8f9fa 0%, transparent 100%);
+}
+
+.insurance-scroll-container {
+    overflow: hidden;
+    padding: 30px 0;
+}
+
+.insurance-scroll-track {
+    display: flex;
+    gap: 60px;
+    animation: infiniteScroll 40s linear infinite;
+}
+
+.insurance-scroll-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes infiniteScroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.insurance-logo-item {
+    flex-shrink: 0;
+    width: 180px;
+    height: 80px;
+    background: white;
+    border-radius: 15px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.insurance-logo-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.insurance-logo-item img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.insurance-logo-item:hover img {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+/* Insurance List */
+.insurance-list-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: white;
+    padding: 50px;
+    border-radius: 25px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+}
+
+.insurance-list-container h3 {
+    text-align: center;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 40px;
+}
+
+.insurance-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.insurance-provider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 20px;
+    background: linear-gradient(135deg, rgba(79, 195, 247, 0.05), rgba(149, 117, 205, 0.05));
+    border-radius: 12px;
+    border: 1px solid rgba(79, 195, 247, 0.1);
+    transition: all 0.3s ease;
+}
+
+.insurance-provider:hover {
+    background: linear-gradient(135deg, rgba(79, 195, 247, 0.1), rgba(149, 117, 205, 0.1));
+    border-color: var(--primary-blue);
+    transform: translateX(5px);
+}
+
+.insurance-provider svg {
+    width: 20px;
+    height: 20px;
+    stroke: #4CAF50;
+    flex-shrink: 0;
+}
+
+.insurance-provider span {
+    font-weight: 600;
+    color: var(--black);
+    font-size: 0.95rem;
+}
+
+.insurance-disclaimer {
+    text-align: center;
+    color: var(--dark-gray);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+    padding-top: 20px;
+    border-top: 2px solid var(--medium-gray);
+}
+
+.insurance-disclaimer a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.insurance-disclaimer a:hover {
+    color: var(--primary-purple);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+    .faq-section,
+    .insurance-section {
+        padding: 60px 0;
+    }
+
+    .faq-question {
+        padding: 20px;
+        font-size: 1rem;
+    }
+
+    .faq-answer p {
+        padding: 0 20px 20px;
+        font-size: 0.95rem;
+    }
+
+    .faq-categories {
+        gap: 10px;
+    }
+
+    .category-tab {
+        padding: 10px 18px;
+        font-size: 0.875rem;
+    }
+
+    .category-tab svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .insurance-notice {
+        flex-direction: column;
+        padding: 30px 25px;
+        gap: 20px;
+    }
+
+    .notice-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .notice-icon svg {
+        width: 28px;
+        height: 28px;
+    }
+
+    .notice-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .insurance-scroll-track {
+        gap: 40px;
+    }
+
+    .insurance-logo-item {
+        width: 140px;
+        height: 70px;
+        padding: 12px;
+    }
+
+    .insurance-list-container {
+        padding: 35px 25px;
+    }
+
+    .insurance-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .insurance-provider {
+        padding: 12px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .faq-item {
+        border-radius: 15px;
+    }
+
+    .faq-question {
+        font-size: 0.95rem;
+    }
+
+    .faq-icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .insurance-notice {
+        padding: 25px 20px;
+    }
+
+    .notice-content h3 {
+        font-size: 1.25rem;
+    }
+
+    .notice-item {
+        padding: 15px;
+    }
+
+    .insurance-logo-item {
+        width: 120px;
+        height: 60px;
+    }
+
+    .insurance-list-container {
+        padding: 30px 20px;
+    }
+
+    .insurance-list-container h3 {
+        font-size: 1.5rem;
+    }
+}
+
+/* ============================================
    LOCATIONS SECTION
    ============================================ */
 
