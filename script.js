@@ -1595,6 +1595,113 @@ class TeamCarousel {
 }
 
 /**
+ * FAQAccordion Class
+ * Manages FAQ accordion functionality
+ */
+class FAQAccordion {
+    constructor() {
+        this.faqItems = document.querySelectorAll('.faq-item');
+        this.categoryTabs = document.querySelectorAll('.category-tab');
+        this.categoryContents = document.querySelectorAll('.faq-category-content');
+        this.init();
+    }
+
+    init() {
+        if (this.faqItems.length === 0) return;
+        
+        this.setupFAQItems();
+        this.setupCategoryTabs();
+    }
+
+    setupFAQItems() {
+        this.faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            
+            question.addEventListener('click', () => {
+                const wasActive = item.classList.contains('active');
+                
+                // Close all other items in the same container
+                const container = item.closest('.featured-faqs, .faq-category-content');
+                if (container) {
+                    container.querySelectorAll('.faq-item').forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                }
+                
+                // Toggle current item
+                item.classList.toggle('active', !wasActive);
+            });
+
+            // Keyboard accessibility
+            question.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    question.click();
+                }
+            });
+        });
+    }
+
+    setupCategoryTabs() {
+        this.categoryTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const category = tab.getAttribute('data-category');
+                
+                // Update active tab
+                this.categoryTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Update active content
+                this.categoryContents.forEach(content => {
+                    if (content.getAttribute('data-category') === category) {
+                        content.classList.add('active');
+                    } else {
+                        content.classList.remove('active');
+                    }
+                });
+
+                // Close all FAQs when switching categories
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+            });
+        });
+    }
+}
+
+/**
+ * InsuranceScroll Class
+ * Manages insurance logo infinite scroll
+ */
+class InsuranceScroll {
+    constructor() {
+        this.scrollTrack = document.querySelector('.insurance-scroll-track');
+        this.init();
+    }
+
+    init() {
+        if (!this.scrollTrack) return;
+        
+        // Pause animation on hover for better UX
+        this.scrollTrack.addEventListener('mouseenter', () => {
+            this.scrollTrack.style.animationPlayState = 'paused';
+        });
+
+        this.scrollTrack.addEventListener('mouseleave', () => {
+            this.scrollTrack.style.animationPlayState = 'running';
+        });
+    }
+}
+
+// Initialize FAQ and Insurance components
+document.addEventListener('DOMContentLoaded', () => {
+    new FAQAccordion();
+    new InsuranceScroll();
+});
+
+/**
  * LocationsEnhancement Class
  * Adds interactive enhancements to the locations section
  */
@@ -1836,6 +1943,8 @@ class App {
         this.components.scrollToTop = new ScrollToTop();
         this.components.servicesCarousel = new ServicesCarousel();
         this.components.teamCarousel = new TeamCarousel();
+        this.components.faqAccordion = new FAQAccordion();
+        this.components.insuranceScroll = new InsuranceScroll();
         this.components.teamCarousel = new LocationsEnhancement();
         this.components.performanceMonitor = new PerformanceMonitor();
         this.components.fabContactMenu = new FABContactMenu();
