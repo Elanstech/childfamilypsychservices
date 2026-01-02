@@ -1596,13 +1596,16 @@ class TeamCarousel {
 
 /**
  * FAQAccordion Class
- * Manages FAQ accordion functionality
+ * Manages FAQ accordion functionality with proper scoping
  */
 class FAQAccordion {
     constructor() {
-        this.faqItems = document.querySelectorAll('.faq-item');
-        this.categoryTabs = document.querySelectorAll('.category-tab');
-        this.categoryContents = document.querySelectorAll('.faq-category-content');
+        this.faqSection = document.querySelector('.faq-section');
+        if (!this.faqSection) return;
+        
+        this.faqItems = this.faqSection.querySelectorAll('.faq-item');
+        this.categoryTabs = this.faqSection.querySelectorAll('.category-tab');
+        this.categoryContents = this.faqSection.querySelectorAll('.faq-category-content');
         this.init();
     }
 
@@ -1616,6 +1619,8 @@ class FAQAccordion {
     setupFAQItems() {
         this.faqItems.forEach(item => {
             const question = item.querySelector('.faq-question');
+            
+            if (!question) return;
             
             question.addEventListener('click', () => {
                 const wasActive = item.classList.contains('active');
@@ -1631,7 +1636,11 @@ class FAQAccordion {
                 }
                 
                 // Toggle current item
-                item.classList.toggle('active', !wasActive);
+                if (wasActive) {
+                    item.classList.remove('active');
+                } else {
+                    item.classList.add('active');
+                }
             });
 
             // Keyboard accessibility
@@ -1645,6 +1654,8 @@ class FAQAccordion {
     }
 
     setupCategoryTabs() {
+        if (this.categoryTabs.length === 0) return;
+        
         this.categoryTabs.forEach(tab => {
             tab.addEventListener('click', () => {
                 const category = tab.getAttribute('data-category');
@@ -1663,7 +1674,7 @@ class FAQAccordion {
                 });
 
                 // Close all FAQs when switching categories
-                document.querySelectorAll('.faq-item').forEach(item => {
+                this.faqSection.querySelectorAll('.faq-item').forEach(item => {
                     item.classList.remove('active');
                 });
             });
@@ -1673,11 +1684,14 @@ class FAQAccordion {
 
 /**
  * InsuranceScroll Class
- * Manages insurance logo infinite scroll
+ * Manages insurance logo infinite scroll with proper scoping
  */
 class InsuranceScroll {
     constructor() {
-        this.scrollTrack = document.querySelector('.insurance-scroll-track');
+        this.insuranceSection = document.querySelector('.insurance-section');
+        if (!this.insuranceSection) return;
+        
+        this.scrollTrack = this.insuranceSection.querySelector('.insurance-scroll-track');
         this.init();
     }
 
@@ -1692,108 +1706,26 @@ class InsuranceScroll {
         this.scrollTrack.addEventListener('mouseleave', () => {
             this.scrollTrack.style.animationPlayState = 'running';
         });
+
+        // Touch support for mobile
+        let touchStartX = 0;
+        
+        this.scrollTrack.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+            this.scrollTrack.style.animationPlayState = 'paused';
+        }, { passive: true });
+
+        this.scrollTrack.addEventListener('touchend', () => {
+            this.scrollTrack.style.animationPlayState = 'running';
+        });
     }
 }
 
-// Initialize FAQ and Insurance components
+// Initialize FAQ and Insurance components when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     new FAQAccordion();
     new InsuranceScroll();
 });
-
-/**
- * LocationsEnhancement Class
- * Adds interactive enhancements to the locations section
- */
-class LocationsEnhancement {
-    constructor() {
-        this.locationCards = document.querySelectorAll('.location-card');
-        this.partnerBanner = document.querySelector('.partner-location-banner');
-        this.init();
-    }
-
-    init() {
-        if (this.locationCards.length > 0) {
-            this.addLocationHoverEffects();
-        }
-        
-        if (this.partnerBanner) {
-            this.addPartnerBannerAnimation();
-        }
-    }
-
-    addLocationHoverEffects() {
-        this.locationCards.forEach((card, index) => {
-            // Add staggered entrance animation
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            
-            setTimeout(() => {
-                card.style.opacity = '1';
-                card.style.transform = 'translateY(0)';
-            }, 100 * index);
-
-            // Add parallax effect on hover
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const rotateX = (y - centerY) / 20;
-                const rotateY = (centerX - x) / 20;
-                
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
-            });
-
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
-            });
-        });
-    }
-
-    addPartnerBannerAnimation() {
-        // Add entrance animation
-        this.partnerBanner.style.opacity = '0';
-        this.partnerBanner.style.transform = 'translateY(30px)';
-        this.partnerBanner.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-        
-        // Trigger animation when in viewport
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-        
-        observer.observe(this.partnerBanner);
-
-        // Add subtle floating animation to partner logo
-        const logoPlaceholder = this.partnerBanner.querySelector('.partner-logo-placeholder, .partner-logo');
-        if (logoPlaceholder) {
-            this.animatePartnerLogo(logoPlaceholder);
-        }
-    }
-
-    animatePartnerLogo(logo) {
-        let time = 0;
-        const animate = () => {
-            time += 0.01;
-            const y = Math.sin(time) * 5;
-            logo.style.transform = `translateY(${y}px)`;
-            requestAnimationFrame(animate);
-        };
-        animate();
-    }
-}
 
 /**
  * FABContactMenu Class
