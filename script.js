@@ -1595,6 +1595,100 @@ class TeamCarousel {
 }
 
 /**
+ * LocationsEnhancement Class
+ * Adds interactive enhancements to the locations section
+ */
+class LocationsEnhancement {
+    constructor() {
+        this.locationCards = document.querySelectorAll('.location-card');
+        this.partnerBanner = document.querySelector('.partner-location-banner');
+        this.init();
+    }
+
+    init() {
+        if (this.locationCards.length > 0) {
+            this.addLocationHoverEffects();
+        }
+        
+        if (this.partnerBanner) {
+            this.addPartnerBannerAnimation();
+        }
+    }
+
+    addLocationHoverEffects() {
+        this.locationCards.forEach((card, index) => {
+            // Add staggered entrance animation
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 100 * index);
+
+            // Add parallax effect on hover
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+            });
+        });
+    }
+
+    addPartnerBannerAnimation() {
+        // Add entrance animation
+        this.partnerBanner.style.opacity = '0';
+        this.partnerBanner.style.transform = 'translateY(30px)';
+        this.partnerBanner.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        
+        // Trigger animation when in viewport
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        observer.observe(this.partnerBanner);
+
+        // Add subtle floating animation to partner logo
+        const logoPlaceholder = this.partnerBanner.querySelector('.partner-logo-placeholder, .partner-logo');
+        if (logoPlaceholder) {
+            this.animatePartnerLogo(logoPlaceholder);
+        }
+    }
+
+    animatePartnerLogo(logo) {
+        let time = 0;
+        const animate = () => {
+            time += 0.01;
+            const y = Math.sin(time) * 5;
+            logo.style.transform = `translateY(${y}px)`;
+            requestAnimationFrame(animate);
+        };
+        animate();
+    }
+}
+
+/**
  * PerformanceMonitor Class
  * Monitors and logs performance metrics
  */
@@ -1628,7 +1722,6 @@ class App {
         this.components = {};
         this.init();
     }
-
     init() {
         this.components.preloader = new Preloader();
         this.components.typedAnimation = new TypedAnimation('#typed-text');
@@ -1641,6 +1734,7 @@ class App {
         this.components.scrollToTop = new ScrollToTop();
         this.components.servicesCarousel = new ServicesCarousel();
         this.components.teamCarousel = new TeamCarousel();
+        this.components.teamCarousel = new LocationsEnhancement();
         this.components.performanceMonitor = new PerformanceMonitor();
     }
 
