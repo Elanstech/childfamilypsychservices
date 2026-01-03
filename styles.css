@@ -1264,6 +1264,10 @@ body {
     box-shadow: 0 12px 35px rgba(149, 117, 205, 0.4);
 }
 
+/* ============================================
+   VALUES SECTION - ROW ON DESKTOP, 2x2 ON MOBILE
+   ============================================ */
+
 .about-section-placeholder .values-section {
     background: white;
     padding: 60px 50px;
@@ -1297,7 +1301,7 @@ body {
 
 .about-section-placeholder .values-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 40px;
 }
 
@@ -1351,6 +1355,10 @@ body {
     font-size: 0.95rem;
     margin: 0;
 }
+
+/* ============================================
+   EXCELLENCE BANNER
+   ============================================ */
 
 .about-section-placeholder .excellence-banner {
     background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
@@ -1414,6 +1422,10 @@ body {
     margin: 0;
 }
 
+/* ============================================
+   CTA SECTION
+   ============================================ */
+
 .about-section-placeholder .about-cta-section {
     text-align: center;
     padding: 60px 40px;
@@ -1445,13 +1457,17 @@ body {
     flex-wrap: wrap;
 }
 
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
 @media (max-width: 1024px) {
     .about-content-grid {
         gap: 25px;
     }
 
     .about-section-placeholder .values-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         gap: 30px;
     }
 
@@ -1503,9 +1519,10 @@ body {
         margin-bottom: 40px;
     }
 
+    /* 2x2 GRID ON MOBILE */
     .about-section-placeholder .values-grid {
-        grid-template-columns: 1fr;
-        gap: 35px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
     }
 
     .about-section-placeholder .excellence-banner {
@@ -1564,6 +1581,12 @@ body {
         padding: 40px 20px;
     }
 
+    /* KEEP 2x2 GRID ON SMALL MOBILE */
+    .about-section-placeholder .values-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+
     .about-section-placeholder .value-icon {
         width: 60px;
         height: 60px;
@@ -1572,6 +1595,14 @@ body {
     .about-section-placeholder .value-icon svg {
         width: 30px;
         height: 30px;
+    }
+
+    .about-section-placeholder .value-item h4 {
+        font-size: 1.125rem;
+    }
+
+    .about-section-placeholder .value-item p {
+        font-size: 0.875rem;
     }
 
     .about-section-placeholder .excellence-banner {
