@@ -1716,12 +1716,6 @@ class InsuranceScroll {
     }
 }
 
-// Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-    new FAQAccordion();
-    new InsuranceScroll();
-});
-
 /**
  * FABContactMenu Class
  * Creates a floating action button with expandable contact options
