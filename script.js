@@ -1333,175 +1333,113 @@ class TeamCarousel {
         this.updateCarousel();
     }
 
-    getTeamData() {
-        return {
-            'kristie-doheny': {
-                name: 'Dr. Kristie Doheny',
-                credentials: 'PsyD, Owner & Lead Psychologist',
-                email: 'childfamily12@gmail.com',
-                photo: 'krisite.jpeg',
-                isOwner: true,
-                bio: [
-                    'While we can\'t change difficult situations of the past, we can work together to better understand and resolve challenges in your life. By applying complementary therapy approaches and techniques, we will unearth long-standing behavior patterns or negative perceptions that may be holding you back from experiencing a more fulfilling and meaningful life.',
-                    'If you\'re looking for extra support and guidance through a challenging situation or you\'re just ready to move in a new direction in your life, I look forward to working with you to achieve your goals.',
-                    'With over 10 years of experience working with children, adolescents, adults, and families, I specialize in person-centered therapy which enables me to create individualized treatment for each client I meet.'
-                ],
-                highlights: [
-                    'Over 10 years of experience with children, adolescents, adults, and families',
-                    'Specializes in person-centered therapy',
-                    'Offers psychological evaluations for ADHD, learning disabilities, autism spectrum disorder (ADOS-2), and developmental delays',
-                    'Uses humanistic therapy techniques including play therapy, sandplay therapy, expressive therapy',
-                    'Trained in cognitive-behavioral therapy, neurofeedback, and biofeedback',
-                    'Creates individualized treatment plans for each client'
-                ]
-            },
-            'jane-albertson': {
-                name: 'Dr. Jane Albertson-Kelly',
-                credentials: 'PhD, Clinical Psychologist',
-                email: 'childfamily12@gmail.com',
-                photo: 'jane.jpg',
-                isOwner: false,
-                bio: [
-                    'Dr. Albertson-Kelly has worked with individuals and families in crisis for over 15 years. She holds a doctorate in clinical psychology as well as a Master\'s Degree in Education.',
-                    'She has been affiliated with the Adolescent Psychiatric Unit at Mather Hospital, the North Suffolk Center Child Treatment Program, and the Northport VA. A former teacher, Dr. Albertson-Kelly has particular interests in working with families adjusting to separation and divorce, as well as adolescents.',
-                    'She is recognized as an expert witness in the areas of parenting, custody and sexual abuse and has presented on topics related to these areas.'
-                ],
-                highlights: [
-                    'Over 15 years working with individuals and families in crisis',
-                    'Doctorate in Clinical Psychology and Master\'s Degree in Education',
-                    'Former teacher with expertise in adolescent care',
-                    'Specializes in families adjusting to separation and divorce',
-                    'Expert witness in parenting, custody, and sexual abuse cases',
-                    'Affiliated with Mather Hospital, North Suffolk Center, and Northport VA'
-                ]
-            },
-            'barbara-burkhard': {
-                name: 'Dr. Barbara Burkhard',
-                credentials: 'PhD, Clinical Psychologist',
-                email: 'childfamily12@gmail.com',
-                photo: 'Barbara.jpg',
-                isOwner: false,
-                bio: [
-                    'Dr. Burkhard has provided psychological services to young children and their families for over 35 years. She holds a doctorate in clinical psychology from Stony Brook University and has specialized training in the area of child abuse assessment.',
-                    'She has served as program director for several Suffolk County programs serving children and families including the Child Treatment Program of North Suffolk Mental Health Center, Inc. and Parents Anonymous of Suffolk County.',
-                    'She has received awards from both Suffolk County and the State University for her work. Dr. Burkhard currently provides treatment and assessment for children and parents including treatment for distressed and traumatized children. She also provides expert testimony in child abuse and custody proceedings.'
-                ],
-                highlights: [
-                    'Over 35 years providing psychological services to children and families',
-                    'Doctorate in Clinical Psychology from Stony Brook University',
-                    'Specialized training in child abuse assessment',
-                    'Former program director for multiple Suffolk County programs',
-                    'Award recipient from Suffolk County and State University',
-                    'Expert testimony in child abuse and custody proceedings'
-                ]
-            },
-            'jessica-panagiotidis': {
-                name: 'Jessica Panagiotidis',
-                credentials: 'MS, CRC, LMSW',
-                email: 'childfamily12@gmail.com',
-                photo: 'https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=400&h=400&fit=crop&crop=faces',
-                isOwner: false,
-                bio: [
-                    'Jessica attended St. John\'s University and graduated with a Bachelor\'s Degree in Psychology in 1996. She began working as a Job Placement Specialist for adults with developmental disabilities while employed with AHRC. Her passion for helping people with disabilities led to her decision to further her training.',
-                    'Jessica graduated from Hofstra University with a Master\'s Degree in Education, specifically vocational rehabilitation counseling in 1999. She began working as a Vocational Rehabilitation Counselor with ACCES-VR in 2001 where she helps individuals with various disabilities find employment and live independent lives.',
-                    'Jessica decided to pursue a second Master\'s Degree in Social Work and graduated from Adelphi University in 2017. She obtained her licensure and is fulfilling her passion in clinical counseling. Her experience ranges from children to adults with respect to individual, group, and family counseling services.'
-                ],
-                highlights: [
-                    'Bachelor\'s in Psychology from St. John\'s University',
-                    'Master\'s in Vocational Rehabilitation Counseling from Hofstra University',
-                    'Master\'s in Social Work from Adelphi University',
-                    'Certified Rehabilitation Counselor (CRC)',
-                    'Experience with individuals with developmental disabilities',
-                    'Provides individual, group, and family counseling services'
-                ]
-            },
-            'jennifer-cuevas': {
-                name: 'Jennifer Cuevas',
-                credentials: 'LCSW, Licensed Clinical Social Worker',
-                email: 'childfamily12@gmail.com',
-                photo: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400&h=400&fit=crop&crop=faces',
-                isOwner: false,
-                bio: [
-                    'I\'m a licensed clinical social worker with 25 years experience working with children, adolescents and families. My areas of specialty are children and adolescents with developmental disabilities, autism, chronic illness, mental illness, anxiety, depression and trauma.',
-                    'I am a Disaster Mental Health Worker for the Red Cross. I do regular television and radio appearances on various news outlets, such as Cablevision News 12, NEWSMAX, CBS & WFAN, to provide psychological commentary on multiple topics.',
-                    'I have specialized experience advocating for children to secure special education services from NY public school system, within parameters of IDEA (Individuals with Disabilities Act) and DASA (NY Dignity for All Students Act), protecting children from bullying and discrimination. I provide trauma recovery counseling for all ages.',
-                    'I am the parent of a special needs child. I fully understand the complexities of accessing all a child needs and deserves, to become a happy and productive person. I look forward to being able to assist you!'
-                ],
-                highlights: [
-                    '25 years experience with children, adolescents, and families',
-                    'Specializes in developmental disabilities, autism, and trauma',
-                    'Disaster Mental Health Worker for the Red Cross',
-                    'Regular media appearances on News 12, NEWSMAX, CBS, and WFAN',
-                    'Expert in special education advocacy (IDEA and DASA)',
-                    'Parent of a special needs child with personal understanding'
-                ]
-            },
-            'katherine-kruser': {
-                name: 'Katherine Kruser',
-                credentials: 'LP, Licensed Psychologist',
-                email: 'childfamily12@gmail.com',
-                photo: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=faces',
-                isOwner: false,
-                bio: [
-                    'The therapeutic relationship is one that should hold no judgments, be empathetic, be safe, and should ultimately empower the client to cope with the issues that they face. Creating a specific treatment plan using a person-centered approach will allow for an autonomous environment.',
-                    'I worked in music education for over 20 years which gives me extensive experience working with children and adolescents. I graduated from Southern New Hampshire graduate Clinical Mental Health Counseling program.',
-                    'My counseling experience is founded in the play therapy modality where children can explore feelings and emotions through therapeutic play. I support children, adolescents and adults with a wide range of issues including anxiety, depression, ADHD, behavioral challenges in school, low self esteem, and poor social skills.',
-                    'I am currently working in two different locations: Patchogue and Hauppauge. I look forward to working with your child and supporting them with whatever struggles they have.'
-                ],
-                highlights: [
-                    'Over 20 years in music education',
-                    'Graduate of Southern New Hampshire Clinical Mental Health Counseling program',
-                    'Specialized in play therapy modality',
-                    'Certified life coach',
-                    'Treats anxiety, depression, ADHD, and behavioral challenges',
-                    'Available in Patchogue and Hauppauge locations'
-                ]
-            },
-            'dominique-galanek': {
-                name: 'Dominique Galanek',
-                credentials: 'LP, Licensed Psychologist',
-                email: 'childfamily12@gmail.com',
-                photo: 'https://images.unsplash.com/photo-1554151228-14d9def656e4?w=400&h=400&fit=crop&crop=faces',
-                isOwner: false,
-                bio: [
-                    'My passion is working with children, adolescents, and young adults who are experiencing mental health symptoms and/or have been involved with the criminal justice system. Through the field of psychology, we have learned that much of our life trajectory is determined by experiences in these formative years.',
-                    'My goal is to help individuals through their anxiety, depression, and other life stressors by providing support and tools; in doing this, we can work together to achieve the goals you have!',
-                    'I have earned both my Masters in Forensic Psychology and Masters in Forensic Mental Health Counseling from John Jay College of Criminal Justice. By using a multitude of therapeutic practices such as psychodynamic, cognitive-behavioral, and motivational interviewing the therapy process is individualized to fit you best!',
-                    'Taking the first step is one of the most challenging parts of the process and by looking for help you have already taken such a huge leap! Please do not hesitate to reach out.'
-                ],
-                highlights: [
-                    'Masters in Forensic Psychology from John Jay College',
-                    'Masters in Forensic Mental Health Counseling',
-                    'Specializes in youth involved with criminal justice system',
-                    'Uses psychodynamic, cognitive-behavioral, and motivational interviewing',
-                    'Provides talk therapy, play therapy, neurofeedback, and biofeedback',
-                    'Focuses on anxiety, depression, and life stressors'
-                ]
-            },
-            'leana-silipo': {
-                name: 'Leana Silipo',
-                credentials: 'LMSW, Licensed Social Worker',
-                email: 'childfamily12@gmail.com',
-                photo: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&h=400&fit=crop&crop=faces',
-                isOwner: false,
-                bio: [
-                    'LGBTQ+ licensed social worker passionate about queer history and advocacy. My goal is providing affirming mental health care to all those under the LGBTQ+ umbrella.',
-                    'Life is messy, complicated, and often out of our control. Being amidst this chaos can feel overwhelming and isolating, especially if you are still figuring out your identity and how you fit into the world. My aim is to help clients figure out what aspects of life they do have control over and empower them to take a stand or make a change.',
-                    'This control can come in the form of exploration and acceptance or recognizing and disrupting unhealthy patterns. I strive to create a collaborative and warm space to foster a therapeutic relationship based on trust, empathy, and validation.',
-                    'Many clients also find speaking to a therapist with a personal understanding and experience of their own to be beneficial, especially within the queer community. I believe healing and peace are found within balance and would love to aid you in finding or creating that in your own life. When you\'re ready, let\'s begin!'
-                ],
-                highlights: [
-                    'LGBTQ+ affirming mental health care specialist',
-                    'Passionate about queer history and advocacy',
-                    'Specializes in identity exploration and acceptance',
-                    'Creates collaborative and warm therapeutic spaces',
-                    'Focus on trust, empathy, and validation',
-                    'Personal understanding of LGBTQ+ experiences'
-                ]
-            }
-        };
-    }
-
+getTeamData() {
+    return {
+        'kristie-doheny': {
+            name: 'Dr. Kristie Doheny',
+            credentials: 'PsyD, Owner & Lead Psychologist',
+            email: 'childfamily12@gmail.com',
+            photo: 'krisite.jpeg',
+            isOwner: true,
+            bio: [
+                'While we can\'t change difficult situations of the past, we can work together to better understand and resolve challenges in your life. By applying complementary therapy approaches and techniques, we will unearth long-standing behavior patterns or negative perceptions that may be holding you back from experiencing a more fulfilling and meaningful life.',
+                'If you\'re looking for extra support and guidance through a challenging situation or you\'re just ready to move in a new direction in your life, I look forward to working with you to achieve your goals.',
+                'With over 15 years of experience working with children, adolescents, adults, and families, I specialize in person centered therapy which enables me to create individualized treatment for each client I meet. Psychological evaluations are also offered to assess for ADHD, learning disabilities, autism spectrum disorder (ADOS-2), and developmental delays.',
+                'At our practice we use humanistic therapy techniques. I use a variety of techniques such as play therapy, sandplay therapy, expressive therapy, cognitive-behavioral therapy, neurofeedback, biofeedback, and person centered therapy. I believe that every individual or family is unique and the treatment should be catered to their needs.'
+            ],
+            highlights: [
+                'Over 15 years of experience with children, adolescents, adults, and families',
+                'Specializes in person-centered therapy',
+                'Offers psychological evaluations for ADHD, learning disabilities, autism spectrum disorder (ADOS-2), and developmental delays',
+                'Uses humanistic therapy techniques including play therapy, sandplay therapy, and expressive therapy',
+                'Trained in cognitive-behavioral therapy, neurofeedback, and biofeedback',
+                'Creates individualized treatment plans for each client'
+            ]
+        },
+        'jane-albertson': {
+            name: 'Dr. Jane Albertson-Kelly',
+            credentials: 'PhD, Clinical Psychologist',
+            email: 'childfamily12@gmail.com',
+            photo: 'jane.jpg',
+            isOwner: false,
+            bio: [
+                'Dr. Albertson-Kelly has worked with individuals and families in crisis for over 15 years. Dr. Albertson-Kelly has a doctorate in clinical psychology as well as a Master\'s Degree in Education.',
+                'She has been affiliated with the Adolescent Psychiatric Unit at Mather Hospital, the North Suffolk Center Child Treatment Program, and the Northport VA. A former teacher, Dr. Albertson-Kelly has particular interests in working with families adjusting to separation and divorce, as well as adolescents.',
+                'She is recognized as an expert witness in the areas of parenting, custody and sexual abuse and has presented on topics related to these areas.'
+            ],
+            highlights: [
+                'Over 15 years working with individuals and families in crisis',
+                'Doctorate in Clinical Psychology and Master\'s Degree in Education',
+                'Former teacher with expertise in adolescent care',
+                'Specializes in families adjusting to separation and divorce',
+                'Expert witness in parenting, custody, and sexual abuse cases',
+                'Affiliated with Mather Hospital, North Suffolk Center, and Northport VA'
+            ]
+        },
+        'barbara-burkhard': {
+            name: 'Dr. Barbara Burkhard',
+            credentials: 'PhD, Clinical Psychologist',
+            email: 'childfamily12@gmail.com',
+            photo: 'barb.jpeg',
+            isOwner: false,
+            bio: [
+                'Dr. Burkhard has provided psychological services to young children and their families for over 35 years. She holds a doctorate in clinical psychology from Stony Brook University and has specialized training in the area of child abuse assessment.',
+                'She has served as program director for several Suffolk County programs serving children and families including the Child Treatment Program of North Suffolk Mental Health Center, Inc. and Parents Anonymous of Suffolk County.',
+                'She has received awards from both Suffolk County and the State University for her work. Dr. Burkhard currently provides treatment and assessment for children and parents including treatment for distressed and traumatized children. She also provides expert testimony in child abuse and custody proceedings.'
+            ],
+            highlights: [
+                'Over 35 years providing psychological services to children and families',
+                'Doctorate in Clinical Psychology from Stony Brook University',
+                'Specialized training in child abuse assessment',
+                'Former program director for multiple Suffolk County programs',
+                'Award recipient from Suffolk County and State University',
+                'Expert testimony in child abuse and custody proceedings'
+            ]
+        },
+        'jessica-panagiotidis': {
+            name: 'Jessica Panagiotidis',
+            credentials: 'MS, CRC, LMSW',
+            email: 'childfamily12@gmail.com',
+            photo: 'https://static.wixstatic.com/media/d54a3e_617ee6e94fba4bd59a82c71bb27eeb75~mv2.jpg/v1/fill/w_754,h_1004,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/9b114896a84f4167c1e7a01587e84c1923addb24-1.jpg',
+            isOwner: false,
+            bio: [
+                'I am a licensed psychotherapist and a certified vocational counselor who specializes in career planning, goal development, career exploration, and individual counseling for the purposes of helping others gain clarity and achieve their goals. I utilize a person-centered approach to help one identify current issues and assist them in developing a plan of action. I look forward to working with you and helping you reach your full potential with the proper supports.',
+                'Jessica attended St. John\'s University and graduated with a Bachelor\'s Degree in Psychology in 1996. She began working as a Job Placement Specialist for adults with developmental disabilities while employed with AHRC. Her passion for helping people with disabilities led to her decision to further her training.',
+                'Jessica graduated from Hofstra University with a Master\'s Degree in Education, specifically, vocational rehabilitation counseling in 1999. She began working as a Vocational Rehabilitation Counselor with ACCES-VR in 2001 where she helps individuals with various disabilities, find employment, and live independent lives.',
+                'Jessica decided to pursue a second Master\'s Degree in Social Work and graduated from Adelphi University in 2017. She obtained her licensure and is fulfilling her passion in clinical counseling. Her experience ranges from children to adults with respect to individual, group, and family counseling services.'
+            ],
+            highlights: [
+                'Licensed psychotherapist and certified vocational counselor',
+                'Bachelor\'s in Psychology from St. John\'s University',
+                'Master\'s in Vocational Rehabilitation Counseling from Hofstra University',
+                'Master\'s in Social Work from Adelphi University',
+                'Specializes in career planning, goal development, and career exploration',
+                'Provides individual, group, and family counseling services'
+            ]
+        },
+        'leana-silipo': {
+            name: 'Leana Silipo',
+            credentials: 'LMSW, Licensed Social Worker',
+            email: 'childfamily12@gmail.com',
+            photo: 'https://photos.psychologytoday.com/58aa80a4-37c9-460b-a684-08deff969aec/1/320x400.jpeg',
+            isOwner: false,
+            bio: [
+                'LGBTQ+ licensed social worker passionate about queer history and advocacy. My goal is providing affirming mental health care to all those under the LGBTQ+ umbrella. Life is messy, complicated, and often out of our control. Being amidst this chaos can feel overwhelming and isolating, especially if you are still figuring out your identity and how you fit into the world!',
+                'I strive to create a collaborative and warm space to foster a therapeutic relationship based on trust, empathy, and validation. I work with my clients to find solutions where we can and understanding or acceptance where we cannot.',
+                'My aim is to help clients figure out what aspects of life they do have control over and empower them to take a stand or make a change. This control can come in the form of exploration and acceptance or recognizing and disrupting unhealthy patterns.',
+                'Many clients also find speaking to a therapist with a personal understanding and experience of their own to be beneficial, especially within the queer community. I believe healing and peace are found within balance and would love to aid you in finding or creating that in your own life. When you\'re ready, let\'s begin!'
+            ],
+            highlights: [
+                'LGBTQ+ affirming mental health care specialist',
+                'Passionate about queer history and advocacy',
+                'Specializes in identity exploration and acceptance',
+                'Creates collaborative and warm therapeutic spaces',
+                'Focus on trust, empathy, and validation',
+                'Personal understanding of LGBTQ+ experiences'
+            ]
+        }
+    };
+}
     generateModals() {
         const container = document.querySelector('.team-modals-container');
         if (!container) return;
