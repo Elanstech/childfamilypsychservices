@@ -1858,25 +1858,24 @@ class App {
         this.components = {};
         this.init();
     }
-    init() {
-        this.components.preloader = new Preloader();
-        this.components.typedAnimation = new TypedAnimation('#typed-text');
-        this.components.progressTrackerNavigation = new ProgressTrackerNavigation();
-        this.components.scrollEffects = new ScrollEffects();
-        this.components.particleAnimation = new ParticleAnimation();
-        this.components.formHandler = new FormHandler('.contact-form');
-        this.components.cardObserver = new CardObserver();
-        this.components.logoAnimation = new LogoAnimation();
-        this.components.scrollToTop = new ScrollToTop();
-        this.components.servicesCarousel = new ServicesCarousel();
-        this.components.teamCarousel = new TeamCarousel();
-        this.components.faqAccordion = new FAQAccordion();
-        this.components.insuranceScroll = new InsuranceScroll();
-        this.components.teamCarousel = new LocationsEnhancement();
-        this.components.performanceMonitor = new PerformanceMonitor();
-        this.components.fabContactMenu = new FABContactMenu();
-    }
 
+init() {
+    this.components.preloader = new Preloader();
+    this.components.typedAnimation = new TypedAnimation('#typed-text');
+    this.components.progressTrackerNavigation = new ProgressTrackerNavigation();
+    this.components.scrollEffects = new ScrollEffects();
+    this.components.particleAnimation = new ParticleAnimation();
+    this.components.formHandler = new FormHandler('.contact-form');
+    this.components.cardObserver = new CardObserver();
+    this.components.logoAnimation = new LogoAnimation();
+    this.components.scrollToTop = new ScrollToTop();
+    this.components.servicesCarousel = new ServicesCarousel();
+    this.components.teamCarousel = new TeamCarousel();
+    this.components.faqAccordion = new FAQAccordion();
+    this.components.insuranceScroll = new InsuranceScroll();
+    this.components.performanceMonitor = new PerformanceMonitor();
+    this.components.fabContactMenu = new FABContactMenu();
+}
     getComponent(name) {
         return this.components[name];
     }
