@@ -1595,8 +1595,7 @@ class TeamCarousel {
 }
 
 /**
- * FAQAccordion Class
- * Manages FAQ accordion functionality with proper scoping
+ * FAQAccordion Class - Complete Working Version
  */
 class FAQAccordion {
     constructor() {
@@ -1683,8 +1682,7 @@ class FAQAccordion {
 }
 
 /**
- * InsuranceScroll Class
- * Manages insurance logo infinite scroll with proper scoping
+ * InsuranceScroll Class - Complete Working Version
  */
 class InsuranceScroll {
     constructor() {
@@ -1698,7 +1696,7 @@ class InsuranceScroll {
     init() {
         if (!this.scrollTrack) return;
         
-        // Pause animation on hover for better UX
+        // Pause animation on hover
         this.scrollTrack.addEventListener('mouseenter', () => {
             this.scrollTrack.style.animationPlayState = 'paused';
         });
@@ -1708,10 +1706,7 @@ class InsuranceScroll {
         });
 
         // Touch support for mobile
-        let touchStartX = 0;
-        
-        this.scrollTrack.addEventListener('touchstart', (e) => {
-            touchStartX = e.touches[0].clientX;
+        this.scrollTrack.addEventListener('touchstart', () => {
             this.scrollTrack.style.animationPlayState = 'paused';
         }, { passive: true });
 
@@ -1721,7 +1716,7 @@ class InsuranceScroll {
     }
 }
 
-// Initialize FAQ and Insurance components when DOM is ready
+// Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     new FAQAccordion();
     new InsuranceScroll();
