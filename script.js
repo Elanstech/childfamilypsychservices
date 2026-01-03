@@ -1421,7 +1421,7 @@ getTeamData() {
                 name: 'Jennifer Cuevas',
                 credentials: 'LCSW, Licensed Clinical Social Worker',
                 email: 'childfamily12@gmail.com',
-                photo: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400&h=400&fit=crop&crop=faces',
+                photo: 'https://childfamilypsychservices.vercel.app/Jennifer.jpg',
                 isOwner: false,
                 bio: [
                     'I\'m a licensed clinical social worker with 25 years experience working with children, adolescents and families. My areas of specialty are children and adolescents with developmental disabilities, autism, chronic illness, mental illness, anxiety, depression and trauma.',
