@@ -105,6 +105,8 @@ class ProgressTrackerNavigation {
             'about': 'About',
             'services': 'Services',
             'team': 'Team',
+            'locations': 'Locations',
+            'faq': 'FAQ',
             'contact': 'Contact'
         };
         
