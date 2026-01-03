@@ -1417,6 +1417,27 @@ getTeamData() {
                 'Provides individual, group, and family counseling services'
             ]
         },
+        'jennifer-cuevas': {
+                name: 'Jennifer Cuevas',
+                credentials: 'LCSW, Licensed Clinical Social Worker',
+                email: 'childfamily12@gmail.com',
+                photo: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400&h=400&fit=crop&crop=faces',
+                isOwner: false,
+                bio: [
+                    'I\'m a licensed clinical social worker with 25 years experience working with children, adolescents and families. My areas of specialty are children and adolescents with developmental disabilities, autism, chronic illness, mental illness, anxiety, depression and trauma.',
+                    'I am a Disaster Mental Health Worker for the Red Cross. I do regular television and radio appearances on various news outlets, such as Cablevision News 12, NEWSMAX, CBS & WFAN, to provide psychological commentary on multiple topics.',
+                    'I have specialized experience advocating for children to secure special education services from NY public school system, within parameters of IDEA (Individuals with Disabilities Act) and DASA (NY Dignity for All Students Act), protecting children from bullying and discrimination. I provide trauma recovery counseling for all ages.',
+                    'I am the parent of a special needs child. I fully understand the complexities of accessing all a child needs and deserves, to become a happy and productive person. I look forward to being able to assist you!'
+                ],
+                highlights: [
+                    '25 years experience with children, adolescents, and families',
+                    'Specializes in developmental disabilities, autism, and trauma',
+                    'Disaster Mental Health Worker for the Red Cross',
+                    'Regular media appearances on News 12, NEWSMAX, CBS, and WFAN',
+                    'Expert in special education advocacy (IDEA and DASA)',
+                    'Parent of a special needs child with personal understanding'
+                ]
+         },
         'leana-silipo': {
             name: 'Leana Silipo',
             credentials: 'LMSW, Licensed Social Worker',
