@@ -6527,3 +6527,1136 @@ body {
         text-align: center;
     }
 }
+
+/* ============================================
+   PLAY THERAPY CERTIFICATION SECTION
+   ============================================ */
+
+.play-therapy-section {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f0f7ff 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.play-therapy-section::before {
+    content: '';
+    position: absolute;
+    top: -30%;
+    right: -15%;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(149, 117, 205, 0.05) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.play-therapy-section::after {
+    content: '';
+    position: absolute;
+    bottom: -20%;
+    left: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(79, 195, 247, 0.04) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* Section Header Scoped */
+.play-therapy-section .section-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.play-therapy-section .section-label {
+    display: inline-block;
+    padding: 8px 24px;
+    background: linear-gradient(135deg, rgba(149, 117, 205, 0.1), rgba(126, 87, 194, 0.1));
+    color: var(--primary-purple);
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.play-therapy-section .section-title {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.play-therapy-section .section-description {
+    font-size: 1.125rem;
+    color: var(--dark-gray);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* Coming Soon Ribbon */
+.coming-soon-ribbon {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.ribbon-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 32px;
+    background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
+    border-radius: 100px;
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    box-shadow: 0 8px 30px rgba(149, 117, 205, 0.4);
+    position: relative;
+}
+
+.ribbon-pulse {
+    width: 12px;
+    height: 12px;
+    background: #4CAF50;
+    border-radius: 50%;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.ribbon-pulse::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: #4CAF50;
+    border-radius: 50%;
+    animation: ribbonPulse 2s ease-in-out infinite;
+}
+
+@keyframes ribbonPulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    50% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+}
+
+.ribbon-text {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Announcement Card */
+.pt-announcement-card {
+    background: white;
+    border-radius: 30px;
+    padding: 50px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 60px;
+    border: 2px solid rgba(149, 117, 205, 0.15);
+}
+
+.pt-announcement-glow {
+    position: absolute;
+    top: -50%;
+    right: -30%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(149, 117, 205, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.pt-announcement-content {
+    position: relative;
+    z-index: 1;
+}
+
+.pt-headline {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 35px;
+}
+
+.pt-headline-icon {
+    flex-shrink: 0;
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 25px rgba(149, 117, 205, 0.35);
+}
+
+.pt-headline-icon svg {
+    width: 35px;
+    height: 35px;
+    stroke: white;
+}
+
+.pt-headline h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1.3;
+    margin: 0 0 8px;
+}
+
+.pt-highlight-text {
+    font-size: 1.25rem;
+    color: var(--dark-gray);
+    margin: 0;
+}
+
+.pt-accent {
+    background: linear-gradient(135deg, var(--primary-purple), var(--primary-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+    font-size: 1.75rem;
+}
+
+/* Feature Chips */
+.pt-features-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.pt-feature-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, rgba(149, 117, 205, 0.08), rgba(79, 195, 247, 0.08));
+    border-radius: 100px;
+    border: 1px solid rgba(149, 117, 205, 0.15);
+    transition: all 0.3s ease;
+}
+
+.pt-feature-chip:hover {
+    background: linear-gradient(135deg, rgba(149, 117, 205, 0.15), rgba(79, 195, 247, 0.15));
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(149, 117, 205, 0.15);
+}
+
+.pt-feature-chip svg {
+    width: 20px;
+    height: 20px;
+    stroke: #4CAF50;
+    flex-shrink: 0;
+}
+
+.pt-feature-chip span {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--black);
+}
+
+/* Presenters Grid */
+.pt-presenters-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.pt-presenter-card {
+    background: white;
+    border-radius: 25px;
+    padding: 40px 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+    text-align: center;
+    position: relative;
+    transition: all 0.4s ease;
+    overflow: hidden;
+}
+
+.pt-presenter-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary-purple), var(--primary-blue));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.pt-presenter-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+}
+
+.pt-presenter-card:hover::before {
+    transform: scaleX(1);
+}
+
+.pt-presenter-badge {
+    display: inline-block;
+    padding: 6px 18px;
+    background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
+    color: white;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(149, 117, 205, 0.3);
+}
+
+.pt-presenter-photo {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 20px;
+}
+
+.pt-presenter-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid white;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.pt-presenter-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(149, 117, 205, 0.1), rgba(79, 195, 247, 0.1));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px solid white;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.pt-presenter-placeholder svg {
+    width: 50px;
+    height: 50px;
+    stroke: var(--primary-purple);
+    opacity: 0.6;
+}
+
+.pt-presenter-card h4 {
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 6px;
+}
+
+.pt-presenter-creds {
+    font-size: 0.95rem;
+    color: var(--primary-blue);
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.pt-presenter-role {
+    font-size: 0.875rem;
+    color: var(--primary-purple);
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.pt-presenter-bio {
+    color: var(--dark-gray);
+    line-height: 1.7;
+    font-size: 0.9rem;
+}
+
+/* Info Grid */
+.pt-info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-bottom: 50px;
+}
+
+.pt-info-card {
+    background: white;
+    padding: 35px 25px;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+    text-align: center;
+    transition: all 0.4s ease;
+    border: 2px solid transparent;
+}
+
+.pt-info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+    border-color: rgba(149, 117, 205, 0.2);
+}
+
+.pt-info-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.pt-info-icon svg {
+    width: 30px;
+    height: 30px;
+    stroke: white;
+}
+
+.pt-info-card h4 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 12px;
+}
+
+.pt-info-card p {
+    color: var(--dark-gray);
+    line-height: 1.7;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* Providers Banner */
+.pt-providers-banner {
+    background: linear-gradient(135deg, rgba(149, 117, 205, 0.06), rgba(79, 195, 247, 0.06));
+    border: 2px solid rgba(149, 117, 205, 0.15);
+    border-radius: 25px;
+    padding: 40px;
+    margin-bottom: 50px;
+}
+
+.pt-providers-content h4 {
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 25px;
+}
+
+.pt-providers-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.pt-provider-item {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    border-left: 4px solid var(--primary-purple);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.pt-provider-label {
+    display: inline-block;
+    padding: 4px 14px;
+    background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
+    color: white;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+.pt-provider-item p {
+    color: var(--dark-gray);
+    line-height: 1.6;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* CTA Section */
+.pt-cta-section {
+    text-align: center;
+}
+
+.pt-cta-card {
+    background: linear-gradient(135deg, var(--primary-purple), var(--primary-blue));
+    padding: 50px;
+    border-radius: 30px;
+    box-shadow: 0 15px 50px rgba(149, 117, 205, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.pt-cta-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.pt-cta-card h3 {
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    position: relative;
+}
+
+.pt-cta-card p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.pt-cta-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.pt-cta-actions .btn {
+    display: inline-flex;
+    align-items: center;
+}
+
+.pt-cta-actions .btn-primary {
+    background: white;
+    color: var(--primary-purple);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.pt-cta-actions .btn-primary:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.pt-cta-actions .btn-secondary {
+    border-color: white;
+    color: white;
+    background: transparent;
+}
+
+.pt-cta-actions .btn-secondary:hover {
+    background: white;
+    color: var(--primary-purple);
+}
+
+/* ============================================
+   NEUROFEEDBACK SECTION
+   ============================================ */
+
+.neurofeedback-section {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f4ff 50%, #f8f9fa 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.neurofeedback-section::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    left: -15%;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(79, 195, 247, 0.05) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* Section Header */
+.neurofeedback-section .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.neurofeedback-section .section-label {
+    display: inline-block;
+    padding: 8px 24px;
+    background: linear-gradient(135deg, rgba(79, 195, 247, 0.1), rgba(41, 182, 246, 0.1));
+    color: var(--primary-blue);
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.neurofeedback-section .section-title {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.neurofeedback-section .section-description {
+    font-size: 1.125rem;
+    color: var(--dark-gray);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* Hero Grid */
+.nf-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 40px;
+    margin-bottom: 70px;
+    align-items: start;
+}
+
+/* Visual Card */
+.nf-visual-card {
+    background: white;
+    border-radius: 25px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.nf-brain-graphic {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nf-brain-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid;
+    animation: nfRingPulse 3s ease-in-out infinite;
+}
+
+.nf-ring-1 {
+    width: 100%;
+    height: 100%;
+    border-color: rgba(79, 195, 247, 0.15);
+    animation-delay: 0s;
+}
+
+.nf-ring-2 {
+    width: 75%;
+    height: 75%;
+    border-color: rgba(149, 117, 205, 0.2);
+    animation-delay: 0.5s;
+}
+
+.nf-ring-3 {
+    width: 50%;
+    height: 50%;
+    border-color: rgba(79, 195, 247, 0.25);
+    animation-delay: 1s;
+}
+
+@keyframes nfRingPulse {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.08); opacity: 1; }
+}
+
+.nf-brain-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 30px rgba(79, 195, 247, 0.4);
+    z-index: 2;
+}
+
+.nf-brain-icon svg {
+    width: 40px;
+    height: 40px;
+    stroke: white;
+}
+
+.nf-stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.nf-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.nf-stat-number {
+    font-size: 1.25rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.nf-stat-label {
+    font-size: 0.75rem;
+    color: var(--dark-gray);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Content Card */
+.nf-content-card {
+    background: white;
+    border-radius: 25px;
+    padding: 45px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+    position: relative;
+    overflow: hidden;
+}
+
+.nf-content-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary-blue), var(--primary-purple));
+}
+
+.nf-content-card h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 20px;
+}
+
+.nf-content-card > p {
+    color: var(--dark-gray);
+    line-height: 1.8;
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+/* How It Works */
+.nf-how-it-works {
+    margin-top: 30px;
+    background: linear-gradient(135deg, rgba(79, 195, 247, 0.04), rgba(149, 117, 205, 0.04));
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.nf-how-it-works h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 20px;
+}
+
+.nf-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.nf-step {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+}
+
+.nf-step-num {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.nf-step strong {
+    display: block;
+    font-size: 1rem;
+    color: var(--black);
+    margin-bottom: 4px;
+}
+
+.nf-step p {
+    color: var(--dark-gray);
+    line-height: 1.6;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* Conditions Section */
+.nf-conditions-section {
+    margin-bottom: 60px;
+}
+
+.nf-conditions-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.nf-conditions-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-blue), var(--primary-purple));
+    border-radius: 2px;
+    margin: 15px auto 0;
+}
+
+.nf-conditions-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.nf-condition-card {
+    background: white;
+    padding: 35px 25px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+    transition: all 0.4s ease;
+    border: 2px solid transparent;
+}
+
+.nf-condition-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.12);
+    border-color: rgba(79, 195, 247, 0.2);
+}
+
+.nf-condition-icon {
+    width: 65px;
+    height: 65px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    transition: all 0.4s ease;
+}
+
+.nf-condition-card:hover .nf-condition-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.nf-condition-icon svg {
+    width: 32px;
+    height: 32px;
+    stroke: white;
+}
+
+.nf-condition-card h4 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 10px;
+}
+
+.nf-condition-card p {
+    color: var(--dark-gray);
+    line-height: 1.6;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* CTA Banner */
+.nf-cta-banner {
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+    padding: 50px;
+    border-radius: 30px;
+    box-shadow: 0 15px 50px rgba(79, 195, 247, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.nf-cta-banner::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.nf-cta-content {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+.nf-cta-icon {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nf-cta-icon svg {
+    width: 40px;
+    height: 40px;
+    stroke: white;
+}
+
+.nf-cta-text {
+    flex-grow: 1;
+}
+
+.nf-cta-text h3 {
+    color: white;
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.nf-cta-text p {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.nf-cta-btn {
+    flex-shrink: 0;
+    background: white !important;
+    color: var(--primary-blue) !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+}
+
+.nf-cta-btn:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* ============================================
+   RESPONSIVE - PLAY THERAPY
+   ============================================ */
+
+@media (max-width: 768px) {
+    .play-therapy-section {
+        padding: 60px 0;
+    }
+
+    .play-therapy-section .section-title {
+        font-size: 2rem;
+    }
+
+    .pt-announcement-card {
+        padding: 35px 25px;
+    }
+
+    .pt-headline {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .pt-headline h3 {
+        font-size: 1.5rem;
+    }
+
+    .pt-features-row {
+        justify-content: center;
+    }
+
+    .pt-presenters-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .pt-info-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .pt-providers-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pt-cta-card {
+        padding: 40px 25px;
+    }
+
+    .pt-cta-card h3 {
+        font-size: 1.5rem;
+    }
+
+    .pt-cta-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .pt-cta-actions .btn {
+        min-width: 250px;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .ribbon-badge {
+        font-size: 0.875rem;
+        padding: 10px 24px;
+    }
+
+    .pt-accent {
+        font-size: 1.5rem;
+    }
+
+    .pt-feature-chip {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .pt-presenter-card {
+        padding: 30px 20px;
+    }
+
+    .pt-providers-banner {
+        padding: 30px 20px;
+    }
+}
+
+/* ============================================
+   RESPONSIVE - NEUROFEEDBACK
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .nf-hero-grid {
+        grid-template-columns: 1fr 1.2fr;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .neurofeedback-section {
+        padding: 60px 0;
+    }
+
+    .neurofeedback-section .section-title {
+        font-size: 2rem;
+    }
+
+    .nf-hero-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .nf-visual-card {
+        padding: 30px;
+    }
+
+    .nf-brain-graphic {
+        width: 160px;
+        height: 160px;
+    }
+
+    .nf-content-card {
+        padding: 35px 25px;
+    }
+
+    .nf-content-card h3 {
+        font-size: 1.5rem;
+    }
+
+    .nf-how-it-works {
+        padding: 25px 20px;
+    }
+
+    .nf-conditions-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .nf-conditions-title {
+        font-size: 1.75rem;
+    }
+
+    .nf-cta-banner {
+        padding: 40px 25px;
+    }
+
+    .nf-cta-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 25px;
+    }
+
+    .nf-cta-text h3 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .nf-stats-row {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+
+    .nf-stat-number {
+        font-size: 1.1rem;
+    }
+
+    .nf-stat-label {
+        font-size: 0.7rem;
+    }
+
+    .nf-conditions-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .nf-condition-card {
+        padding: 30px 20px;
+    }
+
+    .nf-cta-banner {
+        padding: 35px 20px;
+    }
+}
