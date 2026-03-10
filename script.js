@@ -1775,6 +1775,172 @@ class FABContactMenu {
     }
 }
 
+
+/**
+ * PlayTherapySection Class
+ * Handles animations and interactions for the Play Therapy Certification section
+ */
+class PlayTherapySection {
+    constructor() {
+        this.section = document.querySelector('.play-therapy-section');
+        if (!this.section) return;
+        this.init();
+    }
+
+    init() {
+        this.setupCounterAnimation();
+        this.setupFeatureChipHover();
+        this.setupPresenterCardEffects();
+    }
+
+    setupCounterAnimation() {
+        // Animate the ribbon badge entrance
+        const ribbon = this.section.querySelector('.ribbon-badge');
+        if (!ribbon) return;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    ribbon.style.animation = 'ribbonSlideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(ribbon);
+    }
+
+    setupFeatureChipHover() {
+        const chips = this.section.querySelectorAll('.pt-feature-chip');
+        chips.forEach(chip => {
+            chip.addEventListener('mouseenter', () => {
+                const svg = chip.querySelector('svg');
+                if (svg) {
+                    svg.style.transform = 'scale(1.2) rotate(10deg)';
+                    svg.style.transition = 'transform 0.3s ease';
+                }
+            });
+            chip.addEventListener('mouseleave', () => {
+                const svg = chip.querySelector('svg');
+                if (svg) {
+                    svg.style.transform = 'scale(1) rotate(0deg)';
+                }
+            });
+        });
+    }
+
+    setupPresenterCardEffects() {
+        const cards = this.section.querySelectorAll('.pt-presenter-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const photo = card.querySelector('.pt-presenter-photo img, .pt-presenter-placeholder');
+                if (photo) {
+                    photo.style.transform = 'scale(1.05)';
+                    photo.style.transition = 'transform 0.4s ease';
+                }
+            });
+            card.addEventListener('mouseleave', () => {
+                const photo = card.querySelector('.pt-presenter-photo img, .pt-presenter-placeholder');
+                if (photo) {
+                    photo.style.transform = 'scale(1)';
+                }
+            });
+        });
+    }
+}
+
+/**
+ * NeurofeedbackSection Class
+ * Handles animations and interactions for the Neurofeedback section
+ */
+class NeurofeedbackSection {
+    constructor() {
+        this.section = document.querySelector('.neurofeedback-section');
+        if (!this.section) return;
+        this.init();
+    }
+
+    init() {
+        this.setupBrainAnimation();
+        this.setupConditionCards();
+        this.setupStepAnimations();
+    }
+
+    setupBrainAnimation() {
+        const brainGraphic = this.section.querySelector('.nf-brain-graphic');
+        if (!brainGraphic) return;
+
+        // Add mouse tracking parallax on the brain rings
+        brainGraphic.addEventListener('mousemove', (e) => {
+            const rect = brainGraphic.getBoundingClientRect();
+            const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
+            const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
+
+            const rings = brainGraphic.querySelectorAll('.nf-brain-ring');
+            rings.forEach((ring, index) => {
+                const intensity = (index + 1) * 5;
+                ring.style.transform = `translate(${x * intensity}px, ${y * intensity}px)`;
+                ring.style.transition = 'transform 0.3s ease';
+            });
+        });
+
+        brainGraphic.addEventListener('mouseleave', () => {
+            const rings = brainGraphic.querySelectorAll('.nf-brain-ring');
+            rings.forEach(ring => {
+                ring.style.transform = 'translate(0, 0)';
+            });
+        });
+    }
+
+    setupConditionCards() {
+        const cards = this.section.querySelectorAll('.nf-condition-card');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 100);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        cards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(card);
+        });
+    }
+
+    setupStepAnimations() {
+        const steps = this.section.querySelectorAll('.nf-step');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const index = Array.from(steps).indexOf(entry.target);
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateX(0)';
+                    }, index * 150);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        steps.forEach(step => {
+            step.style.opacity = '0';
+            step.style.transform = 'translateX(-20px)';
+            step.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(step);
+        });
+    }
+}
+
+
 // Initialize FAB Contact Menu
 document.addEventListener('DOMContentLoaded', () => {
     new FABContactMenu();
@@ -1814,7 +1980,7 @@ class App {
         this.components = {};
         this.init();
     }
-
+    
 init() {
     this.components.preloader = new Preloader();
     this.components.typedAnimation = new TypedAnimation('#typed-text');
@@ -1829,6 +1995,8 @@ init() {
     this.components.teamCarousel = new TeamCarousel();
     this.components.faqAccordion = new FAQAccordion();
     this.components.insuranceScroll = new InsuranceScroll();
+    this.components.playtherapysection = new PlayTherapySection();
+    this.components.neurofeedbacksection = new NeurofeedbackSection();
     this.components.performanceMonitor = new PerformanceMonitor();
     this.components.fabContactMenu = new FABContactMenu();
 }
