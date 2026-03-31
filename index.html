@@ -134,29 +134,56 @@
 <!-- ============================================
      HEADER / NAVIGATION
      ============================================ -->
+
 <header id="header" class="progress-header">
     <div class="nav-container">
+        <!-- Logo -->
         <a href="#home" class="nav-logo">
             <img src="logo.png" alt="Logo" class="nav-logo-img">
             <span class="nav-logo-text">CFPS</span>
         </a>
 
-        <!-- Desktop Progress Tracker -->
+        <!-- Desktop Progress Tracker (Center) -->
         <nav class="progress-tracker desktop-tracker">
             <div class="progress-track">
                 <div class="progress-line"></div>
-                <a href="#home" class="progress-dot" data-section="home"><span class="dot-label">Home</span><span class="dot-circle"></span></a>
-                <a href="#about" class="progress-dot" data-section="about"><span class="dot-label">About</span><span class="dot-circle"></span></a>
-                <a href="#services" class="progress-dot" data-section="services"><span class="dot-label">Services</span><span class="dot-circle"></span></a>
-                <a href="#team" class="progress-dot" data-section="team"><span class="dot-label">Team</span><span class="dot-circle"></span></a>
-                <a href="#faq" class="progress-dot" data-section="faq"><span class="dot-label">FAQ</span><span class="dot-circle"></span></a>
-                <a href="#insurance" class="progress-dot" data-section="insurance"><span class="dot-label">Insurance</span><span class="dot-circle"></span></a>
-                <a href="#locations" class="progress-dot" data-section="locations"><span class="dot-label">Locations</span><span class="dot-circle"></span></a>
-                <a href="#contact" class="progress-dot" data-section="contact"><span class="dot-label">Contact</span><span class="dot-circle"></span></a>
+                <a href="#home" class="progress-dot" data-section="home">
+                    <span class="dot-label">Home</span>
+                    <span class="dot-circle"></span>
+                </a>
+                <a href="#about" class="progress-dot" data-section="about">
+                    <span class="dot-label">About</span>
+                    <span class="dot-circle"></span>
+                </a>
+                <a href="#services" class="progress-dot" data-section="services">
+                    <span class="dot-label">Services</span>
+                    <span class="dot-circle"></span>
+                </a>
+                <a href="#team" class="progress-dot" data-section="team">
+                    <span class="dot-label">Team</span>
+                    <span class="dot-circle"></span>
+                </a>
+                <a href="#faq" class="progress-dot" data-section="faq">
+                    <span class="dot-label">FAQ</span>
+                    <span class="dot-circle"></span>
+                </a>
+                <a href="#insurance" class="progress-dot" data-section="insurance">
+                    <span class="dot-label">Insurance</span>
+                    <span class="dot-circle"></span>
+                </a>
+                <a href="#locations" class="progress-dot" data-section="locations">
+                    <span class="dot-label">Locations</span>
+                    <span class="dot-circle"></span>
+                </a>
+                <a href="#contact" class="progress-dot" data-section="contact">
+                    <span class="dot-label">Contact</span>
+                    <span class="dot-circle"></span>
+                </a>
             </div>
         </nav>
 
-        <!-- Mobile Progress Tracker -->
+        <!-- Mobile Progress Tracker (Right Side) -->
+        <!-- FIXED: removed the duplicate FAQ dot that was in the original -->
         <nav class="progress-tracker mobile-tracker">
             <div class="current-section-label"></div>
             <div class="mobile-dots">
@@ -171,10 +198,13 @@
             </div>
         </nav>
 
-        <div class="scroll-progress"><div class="scroll-progress-bar"></div></div>
+        <!-- Scroll Progress Bar -->
+        <div class="scroll-progress">
+            <div class="scroll-progress-bar"></div>
+        </div>
     </div>
-</header>    
-
+</header>
+    
 <!-- ============================================
      HERO SECTION
      ============================================ -->
@@ -1937,7 +1967,7 @@
                             <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-width="2"/>
                             <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-width="2"/>
                         </svg>
-                        <span>521 Hauppauge Rd<br>Hauppauge, NY 11788</span>
+                        <span>521 Route 111, Suite 200<br>Hauppauge, NY 11788</span>
                     </li>
                 </ul>
             </div>
@@ -1948,7 +1978,7 @@
             <div class="footer-bottom-content">
                 <p class="copyright">&copy; 2025 Child & Family Psychological Services. All rights reserved.</p>
                 
-                <!-- Design Credit -->
+                <!-- Design Credit - FIXED logo display -->
                 <div class="design-credit">
                     <span>Designed by</span>
                     <a href="https://www.elanstechworld.com" target="_blank" rel="noopener noreferrer" class="designer-link">
