@@ -819,89 +819,474 @@ body {
     overflow: hidden;
 }
 
-.neurofeedback-section::before { content: ''; position: absolute; top: -40%; left: -15%; width: 800px; height: 800px; background: radial-gradient(circle, rgba(79, 195, 247, 0.05) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
+.neurofeedback-section::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    left: -15%;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(79, 195, 247, 0.05) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
 
-.neurofeedback-section .section-header { text-align: center; margin-bottom: 60px; }
+/* Section Header */
+.neurofeedback-section .section-header { text-align: center; margin-bottom: 50px; }
 .neurofeedback-section .section-label { display: inline-block; padding: 8px 24px; background: linear-gradient(135deg, rgba(79, 195, 247, 0.1), rgba(41, 182, 246, 0.1)); color: var(--primary-blue); border-radius: 50px; font-size: 0.875rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px; }
 .neurofeedback-section .section-title { font-family: var(--font-display); font-size: 2.5rem; font-weight: 700; color: var(--black); margin-bottom: 15px; line-height: 1.2; }
 .neurofeedback-section .section-description { font-size: 1.125rem; color: var(--dark-gray); max-width: 700px; margin: 0 auto; line-height: 1.7; }
 
-.nf-hero-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 40px; margin-bottom: 70px; align-items: start; }
-.nf-visual-card { background: white; border-radius: 25px; padding: 40px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06); text-align: center; position: relative; overflow: hidden; }
-.nf-brain-graphic { position: relative; width: 200px; height: 200px; margin: 0 auto 35px; display: flex; align-items: center; justify-content: center; }
-.nf-brain-ring { position: absolute; border-radius: 50%; border: 2px solid; animation: nfRingPulse 3s ease-in-out infinite; }
+
+/* ===================================
+   COMPACT HERO CARD
+   =================================== */
+
+.nf-hero-card {
+    background: white;
+    border-radius: 30px;
+    padding: 50px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+    max-width: 1100px;
+    margin: 0 auto;
+    border: 2px solid rgba(79, 195, 247, 0.12);
+}
+
+.nf-hero-card-glow {
+    position: absolute;
+    top: -40%;
+    right: -25%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(79, 195, 247, 0.06) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.nf-hero-card-content {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 45px;
+    align-items: center;
+}
+
+
+/* ===================================
+   MINI VISUAL (Brain Graphic + Stats)
+   =================================== */
+
+.nf-mini-visual {
+    text-align: center;
+}
+
+.nf-brain-graphic {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nf-brain-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid;
+    animation: nfRingPulse 3s ease-in-out infinite;
+}
+
 .nf-ring-1 { width: 100%; height: 100%; border-color: rgba(79, 195, 247, 0.15); animation-delay: 0s; }
 .nf-ring-2 { width: 75%; height: 75%; border-color: rgba(149, 117, 205, 0.2); animation-delay: 0.5s; }
 .nf-ring-3 { width: 50%; height: 50%; border-color: rgba(79, 195, 247, 0.25); animation-delay: 1s; }
-@keyframes nfRingPulse { 0%, 100% { transform: scale(1); opacity: 0.6; } 50% { transform: scale(1.08); opacity: 1; } }
 
-.nf-brain-icon { width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple)); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 30px rgba(79, 195, 247, 0.4); z-index: 2; }
-.nf-brain-icon svg { width: 40px; height: 40px; stroke: white; }
-.nf-stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-.nf-stat { display: flex; flex-direction: column; align-items: center; gap: 4px; }
-.nf-stat-number { font-size: 1.25rem; font-weight: 800; background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-.nf-stat-label { font-size: 0.75rem; color: var(--dark-gray); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+@keyframes nfRingPulse {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.08); opacity: 1; }
+}
 
-.nf-content-card { background: white; border-radius: 25px; padding: 45px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06); position: relative; overflow: hidden; }
-.nf-content-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--primary-blue), var(--primary-purple)); }
-.nf-content-card h3 { font-size: 1.75rem; font-weight: 700; color: var(--black); margin-bottom: 20px; }
-.nf-content-card > p { color: var(--dark-gray); line-height: 1.8; font-size: 1rem; margin-bottom: 15px; }
-.nf-how-it-works { margin-top: 30px; background: linear-gradient(135deg, rgba(79, 195, 247, 0.04), rgba(149, 117, 205, 0.04)); padding: 30px; border-radius: 20px; }
-.nf-how-it-works h4 { font-size: 1.25rem; font-weight: 700; color: var(--black); margin-bottom: 20px; }
-.nf-steps { display: flex; flex-direction: column; gap: 20px; }
-.nf-step { display: flex; gap: 18px; align-items: flex-start; }
-.nf-step-num { flex-shrink: 0; width: 38px; height: 38px; background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue)); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; }
-.nf-step strong { display: block; font-size: 1rem; color: var(--black); margin-bottom: 4px; }
-.nf-step p { color: var(--dark-gray); line-height: 1.6; font-size: 0.9rem; margin: 0; }
+.nf-brain-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 30px rgba(79, 195, 247, 0.4);
+    z-index: 2;
+}
 
-.nf-conditions-section { margin-bottom: 60px; }
-.nf-conditions-title { text-align: center; font-size: 2rem; font-weight: 700; color: var(--black); margin-bottom: 40px; }
-.nf-conditions-title::after { content: ''; display: block; width: 80px; height: 4px; background: linear-gradient(90deg, var(--primary-blue), var(--primary-purple)); border-radius: 2px; margin: 15px auto 0; }
-.nf-conditions-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
-.nf-condition-card { background: white; padding: 35px 25px; border-radius: 20px; text-align: center; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06); transition: all 0.4s ease; border: 2px solid transparent; }
-.nf-condition-card:hover { transform: translateY(-8px); box-shadow: 0 16px 50px rgba(0, 0, 0, 0.12); border-color: rgba(79, 195, 247, 0.2); }
-.nf-condition-icon { width: 65px; height: 65px; border-radius: 18px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; transition: all 0.4s ease; }
-.nf-condition-card:hover .nf-condition-icon { transform: scale(1.1) rotate(5deg); }
-.nf-condition-icon svg { width: 32px; height: 32px; stroke: white; }
-.nf-condition-card h4 { font-size: 1.125rem; font-weight: 700; color: var(--black); margin-bottom: 10px; }
-.nf-condition-card p { color: var(--dark-gray); line-height: 1.6; font-size: 0.9rem; margin: 0; }
+.nf-brain-icon svg {
+    width: 35px;
+    height: 35px;
+    stroke: white;
+}
 
-.nf-cta-banner { background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple)); padding: 50px; border-radius: 30px; box-shadow: 0 15px 50px rgba(79, 195, 247, 0.3); position: relative; overflow: hidden; }
-.nf-cta-banner::before { content: ''; position: absolute; top: -50%; right: -20%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%); border-radius: 50%; }
-.nf-cta-content { display: flex; align-items: center; gap: 30px; position: relative; z-index: 1; }
-.nf-cta-icon { flex-shrink: 0; width: 80px; height: 80px; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); border-radius: 20px; display: flex; align-items: center; justify-content: center; }
-.nf-cta-icon svg { width: 40px; height: 40px; stroke: white; }
-.nf-cta-text { flex-grow: 1; }
-.nf-cta-text h3 { color: white; font-size: 1.75rem; font-weight: 700; margin-bottom: 8px; }
-.nf-cta-text p { color: rgba(255, 255, 255, 0.9); line-height: 1.6; font-size: 1rem; margin: 0; }
-.nf-cta-btn { flex-shrink: 0; background: white !important; color: var(--primary-blue) !important; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); white-space: nowrap; }
-.nf-cta-btn:hover { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3) !important; }
+.nf-mini-stats {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
 
-/* Neurofeedback Responsive */
+.nf-mini-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.nf-stat-num {
+    font-size: 1.1rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.nf-stat-lbl {
+    font-size: 0.7rem;
+    color: var(--dark-gray);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+
+/* ===================================
+   MINI INFO (Description + Chips + Actions)
+   =================================== */
+
+.nf-mini-info h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 15px;
+}
+
+.nf-mini-info > p {
+    color: var(--dark-gray);
+    line-height: 1.8;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+}
+
+/* Condition Chips */
+.nf-condition-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.nf-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, rgba(79, 195, 247, 0.08), rgba(149, 117, 205, 0.08));
+    border-radius: 100px;
+    border: 1px solid rgba(79, 195, 247, 0.15);
+    font-size: 0.825rem;
+    font-weight: 600;
+    color: var(--black);
+    transition: all 0.3s ease;
+}
+
+.nf-chip:hover {
+    background: linear-gradient(135deg, rgba(79, 195, 247, 0.15), rgba(149, 117, 205, 0.15));
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79, 195, 247, 0.15);
+}
+
+.nf-chip svg {
+    width: 16px;
+    height: 16px;
+    stroke: var(--primary-blue);
+    flex-shrink: 0;
+}
+
+/* Card Actions */
+.nf-card-actions {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.nf-learn-more-btn {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 10px;
+}
+
+.nf-learn-more-btn svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+}
+
+.nf-learn-more-btn:hover svg {
+    transform: translateX(4px);
+}
+
+.nf-contact-btn {
+    display: inline-flex !important;
+    align-items: center;
+}
+
+
+/* ===================================
+   NEUROFEEDBACK DETAIL MODAL
+   =================================== */
+
+.nf-detail-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.nf-detail-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.nf-detail-modal .modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+}
+
+.nf-detail-modal .modal-content-wrapper {
+    position: relative;
+    background: white;
+    border-radius: 30px;
+    max-width: 900px;
+    width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.3);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+    z-index: 10;
+}
+
+.nf-detail-modal.active .modal-content-wrapper {
+    transform: scale(1);
+}
+
+.nf-detail-modal .modal-content-wrapper::-webkit-scrollbar { width: 8px; }
+.nf-detail-modal .modal-content-wrapper::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+.nf-detail-modal .modal-content-wrapper::-webkit-scrollbar-thumb { background: var(--primary-blue); border-radius: 10px; }
+
+.nf-detail-modal .modal-header {
+    background: linear-gradient(135deg, #f0f8ff 0%, #ffffff 100%);
+}
+
+.nf-detail-modal .modal-subtitle {
+    color: var(--primary-blue);
+    font-weight: 600;
+}
+
+/* Modal Steps */
+.nf-modal-steps {
+    background: linear-gradient(135deg, rgba(79, 195, 247, 0.04), rgba(149, 117, 205, 0.04));
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 35px;
+}
+
+.nf-modal-step {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    margin-bottom: 22px;
+    padding-bottom: 22px;
+    border-bottom: 2px solid rgba(79, 195, 247, 0.08);
+}
+
+.nf-modal-step:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.nf-modal-step-num {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+
+.nf-modal-step strong {
+    display: block;
+    font-size: 1rem;
+    color: var(--black);
+    margin-bottom: 4px;
+}
+
+.nf-modal-step p {
+    color: var(--dark-gray);
+    line-height: 1.6;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* Modal Conditions */
+.nf-modal-conditions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 35px;
+}
+
+.nf-modal-condition {
+    display: flex;
+    gap: 15px;
+    padding: 20px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 16px;
+    border: 1px solid rgba(79, 195, 247, 0.1);
+    transition: all 0.3s ease;
+}
+
+.nf-modal-condition:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    border-color: rgba(79, 195, 247, 0.25);
+}
+
+.nf-modal-condition-icon {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.nf-modal-condition:hover .nf-modal-condition-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.nf-modal-condition-icon svg {
+    width: 26px;
+    height: 26px;
+    stroke: white;
+}
+
+.nf-modal-condition h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 4px;
+}
+
+.nf-modal-condition p {
+    color: var(--dark-gray);
+    line-height: 1.5;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+/* Modal CTA override for blue gradient */
+.nf-detail-modal .modal-cta {
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+}
+
+
+/* ===================================
+   NEUROFEEDBACK RESPONSIVE
+   =================================== */
+
+@media (max-width: 900px) {
+    .nf-hero-card-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .nf-mini-visual {
+        order: -1;
+    }
+
+    .nf-brain-graphic {
+        width: 150px;
+        height: 150px;
+        margin-bottom: 20px;
+    }
+}
+
 @media (max-width: 768px) {
     .neurofeedback-section { padding: 60px 0; }
     .neurofeedback-section .section-title { font-size: 2rem; }
-    .nf-hero-grid { grid-template-columns: 1fr; gap: 30px; }
-    .nf-visual-card { padding: 30px; }
-    .nf-brain-graphic { width: 160px; height: 160px; }
-    .nf-content-card { padding: 35px 25px; }
-    .nf-content-card h3 { font-size: 1.5rem; }
-    .nf-how-it-works { padding: 25px 20px; }
-    .nf-conditions-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-    .nf-conditions-title { font-size: 1.75rem; }
-    .nf-cta-banner { padding: 40px 25px; }
-    .nf-cta-content { flex-direction: column; text-align: center; gap: 25px; }
-    .nf-cta-text h3 { font-size: 1.5rem; }
+
+    .nf-hero-card {
+        padding: 30px 25px;
+    }
+
+    .nf-mini-info h3 { font-size: 1.3rem; }
+
+    .nf-card-actions {
+        justify-content: center;
+    }
+
+    /* Modal responsive */
+    .nf-detail-modal .modal-header { padding: 50px 25px 30px; }
+    .nf-detail-modal .modal-header h2 { font-size: 1.5rem; }
+    .nf-detail-modal .modal-body { padding: 30px 25px; }
+    .nf-detail-modal .modal-close { margin-left: -60px; margin-bottom: -40px; }
+
+    .nf-modal-conditions {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .nf-modal-steps { padding: 25px 20px; }
 }
 
 @media (max-width: 480px) {
-    .nf-stat-number { font-size: 1.1rem; }
-    .nf-stat-label { font-size: 0.7rem; }
-    .nf-conditions-grid { grid-template-columns: 1fr; }
-    .nf-condition-card { padding: 30px 20px; }
-    .nf-cta-banner { padding: 35px 20px; }
-}
+    .nf-hero-card { padding: 25px 20px; }
+    .nf-brain-graphic { width: 130px; height: 130px; }
+    .nf-brain-icon { width: 60px; height: 60px; }
+    .nf-brain-icon svg { width: 30px; height: 30px; }
+    .nf-mini-stats { gap: 12px; }
+    .nf-stat-num { font-size: 1rem; }
+    .nf-stat-lbl { font-size: 0.65rem; }
+    .nf-mini-info h3 { font-size: 1.15rem; }
+    .nf-chip { padding: 6px 12px; font-size: 0.75rem; }
+    .nf-chip svg { width: 14px; height: 14px; }
 
+    .nf-detail-modal .modal-cta { padding: 30px 20px; }
+    .nf-detail-modal .modal-cta h3 { font-size: 1.4rem; }
+}
 
 /* ===================================
    8. TEAM CAROUSEL + MODALS
