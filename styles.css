@@ -1948,13 +1948,112 @@ body {
 .footer-bottom-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
 .copyright { color: rgba(255, 255, 255, 0.6); font-size: 0.875rem; margin: 0; }
 
-.design-credit { display: flex; align-items: center; gap: 10px; font-size: 0.875rem; color: rgba(255, 255, 255, 0.6); }
-.designer-link { display: flex; align-items: center; gap: 8px; text-decoration: none; padding: 8px 16px; background: rgba(255, 255, 255, 0.05); border-radius: 50px; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; }
-.designer-link:hover { background: rgba(79, 195, 247, 0.1); border-color: rgba(79, 195, 247, 0.3); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(79, 195, 247, 0.2); }
-.designer-logo { width: 24px; height: 24px; object-fit: contain; filter: brightness(0) invert(1); transition: filter 0.3s ease; }
-.designer-link:hover .designer-logo { filter: brightness(1) invert(0) drop-shadow(0 2px 8px rgba(79, 195, 247, 0.4)); }
-.designer-name { color: rgba(255, 255, 255, 0.8); font-weight: 600; transition: color 0.3s ease; }
-.designer-link:hover .designer-name { background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+/* ===================================
+   DESIGN CREDIT
+   =================================== */
+
+.design-credit {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.designer-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    padding: 10px 22px 10px 12px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.designer-link:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(79, 195, 247, 0.5);
+    transform: translateY(-3px);
+    box-shadow: 
+        0 8px 25px rgba(79, 195, 247, 0.25),
+        0 0 0 1px rgba(79, 195, 247, 0.15);
+}
+
+/* Logo - NO white filter, show actual branding */
+.designer-logo {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 3px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s ease;
+    /* REMOVED: filter: brightness(0) invert(1) — this was the problem */
+    filter: none;
+}
+
+.designer-link:hover .designer-logo {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 4px 15px rgba(79, 195, 247, 0.4);
+    filter: none;
+}
+
+/* Company Name */
+.designer-name {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 700;
+    font-size: 0.925rem;
+    letter-spacing: 0.2px;
+    transition: all 0.4s ease;
+}
+
+.designer-link:hover .designer-name {
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+@media (max-width: 768px) {
+    .footer-bottom-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .design-credit {
+        justify-content: center;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .designer-link {
+        padding: 10px 24px 10px 14px;
+    }
+
+    .designer-logo {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .design-credit {
+        font-size: 0.8rem;
+    }
+
+    .designer-name {
+        font-size: 0.85rem;
+    }
+
+    .designer-logo {
+        width: 28px;
+        height: 28px;
+    }
+}
 
 /* Footer Responsive */
 @media (max-width: 1024px) {
@@ -1967,7 +2066,6 @@ body {
     .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; padding-bottom: 40px; }
     .footer-about { grid-column: 1 / -1; }
     .footer-bottom-content { flex-direction: column; text-align: center; gap: 15px; }
-    .design-credit { justify-content: center; }
 }
 
 @media (max-width: 480px) {
