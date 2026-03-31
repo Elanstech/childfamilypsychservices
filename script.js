@@ -639,68 +639,123 @@ class ServicesCarousel {
 class NeurofeedbackSection {
     constructor() {
         this.section = document.querySelector('.neurofeedback-section');
+        this.modal = document.getElementById('nf-detail-modal');
+        this.openBtn = document.getElementById('nf-open-modal');
         if (!this.section) return;
         this.init();
     }
 
     init() {
+        this.setupModal();
         this.setupBrainAnimation();
-        this.setupConditionCards();
-        this.setupStepAnimations();
+        this.setupChipHover();
     }
+
+    /* ========================================
+       MODAL OPEN / CLOSE
+       ======================================== */
+
+    setupModal() {
+        if (!this.modal) return;
+
+        const overlay = this.modal.querySelector('.modal-overlay');
+        const closeBtn = this.modal.querySelector('.modal-close');
+        const ctaBtn = this.modal.querySelector('#nf-modal-cta');
+
+        // Open
+        if (this.openBtn) {
+            this.openBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.openModal();
+            });
+        }
+
+        // Close via overlay
+        if (overlay) overlay.addEventListener('click', () => this.closeModal());
+
+        // Close via X
+        if (closeBtn) closeBtn.addEventListener('click', () => this.closeModal());
+
+        // Close via CTA (scroll to contact)
+        if (ctaBtn) {
+            ctaBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.closeModal();
+                setTimeout(() => {
+                    document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+                }, 300);
+            });
+        }
+
+        // Close via Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.modal.classList.contains('active')) {
+                this.closeModal();
+            }
+        });
+    }
+
+    openModal() {
+        if (this.modal) {
+            this.modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    closeModal() {
+        if (this.modal) {
+            this.modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    }
+
+    /* ========================================
+       BRAIN GRAPHIC PARALLAX
+       ======================================== */
 
     setupBrainAnimation() {
         const graphic = this.section.querySelector('.nf-brain-graphic');
         if (!graphic) return;
+
         graphic.addEventListener('mousemove', (e) => {
             const rect = graphic.getBoundingClientRect();
             const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
             const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
+
             graphic.querySelectorAll('.nf-brain-ring').forEach((ring, i) => {
                 const intensity = (i + 1) * 5;
                 ring.style.transform = `translate(${x * intensity}px, ${y * intensity}px)`;
                 ring.style.transition = 'transform 0.3s ease';
             });
         });
+
         graphic.addEventListener('mouseleave', () => {
-            graphic.querySelectorAll('.nf-brain-ring').forEach(ring => { ring.style.transform = 'translate(0, 0)'; });
+            graphic.querySelectorAll('.nf-brain-ring').forEach(ring => {
+                ring.style.transform = 'translate(0, 0)';
+            });
         });
     }
 
-    setupConditionCards() {
-        const cards = this.section.querySelectorAll('.nf-condition-card');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, i) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; }, i * 100);
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
-        cards.forEach(card => {
-            card.style.opacity = '0'; card.style.transform = 'translateY(20px)'; card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            observer.observe(card);
-        });
-    }
+    /* ========================================
+       CONDITION CHIP HOVER
+       ======================================== */
 
-    setupStepAnimations() {
-        const steps = this.section.querySelectorAll('.nf-step');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const i = Array.from(steps).indexOf(entry.target);
-                    setTimeout(() => { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateX(0)'; }, i * 150);
-                    observer.unobserve(entry.target);
+    setupChipHover() {
+        this.section.querySelectorAll('.nf-chip').forEach(chip => {
+            chip.addEventListener('mouseenter', () => {
+                const svg = chip.querySelector('svg');
+                if (svg) {
+                    svg.style.transform = 'scale(1.2) rotate(10deg)';
+                    svg.style.transition = 'transform 0.3s ease';
                 }
             });
-        }, { threshold: 0.2 });
-        steps.forEach(step => {
-            step.style.opacity = '0'; step.style.transform = 'translateX(-20px)'; step.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            observer.observe(step);
+            chip.addEventListener('mouseleave', () => {
+                const svg = chip.querySelector('svg');
+                if (svg) svg.style.transform = 'scale(1) rotate(0deg)';
+            });
         });
     }
 }
-
 
 /* ===================================
    10. TEAM CAROUSEL + MODALS
