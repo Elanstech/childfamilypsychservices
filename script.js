@@ -860,7 +860,7 @@ class TeamCarousel {
             'jennifer-cuevas': { name:'Jennifer Cuevas', credentials:'LCSW, Licensed Clinical Social Worker', email:'childfamily12@gmail.com', photo:'https://childfamilypsychservices.vercel.app/Jennifer.jpg',
                 bio:['Licensed clinical social worker with 25 years experience working with children, adolescents and families. Specializes in developmental disabilities, autism, chronic illness, and trauma.','Disaster Mental Health Worker for the Red Cross with regular media appearances on News 12, NEWSMAX, CBS & WFAN.'],
                 highlights:['25 years experience with children and families','Specializes in developmental disabilities, autism, and trauma','Red Cross Disaster Mental Health Worker','Expert in special education advocacy'] },
-            'leana-silipo': { name:'Leana Silipo', credentials:'LMSW, Licensed Social Worker', email:'childfamily12@gmail.com', photo:'https://photos.psychologytoday.com/58aa80a4-37c9-460b-a684-08deff969aec/1/320x400.jpeg',
+            'mercedes-infantes': { name:'Mercedes Infantes', credentials:'LMSW, Licensed Social Worker', email:'childfamily12@gmail.com', photo:'mercedes.jpeg',
                 bio:['LGBTQ+ licensed social worker passionate about queer history and advocacy. My goal is providing affirming mental health care to all those under the LGBTQ+ umbrella.','I strive to create a collaborative and warm space to foster a therapeutic relationship based on trust, empathy, and validation.'],
                 highlights:['LGBTQ+ affirming care specialist','Passionate about queer history and advocacy','Specializes in identity exploration and acceptance','Focus on trust, empathy, and validation'] }
         };
