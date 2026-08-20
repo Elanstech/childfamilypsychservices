@@ -10,7 +10,7 @@
    06  Carousel (services + team)
    07  Modal manager
    08  Service modals
-   09  Training season (ledger + registration)
+   09  Training season (workshop carousel + registration)
    10  Neurofeedback modal
    11  Team modals
    12  FAQ (accordion + tabs)
@@ -24,14 +24,17 @@
 /* ============================================================
    01  CONFIG
    ------------------------------------------------------------
-   Replace the two Formspree IDs below AND the matching `action`
-   attributes in index.html. Create both forms on the account for
+   The contact form is an Elfsight embed — its recipients are set
+   in the Elfsight dashboard, not here.
+
+   The training registration form uses Formspree. Replace the ID
+   below AND the matching `action` attribute on #trainingForm in
+   index.html. Create the form on the account for
    elan@elanstechworld.com, then add drkdoheny@gmail.com under
    Form settings → Notification emails so both inboxes receive it.
    ============================================================ */
 
 const CONFIG = {
-  contactEndpoint:  'https://formspree.io/f/YOUR_CONTACT_FORM_ID',
   trainingEndpoint: 'https://formspree.io/f/YOUR_TRAINING_FORM_ID'
 };
 
@@ -560,10 +563,10 @@ class ServiceModals {
 
 
 /* ============================================================
-   09  TRAINING SEASON — ledger + registration
+   09  TRAINING SEASON — workshop cards + registration
    ------------------------------------------------------------
    Single source of truth: edit a workshop here and it updates
-   the ledger rows AND the registration dropdown.
+   the workshop cards AND the registration dropdown.
    ============================================================ */
 
 const TRAINING_SEASON = [
@@ -628,39 +631,34 @@ const TRAINING_SEASON = [
 
 class TrainingSeason {
   constructor() {
-    this.ledger = document.getElementById('ledger');
+    this.track = document.getElementById('seasonTrack');
     this.select = document.getElementById('tr-cert');
-    if (!this.ledger) return;
-    this.renderLedger();
+    if (!this.track) return;
+    this.renderCards();
     this.renderOptions();
     this.bindRegisterButtons();
   }
 
-  renderLedger() {
-    this.ledger.innerHTML = TRAINING_SEASON.map(w => `
-      <li class="ledger-row${w.feature ? ' is-feature' : ''}">
-        <div class="ledger-date">
-          <span class="ledger-month">${w.month}</span>
-          <span class="ledger-day">${w.day}</span>
-          <span class="ledger-year">${w.year}</span>
+  renderCards() {
+    this.track.innerHTML = TRAINING_SEASON.map(w => `
+      <article class="w-card${w.feature ? ' is-feature' : ''}">
+        <div class="w-date">
+          <span class="w-month">${w.month}</span>
+          <span class="w-day">${w.day}</span>
+          <span class="w-year">${w.year}</span>
         </div>
-        <div class="ledger-main">
-          <div class="ledger-meta">
-            <span class="ledger-tag tag-level">${w.level}</span>
-            <span class="ledger-tag">8:30am–4pm</span>
-            <span class="ledger-tag">Mineola, NY</span>
-            ${w.guest ? '<span class="ledger-tag tag-guest">Guest presenter</span>' : ''}
-          </div>
-          <h4>${w.title}</h4>
-          <p>${w.description}</p>
-          <span class="ledger-presenter">${w.presenter}</span>
+        <div class="w-meta">
+          <span class="w-tag tag-level">${w.level}</span>
+          ${w.guest ? '<span class="w-tag tag-guest">Guest presenter</span>' : '<span class="w-tag">8:30am–4pm</span>'}
         </div>
-        <div class="ledger-side">
-          <span class="ledger-fee">${w.fee} <small>${w.feeNote}</small></span>
-          <span class="ledger-ce">${w.ces}</span>
+        <h4>${w.title}</h4>
+        <p>${w.description}</p>
+        <span class="w-presenter">${w.presenter}</span>
+        <div class="w-foot">
+          <span class="w-price">${w.fee}<small>${w.feeNote} · ${w.ces}</small></span>
           <button type="button" class="btn btn-solid btn-sm" data-workshop="${w.id}">Register</button>
         </div>
-      </li>
+      </article>
     `).join('');
   }
 
@@ -1084,21 +1082,20 @@ class App {
       'a safe space to heal'
     ]);
 
+    // TrainingSeason injects the workshop cards, so it must run
+    // before the carousels measure their pages.
+    new TrainingSeason();
     document.querySelectorAll('[data-carousel]').forEach(el => new Carousel(el));
 
     new ServiceModals();
-    new TrainingSeason();
     new NeurofeedbackModal();
     new TeamModals();
     new FAQ();
     new InsuranceMarquee();
     new FloatingActions();
 
-    new FormspreeForm(
-      'contactForm',
-      CONFIG.contactEndpoint,
-      'Thank you — your message is on its way. We\u2019ll respond within 24 hours.'
-    );
+    // The contact form is an Elfsight embed (submissions are configured in
+    // the Elfsight dashboard). Only the training registration uses Formspree.
     new FormspreeForm(
       'trainingForm',
       CONFIG.trainingEndpoint,
