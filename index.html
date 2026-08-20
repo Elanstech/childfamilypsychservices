@@ -537,13 +537,26 @@
       </dl>
     </div>
 
-    <!-- Season ledger -->
+    <!-- Season carousel -->
     <div id="season" class="tr-season reveal">
       <div class="tr-season-head">
         <h3>The 2026–27 season</h3>
         <p>All workshops run 8:30am–4pm at our Mineola office. Each day carries CEs for APT, MHC and SW, and counts toward RPT credential tracking.</p>
       </div>
-      <ol class="ledger" id="ledger"><!-- rendered by script.js --></ol>
+      <div class="carousel" data-carousel="season">
+        <div class="carousel-viewport">
+          <div class="carousel-track" id="seasonTrack"><!-- rendered by script.js --></div>
+        </div>
+        <div class="carousel-controls">
+          <button class="carousel-btn" data-dir="prev" aria-label="Previous workshops">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M15 18l-6-6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="carousel-dots" id="seasonDots"></div>
+          <button class="carousel-btn" data-dir="next" aria-label="Next workshops">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
     </div>
 
     <!-- Presenters -->
@@ -567,32 +580,30 @@
     </div>
 
     <!-- Program details -->
-    <div class="tr-details reveal">
-      <article class="tr-detail">
-        <h4>Who should attend?</h4>
-        <p>Mental health and educational professionals (and graduate students in those disciplines) who work with children can significantly benefit from this training.</p>
-      </article>
-      <article class="tr-detail">
-        <h4>Schedule</h4>
-        <p>Weekday &amp; weekend workshop options available to fit your schedule. Sessions run 8:30am to 4pm in Mineola.</p>
-      </article>
-      <article class="tr-detail">
-        <h4>Continuing education</h4>
-        <p>Earn 6 CEs (one day) or 12 CEs (two day) through APT and NBCC, with credit for MHC and SW.</p>
-      </article>
-      <article class="tr-detail">
-        <h4>Class size</h4>
-        <p>Limited to fewer than 20 participants for intimate, hands-on learning.</p>
-      </article>
-    </div>
-
-    <div class="tr-providers reveal">
-      <h4>Approved CE providers</h4>
-      <div class="tr-provider-row">
-        <div class="tr-provider"><span class="tr-provider-tag">APT</span><p>Integrative Counseling Services, PLLC — Provider #06-168</p></div>
-        <div class="tr-provider"><span class="tr-provider-tag">NBCC</span><p>Integrative Counseling Services, PLLC — NBCC-Approved ACEP™</p></div>
+    <div class="tr-fine reveal">
+      <div class="tr-fine-grid">
+        <div>
+          <h4>Who should attend?</h4>
+          <p>Mental health and educational professionals — and graduate students in those disciplines — who work with children.</p>
+        </div>
+        <div>
+          <h4>Schedule</h4>
+          <p>Weekday &amp; weekend workshop options available to fit your schedule. Sessions run 8:30am to 4pm in Mineola.</p>
+        </div>
+        <div>
+          <h4>Continuing education</h4>
+          <p>Earn 6 CEs (one day) or 12 CEs (two day) through APT and NBCC, with credit for MHC and SW.</p>
+        </div>
+        <div>
+          <h4>Class size</h4>
+          <p>Limited to fewer than 20 participants for intimate, hands-on learning.</p>
+        </div>
       </div>
-      <p class="tr-policy"><strong>Cancellation policy:</strong> Cancellations up to one full week before each workshop incur a $20.00 processing fee. No refunds during the week of the workshop or for no-shows.</p>
+      <div class="tr-fine-foot">
+        <p><span class="tr-provider-tag">APT</span>Integrative Counseling Services, PLLC — Provider #06-168</p>
+        <p><span class="tr-provider-tag">NBCC</span>Integrative Counseling Services, PLLC — NBCC-Approved ACEP™</p>
+        <p class="tr-policy"><strong>Cancellation policy:</strong> Cancellations up to one full week before each workshop incur a $20.00 processing fee. No refunds during the week of the workshop or for no-shows.</p>
+      </div>
     </div>
 
     <!-- Registration -->
@@ -1125,57 +1136,13 @@
         </div>
       </div>
 
-      <form class="form contact-form reveal" id="contactForm" action="https://formspree.io/f/YOUR_CONTACT_FORM_ID" method="POST" novalidate>
-        <input type="hidden" name="_subject" value="New website enquiry — childandfamilypsychservices.com">
-        <input type="hidden" name="_cc" value="drkdoheny@gmail.com,elan@elanstechworld.com">
-        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hp-field" aria-hidden="true">
-
-        <div class="field-row">
-          <div class="field">
-            <label for="name">Full name <span aria-hidden="true">*</span></label>
-            <input type="text" id="name" name="name" required autocomplete="name" placeholder="John Doe">
-          </div>
-          <div class="field">
-            <label for="email">Email address <span aria-hidden="true">*</span></label>
-            <input type="email" id="email" name="email" required autocomplete="email" placeholder="john@example.com">
-          </div>
-        </div>
-
-        <div class="field-row">
-          <div class="field">
-            <label for="phone">Phone number <span class="field-optional">Optional</span></label>
-            <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="(123) 456-7890">
-          </div>
-          <div class="field">
-            <label for="service">Service interested in</label>
-            <select id="service" name="service">
-              <option value="">Select a service…</option>
-              <option value="Child Therapy">Child Therapy</option>
-              <option value="Adolescent Therapy">Adolescent Therapy</option>
-              <option value="Individual Therapy">Individual Therapy</option>
-              <option value="Family Therapy">Family Therapy</option>
-              <option value="Marital Therapy">Marital Therapy</option>
-              <option value="Divorce Support">Divorce Support</option>
-              <option value="Reunification Therapy">Reunification Therapy</option>
-              <option value="Supervised Visitation">Supervised Visitation</option>
-              <option value="Parent Coordination">Parent Coordination</option>
-              <option value="Custody Evaluation">Custody Evaluation</option>
-              <option value="Mental Health Evaluation">Mental Health Evaluation</option>
-              <option value="Neurofeedback">Neurofeedback</option>
-              <option value="Play Therapy Training / CEs">Play Therapy Training / CEs</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="message">Message <span aria-hidden="true">*</span></label>
-          <textarea id="message" name="message" rows="6" required placeholder="Tell us how we can help you..."></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-solid btn-block btn-lg">Send message</button>
-        <p class="form-status" data-status role="status" aria-live="polite"></p>
-        <p class="form-note">* Required fields. We'll respond within 24 hours.</p>
-      </form>
+      <!-- Elfsight Contact Form | Untitled Contact Form -->
+      <div class="contact-embed reveal">
+        <div class="elfsight-app-ed6b30fb-a723-4566-9d8e-5d34aa85983e" data-elfsight-app-lazy></div>
+        <noscript>
+          <p class="embed-fallback">Our contact form needs JavaScript. Please call <a href="tel:6312659850">(631) 265-9850</a> or email <a href="mailto:childfamily12@gmail.com">childfamily12@gmail.com</a>.</p>
+        </noscript>
+      </div>
 
     </div>
   </div>
@@ -1282,6 +1249,8 @@
   </div>
 </footer>
 
+<!-- Elfsight platform -->
+<script src="https://elfsightcdn.com/platform.js" async></script>
 <script src="script.js"></script>
 </body>
 </html>
