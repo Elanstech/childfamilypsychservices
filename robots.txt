@@ -1,0 +1,36 @@
+# robots.txt for Child & Family Psychological Services
+# https://www.childandfamilypsychservices.com
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+
+# Google-specific
+# Note: a bot with its own group ignores "User-agent: *" entirely,
+# so any future rule added above must be repeated here to apply to Google.
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+
+# Bing-specific
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+Crawl-delay: 1
+
+# Blocked crawlers
+# Heads-up: these also block your own Ahrefs / Semrush site audits
+# for this domain. Remove a group if you start using that tool.
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+# Sitemap location
+Sitemap: https://www.childandfamilypsychservices.com/sitemap.xml
