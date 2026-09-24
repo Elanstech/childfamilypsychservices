@@ -601,7 +601,7 @@
       <div class="tr-register-copy">
         <span class="eyebrow eyebrow-alt">Reserve your seat</span>
         <h3>Register for a workshop</h3>
-        <p>Tell us which training you want and we'll confirm your seat, payment options and CE paperwork by email. Spots are limited to fewer than 20 per workshop.</p>
+        <p>Send us the form and include the workshop you want in your message. We'll confirm your seat, payment options and CE paperwork by email. Spots are limited to fewer than 20 per workshop.</p>
         <ul class="tr-register-facts">
           <li><span>Where</span>166 E Jericho Turnpike, Suite 10 · Mineola, NY 11501</li>
           <li><span>When</span>8:30am – 4pm on each scheduled date</li>
@@ -609,44 +609,15 @@
         </ul>
       </div>
 
-      <form class="form tr-form" id="trainingForm" action="https://formspree.io/f/YOUR_TRAINING_FORM_ID" method="POST" novalidate>
-        <input type="hidden" name="_subject" value="New play therapy training registration — childandfamilypsychservices.com">
-        <input type="hidden" name="_cc" value="drkdoheny@gmail.com,elan@elanstechworld.com">
-        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hp-field" aria-hidden="true">
-
-        <div class="field">
-          <label for="tr-name">Full name <span aria-hidden="true">*</span></label>
-          <input type="text" id="tr-name" name="name" required autocomplete="name" placeholder="Jane Doe">
+      <div class="tr-embed">
+        <p class="tr-picked" id="trPicked" hidden aria-live="polite"></p>
+        <div class="contact-embed">
+          <div class="elfsight-app-ed6b30fb-a723-4566-9d8e-5d34aa85983e" data-elfsight-app-lazy></div>
+          <noscript>
+            <p class="embed-fallback">The registration form needs JavaScript. Email <a href="mailto:drkdoheny@gmail.com">drkdoheny@gmail.com</a> or call <a href="tel:6312659850">(631) 265-9850</a>.</p>
+          </noscript>
         </div>
-
-        <div class="field-row">
-          <div class="field">
-            <label for="tr-email">Email <span aria-hidden="true">*</span></label>
-            <input type="email" id="tr-email" name="email" required autocomplete="email" placeholder="jane@example.com">
-          </div>
-          <div class="field">
-            <label for="tr-phone">Phone <span aria-hidden="true">*</span></label>
-            <input type="tel" id="tr-phone" name="phone" required autocomplete="tel" placeholder="(555) 123-4567">
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="tr-cert">Desired certification / workshop <span aria-hidden="true">*</span></label>
-          <select id="tr-cert" name="desired_certification" required>
-            <option value="">Choose a workshop…</option>
-            <!-- options injected by script.js from the season data -->
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="tr-notes">Anything we should know? <span class="field-optional">Optional</span></label>
-          <textarea id="tr-notes" name="message" rows="3" placeholder="License type, CE needs, accessibility requests…"></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-solid btn-block btn-lg">Send my registration</button>
-        <p class="form-status" data-status role="status" aria-live="polite"></p>
-        <p class="form-note">We'll reply within one business day with payment and confirmation details.</p>
-      </form>
+      </div>
     </div>
 
   </div>
