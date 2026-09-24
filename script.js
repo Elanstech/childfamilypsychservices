@@ -2,7 +2,6 @@
    CHILD & FAMILY PSYCHOLOGICAL SERVICES
    script.js — no external dependencies.
 
-   01  Config
    03  Typewriter (hero)
    04  Header: sticky, scrollspy, progress rail, mobile drawer
    05  Reveal on scroll
@@ -14,28 +13,9 @@
    11  Team modals
    12  FAQ (accordion + tabs)
    13  Insurance marquee
-   14  Forms (Formspree)
    15  FAB + back to top
    16  App bootstrap
    ============================================================ */
-
-
-/* ============================================================
-   01  CONFIG
-   ------------------------------------------------------------
-   The contact form is an Elfsight embed — its recipients are set
-   in the Elfsight dashboard, not here.
-
-   The training registration form uses Formspree. Replace the ID
-   below AND the matching `action` attribute on #trainingForm in
-   index.html. Create the form on the account for
-   elan@elanstechworld.com, then add drkdoheny@gmail.com under
-   Form settings → Notification emails so both inboxes receive it.
-   ============================================================ */
-
-const CONFIG = {
-  trainingEndpoint: 'https://formspree.io/f/YOUR_TRAINING_FORM_ID'
-};
 
 
 /* ============================================================
@@ -611,10 +591,8 @@ const TRAINING_SEASON = [
 class TrainingSeason {
   constructor() {
     this.track = document.getElementById('seasonTrack');
-    this.select = document.getElementById('tr-cert');
     if (!this.track) return;
     this.renderCards();
-    this.renderOptions();
     this.bindRegisterButtons();
   }
 
@@ -641,22 +619,11 @@ class TrainingSeason {
     `).join('');
   }
 
-  renderOptions() {
-    if (!this.select) return;
-    const options = TRAINING_SEASON
-      .map(w => `<option value="${w.title} — ${w.dateLabel}">${w.title} — ${w.dateLabel}</option>`)
-      .join('');
-    this.select.insertAdjacentHTML('beforeend', options +
-      '<option value="Full RPT certification track (all workshops)">Full RPT certification track (all workshops)</option>' +
-      '<option value="Supervision toward RPT">Supervision toward RPT</option>' +
-      '<option value="Not sure yet — please advise">Not sure yet — please advise</option>');
-  }
-
   bindRegisterButtons() {
     document.querySelectorAll('[data-workshop]').forEach(btn => {
       btn.addEventListener('click', () => {
         const w = TRAINING_SEASON.find(x => x.id === btn.getAttribute('data-workshop'));
-        if (w && this.select) this.select.value = `${w.title} — ${w.dateLabel}`;
+        if (w) this.showPicked(`${w.title} — ${w.dateLabel}`);
         this.goToForm();
       });
     });
@@ -665,16 +632,19 @@ class TrainingSeason {
     });
   }
 
+  showPicked(label) {
+    const el = document.getElementById('trPicked');
+    if (!el) return;
+    el.innerHTML = `You picked <strong>${label}</strong>. Please mention it in your message.`;
+    el.hidden = false;
+  }
+
   goToForm() {
     const form = document.getElementById('register');
     if (!form) return;
     const header = document.getElementById('siteHeader');
     const offset = header ? header.offsetHeight + 16 : 100;
     window.scrollTo({ top: form.getBoundingClientRect().top + window.pageYOffset - offset, behavior: 'smooth' });
-    setTimeout(() => {
-      const name = document.getElementById('tr-name');
-      if (name) name.focus({ preventScroll: true });
-    }, 650);
   }
 }
 
@@ -874,130 +844,6 @@ class InsuranceMarquee {
 
 
 /* ============================================================
-   14  FORMS — Formspree with inline validation
-   ============================================================ */
-
-class FormspreeForm {
-  constructor(formId, endpoint, successMessage) {
-    this.form = document.getElementById(formId);
-    if (!this.form) return;
-    this.endpoint = endpoint || this.form.getAttribute('action');
-    this.status = this.form.querySelector('[data-status]');
-    this.success = successMessage;
-    this.form.setAttribute('action', this.endpoint);
-
-    // Until a real Formspree ID is set, registrations open a pre-filled email instead.
-    this.useEmail = this.endpoint.includes('YOUR_');
-
-    this.form.addEventListener('submit', e => this.submit(e));
-    this.form.querySelectorAll('input, select, textarea').forEach(field => {
-      field.addEventListener('input', () => this.clearError(field));
-      field.addEventListener('blur', () => { if (field.value.trim()) this.clearError(field); });
-    });
-  }
-
-  clearError(field) {
-    const wrap = field.closest('.field');
-    if (!wrap) return;
-    wrap.classList.remove('has-error');
-    const msg = wrap.querySelector('.field-error');
-    if (msg) msg.remove();
-  }
-
-  setError(field, message) {
-    const wrap = field.closest('.field');
-    if (!wrap || wrap.querySelector('.field-error')) return;
-    wrap.classList.add('has-error');
-    const span = document.createElement('span');
-    span.className = 'field-error';
-    span.textContent = message;
-    wrap.appendChild(span);
-  }
-
-  validate() {
-    let firstBad = null;
-    this.form.querySelectorAll('[required]').forEach(field => {
-      const value = field.value.trim();
-      let message = '';
-      if (!value) {
-        message = 'This field is required.';
-      } else if (field.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) {
-        message = 'Enter a valid email address.';
-      } else if (field.type === 'tel' && value.replace(/\D/g, '').length < 10) {
-        message = 'Enter a phone number with at least 10 digits.';
-      }
-      if (message) {
-        this.setError(field, message);
-        if (!firstBad) firstBad = field;
-      }
-    });
-    if (firstBad) firstBad.focus();
-    return !firstBad;
-  }
-
-  say(message, ok) {
-    if (!this.status) return;
-    this.status.textContent = message;
-    this.status.classList.add('is-visible');
-    this.status.classList.toggle('is-ok', ok);
-    this.status.classList.toggle('is-bad', !ok);
-  }
-
-  sendByEmail() {
-    const get = name => (this.form.elements[name] ? this.form.elements[name].value.trim() : '');
-    const cert = this.form.elements.desired_certification;
-    const workshop = cert && cert.selectedIndex > 0 ? cert.options[cert.selectedIndex].text : '';
-    const body = [
-      `Name: ${get('name')}`,
-      `Email: ${get('email')}`,
-      `Phone: ${get('phone')}`,
-      `Workshop: ${workshop}`,
-      `Notes: ${get('message')}`
-    ].join('\n');
-    const subject = `Play therapy training registration — ${workshop || 'workshop'}`;
-    window.location.href = `mailto:drkdoheny@gmail.com?cc=elan@elanstechworld.com&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    this.say('Your email app should open with your registration filled in. Press send to finish.', true);
-  }
-
-  async submit(e) {
-    e.preventDefault();
-    if (!this.validate()) {
-      this.say('Please fix the highlighted fields and try again.', false);
-      return;
-    }
-
-    if (this.useEmail) { this.sendByEmail(); return; }
-
-    const button = this.form.querySelector('button[type="submit"]');
-    const label = button ? button.textContent : '';
-    if (button) { button.disabled = true; button.textContent = 'Sending…'; }
-    this.say('Sending…', true);
-
-    try {
-      const response = await fetch(this.endpoint, {
-        method: 'POST',
-        body: new FormData(this.form),
-        headers: { Accept: 'application/json' }
-      });
-
-      if (response.ok) {
-        this.form.reset();
-        this.say(this.success, true);
-      } else {
-        const data = await response.json().catch(() => ({}));
-        const detail = data.errors ? data.errors.map(x => x.message).join(', ') : '';
-        this.say(detail || 'That didn\u2019t go through. Please call (631) 265-9850 and we\u2019ll take your details by phone.', false);
-      }
-    } catch (err) {
-      this.say('No connection right now. Please call (631) 265-9850 or email childfamily12@gmail.com.', false);
-    } finally {
-      if (button) { button.disabled = false; button.textContent = label; }
-    }
-  }
-}
-
-
-/* ============================================================
    15  FAB + BACK TO TOP
    ============================================================ */
 
@@ -1081,13 +927,6 @@ class App {
     new InsuranceMarquee();
     new FloatingActions();
 
-    // The contact form is an Elfsight embed (submissions are configured in
-    // the Elfsight dashboard). Only the training registration uses Formspree.
-    new FormspreeForm(
-      'trainingForm',
-      CONFIG.trainingEndpoint,
-      'Registration received. We\u2019ll confirm your seat and payment details by email within one business day.'
-    );
 
     const year = document.getElementById('year');
     if (year) year.textContent = new Date().getFullYear();
