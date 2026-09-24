@@ -3,7 +3,6 @@
    script.js — no external dependencies.
 
    01  Config
-   02  Preloader
    03  Typewriter (hero)
    04  Header: sticky, scrollspy, progress rail, mobile drawer
    05  Reveal on scroll
@@ -37,34 +36,6 @@
 const CONFIG = {
   trainingEndpoint: 'https://formspree.io/f/YOUR_TRAINING_FORM_ID'
 };
-
-
-/* ============================================================
-   02  PRELOADER
-   ============================================================ */
-
-class Preloader {
-  constructor(minimum = 700) {
-    this.el = document.getElementById('preloader');
-    this.minimum = minimum;
-    this.start = Date.now();
-    if (!this.el) return;
-    document.body.classList.add('is-locked');
-    window.addEventListener('load', () => this.hide());
-    setTimeout(() => this.hide(), 4000); // safety net
-  }
-
-  hide() {
-    if (!this.el || this.done) return;
-    this.done = true;
-    const wait = Math.max(0, this.minimum - (Date.now() - this.start));
-    setTimeout(() => {
-      this.el.classList.add('is-hidden');
-      document.body.classList.remove('is-locked');
-      setTimeout(() => this.el.remove(), 600);
-    }, wait);
-  }
-}
 
 
 /* ============================================================
@@ -469,6 +440,7 @@ const SERVICE_DATA = {
     ]
   },
   'custody-evaluations': {
+    forensic: true,
     title: 'Custody Evaluations', subtitle: 'Comprehensive assessments for informed custody decisions',
     description: 'Child custody evaluations are comprehensive psychological assessments conducted to assist courts in making informed decisions about custody and parenting time arrangements.',
     before: ['Custody disputes','Need for professional assessment','Court requirement for evaluation','Concerns about child wellbeing','Parenting capability questions'],
@@ -538,11 +510,18 @@ class ServiceModals {
                   ${s.process.map(p => `<li><strong>${p.title}</strong><p>${p.description}</p></li>`).join('')}
                 </ol>
               </div>
+              ${s.forensic ? `
+              <div class="modal-cta">
+                <h3>Forensic services line</h3>
+                <p>Custody evaluations and other court-ordered forensic work have their own contact. This line is for forensic services only.</p>
+                <a href="mailto:cfpsforensics@gmail.com" class="btn btn-cream">cfpsforensics@gmail.com</a>
+                <a href="tel:6316320400" class="modal-cta-phone">(631) 632-0400</a>
+              </div>` : `
               <div class="modal-cta">
                 <h3>Ready to get started?</h3>
                 <p>Take the first step toward healing and growth. Contact us today.</p>
                 <a href="#contact" class="btn btn-cream" data-close-scroll>Schedule a consultation</a>
-              </div>
+              </div>`}
             </div>
           </div>
         </div>
@@ -748,14 +727,6 @@ const TEAM_DATA = {
     ],
     highlights: ['Over 35 years with children and families','Doctorate from Stony Brook University','Specialized in child abuse assessment','Award recipient from Suffolk County and State University']
   },
-  'jessica-panagiotidis': {
-    name: 'Jessica Panagiotidis', credentials: 'MS, CRC, LMSW', photo: 'Jennifer.jpg',
-    bio: [
-      'I am a licensed psychotherapist and certified vocational counselor specializing in career planning, goal development, and individual counseling.',
-      'Jessica graduated from Hofstra University with a Master\u2019s in vocational rehabilitation counseling and from Adelphi University with a Master\u2019s in Social Work.'
-    ],
-    highlights: ['Licensed psychotherapist and certified vocational counselor','Master\u2019s from Hofstra and Adelphi Universities','Specializes in career planning and goal development','Individual, group, and family counseling services']
-  },
   'jennifer-cuevas': {
     name: 'Jennifer Cuevas', credentials: 'LCSW, Licensed Clinical Social Worker', photo: 'cuevas.jpeg',
     bio: [
@@ -915,9 +886,8 @@ class FormspreeForm {
     this.success = successMessage;
     this.form.setAttribute('action', this.endpoint);
 
-    if (this.endpoint.includes('YOUR_')) {
-      console.warn(`[${formId}] Formspree endpoint not set yet — update CONFIG in script.js and the form action in index.html.`);
-    }
+    // Until a real Formspree ID is set, registrations open a pre-filled email instead.
+    this.useEmail = this.endpoint.includes('YOUR_');
 
     this.form.addEventListener('submit', e => this.submit(e));
     this.form.querySelectorAll('input, select, textarea').forEach(field => {
@@ -973,12 +943,30 @@ class FormspreeForm {
     this.status.classList.toggle('is-bad', !ok);
   }
 
+  sendByEmail() {
+    const get = name => (this.form.elements[name] ? this.form.elements[name].value.trim() : '');
+    const cert = this.form.elements.desired_certification;
+    const workshop = cert && cert.selectedIndex > 0 ? cert.options[cert.selectedIndex].text : '';
+    const body = [
+      `Name: ${get('name')}`,
+      `Email: ${get('email')}`,
+      `Phone: ${get('phone')}`,
+      `Workshop: ${workshop}`,
+      `Notes: ${get('message')}`
+    ].join('\n');
+    const subject = `Play therapy training registration — ${workshop || 'workshop'}`;
+    window.location.href = `mailto:drkdoheny@gmail.com?cc=elan@elanstechworld.com&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    this.say('Your email app should open with your registration filled in. Press send to finish.', true);
+  }
+
   async submit(e) {
     e.preventDefault();
     if (!this.validate()) {
       this.say('Please fix the highlighted fields and try again.', false);
       return;
     }
+
+    if (this.useEmail) { this.sendByEmail(); return; }
 
     const button = this.form.querySelector('button[type="submit"]');
     const label = button ? button.textContent : '';
@@ -1068,7 +1056,6 @@ class App {
   constructor() {
     Modals.init();
 
-    new Preloader();
     new Header();
     new Reveal();
 
