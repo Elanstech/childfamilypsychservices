@@ -628,7 +628,7 @@ body.is-locked{ overflow:hidden; }
 .w-card:hover{ transform:translateY(-6px); box-shadow:var(--shadow-md); }
 .w-card.is-feature{ border-top-color:var(--lilac); background:linear-gradient(180deg,var(--lilac-tint),var(--paper) 38%); }
 
-.w-date{ display:flex; align-items:baseline; gap:.4rem; font-family:var(--mono); margin-bottom:.9rem; }
+.w-date{ display:flex; flex-wrap:wrap; align-items:baseline; gap:.4rem; font-family:var(--mono); margin-bottom:.9rem; }
 .w-month{ font-size:.74rem; letter-spacing:.18em; text-transform:uppercase; color:var(--sea); }
 .w-day{ font-size:1.75rem; font-weight:600; line-height:1; letter-spacing:-.02em; }
 .w-year{ font-size:.72rem; color:var(--ink-faint); letter-spacing:.12em; }
@@ -647,6 +647,8 @@ body.is-locked{ overflow:hidden; }
 .w-tag.tag-level{ background:var(--sea-tint); color:var(--sea); }
 .w-tag.tag-guest{ background:var(--lilac); color:#fff; }
 .w-presenter{ font-size:.8rem; color:var(--ink-faint); margin-bottom:1rem; }
+.w-more{ font-size:.82rem; font-weight:600; color:var(--lilac); margin:-.4rem 0 1rem; }
+.w-more:hover{ text-decoration:underline; }
 
 .w-foot{ margin-top:auto; padding-top:1rem; border-top:1px solid var(--line-soft); display:flex; align-items:center; justify-content:space-between; gap:.75rem; }
 .w-price{ font-family:var(--mono); font-size:1.05rem; font-weight:600; line-height:1.2; }
@@ -677,6 +679,15 @@ body.is-locked{ overflow:hidden; }
   background:var(--lilac); color:#fff; padding:.15rem .45rem; border-radius:4px; margin-right:.55rem;
 }
 .tr-policy{ margin-top:.25rem; }
+
+/* guest course detail (DDP) */
+.tr-course{ border-top:3px solid var(--lilac); scroll-margin-top:110px; }
+.tr-course-head{ margin-bottom:1rem; }
+.tr-course-head h3{ margin-top:.4rem; }
+.tr-course-dates{ font-family:var(--mono); font-size:.78rem; letter-spacing:.06em; color:var(--lilac); margin-top:.45rem; }
+.tr-course-copy{ display:grid; gap:.7rem; max-width:72ch; margin-bottom:1.5rem; }
+.tr-course-copy p{ color:var(--ink-soft); }
+.tr-course-actions{ margin-top:.5rem; }
 
 /* registration */
 .tr-register{

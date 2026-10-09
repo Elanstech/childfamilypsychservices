@@ -585,6 +585,20 @@ const TRAINING_SEASON = [
     description: 'Children who have lived in unsafe environments, with inconsistent or impaired caregivers, or who have endured multiple losses may not be able to overcome these traumatic experiences without intervention. Based on the Theraplay model, attachment-based play activities focus on the parent-child relationship as a vehicle to heal problems of trust, hyperarousal and connection in both children and parents.',
     feature: true,
     guest: true
+  },
+  {
+    id: 'ddp-lender',
+    month: 'Mar', day: '21–22', year: '& Apr 1–2, 2027',
+    dateLabel: 'March 21–22 & April 1–2, 2027',
+    title: 'Dyadic Developmental Psychotherapy (DDP)',
+    presenter: 'Dafna Lender — guest presenter',
+    level: '4-day course',
+    fee: 'TBA', feeNote: 'fee to be announced',
+    ces: 'limited to 24 participants',
+    description: 'A four-day course on DDP, the intervention model developed by Dr. Daniel Hughes, integrating developmental trauma, attachment theory, intersubjectivity and child development to support children, young people and their families.',
+    details: '#ddp',
+    feature: true,
+    guest: true
   }
 ];
 
@@ -611,6 +625,7 @@ class TrainingSeason {
         <h4>${w.title}</h4>
         <p>${w.description}</p>
         <span class="w-presenter">${w.presenter}</span>
+        ${w.details ? `<a href="${w.details}" class="w-more">Course details &rarr;</a>` : ''}
         <div class="w-foot">
           <span class="w-price">${w.fee}<small>${w.feeNote} · ${w.ces}</small></span>
           <button type="button" class="btn btn-solid btn-sm" data-workshop="${w.id}">Register</button>
@@ -722,6 +737,30 @@ const TEAM_DATA = {
       'Whether you are navigating relationship difficulties, parenting transitions, or personal challenges, I aim to support you in creating healthier and more fulfilling connections.'
     ],
     highlights: ['Systemic approach to relationships and family dynamics','Works with individuals, couples, and families','Focus on marital conflict, communication, and co-parenting','Supports separation and divorce adjustment','Collaborative, safe, and nonjudgmental space']
+  },
+  'erin-kelly': {
+    name: 'Erin Kelly', credentials: 'LBA, LMSW', photo: 'erin.jpeg',
+    bio: [
+      'Erin Kelly is a Licensed Behavior Analyst (LBA) and Licensed Master Social Worker (LMSW), bringing expertise in behavioral analysis and social work to provide comprehensive support for individuals and families.'
+    ],
+    highlights: ['Licensed Behavior Analyst (LBA)','Licensed Master Social Worker (LMSW)','Behavioral analysis','Family therapy and social work support']
+  },
+  'humma-azeemi': {
+    name: 'Humma Azeemi', credentials: 'MFT, Pre-Licensed Professional', photo: 'humma.jpeg',
+    bio: [
+      'Multilingual (English, Urdu, Hindi) Marriage and Family Therapist supporting individuals, couples, and families through a systemic, relationship-centered approach, addressing personal and relational challenges.',
+      'Focused on providing culturally responsive, individualized care, creating a safe and collaborative environment where clients feel heard, respected, and empowered to achieve meaningful and lasting change.'
+    ],
+    highlights: ['Multilingual \u2014 English, Urdu, Hindi','Couples & family therapy','Systemic, relationship-centered approach','Culturally responsive, individualized care']
+  },
+  'beatrice-jean-mary': {
+    name: 'Beatrice Jean-Mary', credentials: 'Therapist', photo: 'beatrice.jpeg',
+    bio: [
+      'We are told to grab life by the horns. But we don\u2019t all have the tools to do so, and we each experience life differently. Being in a therapeutic, caring, and nonjudgmental space could help you develop the tools needed to embrace life, and get to know yourself better in the process.',
+      'Beatrice serves toddlers to older children, adolescents, families and couples, providing approaches geared to the individual from a client-centered, humanistic mindset. She specializes in child and adolescent play interventions, working with individuals with disabilities, women and maternal care, the grief life cycle, trauma experiences, and high-functioning behaviors.',
+      'Beatrice embraces cultural differences, while pulling from her own personal experiences, in order to explore your life together and tackle the present challenges. Reach out today to begin your journey!'
+    ],
+    highlights: ['Serves toddlers through adolescents, families, and couples','Child and adolescent play interventions','Individuals with disabilities; women and maternal care','Grief, trauma, and high-functioning behaviors','Client-centered, humanistic approach']
   }
 };
 
