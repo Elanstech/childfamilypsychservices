@@ -685,7 +685,7 @@ class NeurofeedbackModal {
 
 const TEAM_DATA = {
   'kristie-doheny': {
-    name: 'Dr. Kristie Doheny', credentials: 'PsyD, Owner & Lead Psychologist', photo: 'krisite.jpeg',
+    name: 'Dr. Kristie Doheny', credentials: 'PsyD, Owner & Lead Psychologist', photo: 'images/krisite.jpeg',
     bio: [
       'While we can\u2019t change difficult situations of the past, we can work together to better understand and resolve challenges in your life.',
       'If you\u2019re looking for extra support and guidance through a challenging situation or you\u2019re just ready to move in a new direction in your life, I look forward to working with you to achieve your goals.',
@@ -695,7 +695,7 @@ const TEAM_DATA = {
     highlights: ['Over 15 years of experience','Specializes in person-centered therapy','Offers evaluations for ADHD, learning disabilities, autism (ADOS-2)','Uses play therapy, sandplay, expressive therapy, CBT, neurofeedback','Leads our play therapy training and RPT supervision program']
   },
   'jane-albertson': {
-    name: 'Dr. Jane Albertson-Kelly', credentials: 'PhD, Clinical Psychologist', photo: 'jane.jpg',
+    name: 'Dr. Jane Albertson-Kelly', credentials: 'PhD, Clinical Psychologist', photo: 'images/jane.jpg',
     bio: [
       'Dr. Albertson-Kelly has worked with individuals and families in crisis for over 15 years. She has a doctorate in clinical psychology and a Master\u2019s Degree in Education.',
       'She has been affiliated with the Adolescent Psychiatric Unit at Mather Hospital, the North Suffolk Center Child Treatment Program, and the Northport VA.',
@@ -704,7 +704,7 @@ const TEAM_DATA = {
     highlights: ['Over 15 years with individuals and families in crisis','Doctorate in Clinical Psychology + Master\u2019s in Education','Expert witness in parenting, custody, and sexual abuse','Specializes in families adjusting to separation and divorce']
   },
   'barbara-burkhard': {
-    name: 'Dr. Barbara Burkhard', credentials: 'PhD, Clinical Psychologist', photo: 'barb.jpeg',
+    name: 'Dr. Barbara Burkhard', credentials: 'PhD, Clinical Psychologist', photo: 'images/barb.jpeg',
     bio: [
       'Dr. Burkhard has provided psychological services to young children and their families for over 35 years. She holds a doctorate from Stony Brook University.',
       'She has served as program director for several Suffolk County programs including the Child Treatment Program of North Suffolk Mental Health Center.',
@@ -713,7 +713,7 @@ const TEAM_DATA = {
     highlights: ['Over 35 years with children and families','Doctorate from Stony Brook University','Specialized in child abuse assessment','Award recipient from Suffolk County and State University']
   },
   'jennifer-cuevas': {
-    name: 'Jennifer Cuevas', credentials: 'LCSW, Licensed Clinical Social Worker', photo: 'cuevas.jpeg',
+    name: 'Jennifer Cuevas', credentials: 'LCSW, Licensed Clinical Social Worker', photo: 'images/cuevas.jpeg',
     bio: [
       'Licensed clinical social worker with 25 years experience working with children, adolescents and families. Specializes in developmental disabilities, autism, chronic illness, and trauma.',
       'Disaster Mental Health Worker for the Red Cross with regular media appearances on News 12, NEWSMAX, CBS & WFAN.'
@@ -721,7 +721,7 @@ const TEAM_DATA = {
     highlights: ['25 years experience with children and families','Specializes in developmental disabilities, autism, and trauma','Red Cross Disaster Mental Health Worker','Expert in special education advocacy']
   },
   'mercedes-infantes': {
-    name: 'Mercedes Infantes', credentials: 'Bilingual Mental Health Professional', photo: 'mercedes.jpeg',
+    name: 'Mercedes Infantes', credentials: 'Bilingual Mental Health Professional', photo: 'images/mercedes.jpeg',
     bio: [
       'Bilingual mental health professional fluent in Spanish, dedicated to providing culturally responsive and individualized care. I believe each session should be tailored to each client\u2019s unique needs, goals, life experiences, and cultural background.',
       'I strive to create a supportive and collaborative environment where clients feel heard, respected, and empowered.'
@@ -729,7 +729,7 @@ const TEAM_DATA = {
     highlights: ['Bilingual — fluent in Spanish','Culturally responsive, individualized care','Tailors each session to the client\u2019s unique needs','Supportive, collaborative environment']
   },
   'carla': {
-    name: 'Carla Mondelli', credentials: 'Marriage and Family Therapist (MFT), Limited Permit', photo: 'carlamondelli.jpeg',
+    name: 'Carla Mondelli', credentials: 'Marriage and Family Therapist (MFT), Limited Permit', photo: 'images/carlamondelli.jpeg',
     bio: [
       'I am a Marriage and Family Therapist (MFT) practicing under a limited permit. I hold a Bachelor\u2019s degree in Psychology and a Master\u2019s degree in Marriage and Family Therapy. My work is grounded in a systemic approach, focusing on how individuals are shaped by their relationships and family dynamics.',
       'I work with individuals, couples, and families to support healthier relationships and emotional well-being. My areas of focus include marital conflict, communication issues, co-parenting challenges, separation and divorce adjustment, and life stressors that impact relationships.',
@@ -739,14 +739,14 @@ const TEAM_DATA = {
     highlights: ['Systemic approach to relationships and family dynamics','Works with individuals, couples, and families','Focus on marital conflict, communication, and co-parenting','Supports separation and divorce adjustment','Collaborative, safe, and nonjudgmental space']
   },
   'erin-kelly': {
-    name: 'Erin Kelly', credentials: 'LBA, LMSW', photo: 'erin.jpeg',
+    name: 'Erin Kelly', credentials: 'LBA, LMSW', photo: 'images/erin.jpeg',
     bio: [
       'Erin Kelly is a Licensed Behavior Analyst (LBA) and Licensed Master Social Worker (LMSW), bringing expertise in behavioral analysis and social work to provide comprehensive support for individuals and families.'
     ],
     highlights: ['Licensed Behavior Analyst (LBA)','Licensed Master Social Worker (LMSW)','Behavioral analysis','Family therapy and social work support']
   },
   'humma-azeemi': {
-    name: 'Humma Azeemi', credentials: 'MFT, Pre-Licensed Professional', photo: 'humma.jpeg',
+    name: 'Humma Azeemi', credentials: 'MFT, Pre-Licensed Professional', photo: 'images/humma.jpeg',
     bio: [
       'Multilingual (English, Urdu, Hindi) Marriage and Family Therapist supporting individuals, couples, and families through a systemic, relationship-centered approach, addressing personal and relational challenges.',
       'Focused on providing culturally responsive, individualized care, creating a safe and collaborative environment where clients feel heard, respected, and empowered to achieve meaningful and lasting change.'
@@ -754,7 +754,7 @@ const TEAM_DATA = {
     highlights: ['Multilingual \u2014 English, Urdu, Hindi','Couples & family therapy','Systemic, relationship-centered approach','Culturally responsive, individualized care']
   },
   'beatrice-jean-mary': {
-    name: 'Beatrice Jean-Mary', credentials: 'Therapist', photo: 'beatrice.jpeg',
+    name: 'Beatrice Jean-Mary', credentials: 'Therapist', photo: 'images/beatrice.jpeg',
     bio: [
       'We are told to grab life by the horns. But we don\u2019t all have the tools to do so, and we each experience life differently. Being in a therapeutic, caring, and nonjudgmental space could help you develop the tools needed to embrace life, and get to know yourself better in the process.',
       'Beatrice serves toddlers to older children, adolescents, families and couples, providing approaches geared to the individual from a client-centered, humanistic mindset. She specializes in child and adolescent play interventions, working with individuals with disabilities, women and maternal care, the grief life cycle, trauma experiences, and high-functioning behaviors.',
