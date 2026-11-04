@@ -878,7 +878,7 @@ body.is-locked{ overflow:hidden; }
    17  LOCATIONS
    ============================================================ */
 
-.loc-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1.25rem; }
+.loc-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1.25rem; }
 .loc-card{
   position:relative; background:var(--paper); border:1px solid var(--line);
   border-radius:var(--radius); padding:1.75rem 1.5rem;
