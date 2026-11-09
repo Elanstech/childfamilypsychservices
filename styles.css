@@ -690,6 +690,21 @@ body.is-locked{ overflow:hidden; }
 .tr-course-actions{ margin-top:.5rem; }
 
 /* registration */
+/* Collapsed "more info" rows (DDP, presenters, CE & policy) */
+.tr-more{ display:grid; gap:.7rem; margin-top:clamp(2rem,4vw,2.75rem); }
+.tr-acc summary{ display:flex; flex-wrap:wrap; align-items:baseline; gap:.25rem .75rem; }
+.tr-acc-note{ font-family:var(--mono); font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--lilac); font-weight:500; }
+.tr-acc .faq-answer{ display:grid; gap:.85rem; justify-items:start; }
+.tr-acc-facts{ list-style:none; display:grid; gap:.45rem; }
+.tr-acc-facts li{ font-size:.92rem; color:var(--ink-soft); padding-left:1rem; position:relative; }
+.tr-acc-facts li::before{ content:""; position:absolute; left:0; top:.6em; width:5px; height:5px; border-radius:50%; background:var(--lilac); }
+.tr-acc-facts strong{ color:var(--ink); font-weight:600; }
+.tr-acc .tr-acc-small{ font-size:.85rem; color:var(--ink-soft); }
+.tr-more .tr-person .tr-creds{ font-size:.68rem; color:var(--sea); }
+.tr-more .tr-person p:last-child{ font-size:.89rem; }
+.tr-more .tr-people{ margin-top:0; width:100%; }
+.tr-more .tr-person{ box-shadow:none; background:var(--shell); padding:1.1rem; }
+
 .tr-register{
   display:grid; grid-template-columns:.85fr 1.15fr; gap:clamp(1.5rem,4vw,3rem); align-items:start;
   margin-top:clamp(2.5rem,5vw,4rem); scroll-margin-top:calc(var(--header-h) + 20px);

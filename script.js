@@ -608,6 +608,7 @@ class TrainingSeason {
     if (!this.track) return;
     this.renderCards();
     this.bindRegisterButtons();
+    this.openDetails();
   }
 
   renderCards() {
@@ -645,6 +646,13 @@ class TrainingSeason {
     document.querySelectorAll('[data-register]').forEach(btn => {
       btn.addEventListener('click', e => { e.preventDefault(); this.goToForm(); });
     });
+  }
+
+  openDetails() {
+    // "Course details" links point at the collapsed DDP row: open it before jumping there
+    const open = () => { const d = document.getElementById('ddp'); if (d) d.open = true; };
+    document.addEventListener('click', e => { if (e.target.closest('a[href="#ddp"]')) open(); });
+    if (location.hash === '#ddp') open();
   }
 
   showPicked(label) {
